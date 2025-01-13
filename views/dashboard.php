@@ -21,7 +21,7 @@
   <link rel="apple-touch-icon" sizes="76x76" href="../assets/img/apple-icon.png">
   <link rel="icon" type="image/png" href="../assets/img/favicon.png">
   <title>
-    Material Dashboard 3 by Creative Tim
+    Youdemy
   </title>
   <!--     Fonts and icons     -->
   <link rel="stylesheet" type="text/css" href="https://fonts.googleapis.com/css?family=Inter:300,400,500,600,700,900" />
@@ -42,14 +42,14 @@
       <i class="fas fa-times p-3 cursor-pointer text-dark opacity-5 position-absolute end-0 top-0 d-none d-xl-none" aria-hidden="true" id="iconSidenav"></i>
       <a class="navbar-brand px-4 py-3 m-0" href=" https://demos.creative-tim.com/material-dashboard/pages/dashboard " target="_blank">
         <img src="../assets/img/logo-ct-dark.png" class="navbar-brand-img" width="26" height="26" alt="main_logo">
-        <span class="ms-1 text-sm text-dark">Creative Tim</span>
+        <span class="ms-1 text-sm text-dark">Youdemy</span>
       </a>
     </div>
     <hr class="horizontal dark mt-0 mb-2">
     <div class="collapse navbar-collapse  w-auto " id="sidenav-collapse-main">
       <ul class="navbar-nav">
         <li class="nav-item">
-          <a class="nav-link active bg-gradient-dark text-white" href="../pages/dashboard.html">
+          <a class="nav-link active bg-gradient-dark text-white" href="../views/dashboard.php">
             <i class="material-symbols-rounded opacity-5">dashboard</i>
             <span class="nav-link-text ms-1">Dashboard</span>
           </a>
@@ -61,21 +61,27 @@
           </a>
         </li>
         <li class="nav-item">
-          <a class="nav-link text-dark" href="../pages/billing.html">
+          <a class="nav-link text-dark" href="">
             <i class="material-symbols-rounded opacity-5">receipt_long</i>
-            <span class="nav-link-text ms-1">Billing</span>
+            <span class="nav-link-text ms-1">Categories</span>
           </a>
         </li>
         <li class="nav-item">
-          <a class="nav-link text-dark" href="../pages/virtual-reality.html">
+          <a class="nav-link text-dark" href="">
             <i class="material-symbols-rounded opacity-5">view_in_ar</i>
-            <span class="nav-link-text ms-1">Virtual Reality</span>
+            <span class="nav-link-text ms-1">Tags</span>
           </a>
         </li>
         <li class="nav-item">
-          <a class="nav-link text-dark" href="../pages/rtl.html">
-            <i class="material-symbols-rounded opacity-5">format_textdirection_r_to_l</i>
-            <span class="nav-link-text ms-1">RTL</span>
+          <a class="nav-link text-dark" href="">
+            <i class="material-symbols-rounded opacity-5">person</i>
+            <span class="nav-link-text ms-1">Students</span>
+          </a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link text-dark" href="">
+            <i class="material-symbols-rounded opacity-5">person</i>
+            <span class="nav-link-text ms-1">Teachers</span>
           </a>
         </li>
         <li class="nav-item">
@@ -94,13 +100,13 @@
           </a>
         </li>
         <li class="nav-item">
-          <a class="nav-link text-dark" href="../pages/sign-in.html">
+          <a class="nav-link text-dark" href="../views/sign-in.html">
             <i class="material-symbols-rounded opacity-5">login</i>
             <span class="nav-link-text ms-1">Sign In</span>
           </a>
         </li>
         <li class="nav-item">
-          <a class="nav-link text-dark" href="../pages/sign-up.html">
+          <a class="nav-link text-dark" href="../views/sign-up.html">
             <i class="material-symbols-rounded opacity-5">assignment</i>
             <span class="nav-link-text ms-1">Sign Up</span>
           </a>
@@ -120,7 +126,6 @@
       <div class="container-fluid py-1 px-3">
         <nav aria-label="breadcrumb">
           <ol class="breadcrumb bg-transparent mb-0 pb-0 pt-1 px-0 me-sm-6 me-5">
-            <li class="breadcrumb-item text-sm"><a class="opacity-5 text-dark" href="javascript:;">Pages</a></li>
             <li class="breadcrumb-item text-sm text-dark active" aria-current="page">Dashboard</li>
           </ol>
         </nav>
@@ -133,10 +138,9 @@
           </div>
           <ul class="navbar-nav d-flex align-items-center  justify-content-end">
             <li class="nav-item d-flex align-items-center">
-              <a class="btn btn-outline-primary btn-sm mb-0 me-3" target="_blank" href="https://www.creative-tim.com/builder?ref=navbar-material-dashboard">Online Builder</a>
+              <a class="btn btn-outline-primary btn-sm mb-0 me-3" target="_blank" href="">logout</a>
             </li>
             <li class="mt-1">
-              <a class="github-button" href="https://github.com/creativetimofficial/material-dashboard" data-icon="octicon-star" data-size="large" data-show-count="true" aria-label="Star creativetimofficial/material-dashboard on GitHub">Star</a>
             </li>
             <li class="nav-item d-xl-none ps-3 d-flex align-items-center">
               <a href="javascript:;" class="nav-link text-body p-0" id="iconNavbarSidenav">
@@ -240,7 +244,7 @@
         <div class="ms-3">
           <h3 class="mb-0 h4 font-weight-bolder">Dashboard</h3>
           <p class="mb-4">
-            Check the sales, value and bounce rate by country.
+            
           </p>
         </div>
         <div class="col-xl-3 col-sm-6 mb-xl-0 mb-4">
@@ -248,7 +252,7 @@
             <div class="card-header p-2 ps-3">
               <div class="d-flex justify-content-between">
                 <div>
-                  <p class="text-sm mb-0 text-capitalize">Today's Money</p>
+                  <p class="text-sm mb-0 text-capitalize">total de cours</p>
                   <h4 class="mb-0">$53k</h4>
                 </div>
                 <div class="icon icon-md icon-shape bg-gradient-dark shadow-dark shadow text-center border-radius-lg">
@@ -257,9 +261,7 @@
               </div>
             </div>
             <hr class="dark horizontal my-0">
-            <div class="card-footer p-2 ps-3">
-              <p class="mb-0 text-sm"><span class="text-success font-weight-bolder">+55% </span>than last week</p>
-            </div>
+            
           </div>
         </div>
         <div class="col-xl-3 col-sm-6 mb-xl-0 mb-4">
@@ -267,7 +269,7 @@
             <div class="card-header p-2 ps-3">
               <div class="d-flex justify-content-between">
                 <div>
-                  <p class="text-sm mb-0 text-capitalize">Today's Users</p>
+                  <p class="text-sm mb-0 text-capitalize">Top course</p>
                   <h4 class="mb-0">2300</h4>
                 </div>
                 <div class="icon icon-md icon-shape bg-gradient-dark shadow-dark shadow text-center border-radius-lg">
@@ -276,9 +278,7 @@
               </div>
             </div>
             <hr class="dark horizontal my-0">
-            <div class="card-footer p-2 ps-3">
-              <p class="mb-0 text-sm"><span class="text-success font-weight-bolder">+3% </span>than last month</p>
-            </div>
+
           </div>
         </div>
         <div class="col-xl-3 col-sm-6 mb-xl-0 mb-4">
@@ -286,7 +286,7 @@
             <div class="card-header p-2 ps-3">
               <div class="d-flex justify-content-between">
                 <div>
-                  <p class="text-sm mb-0 text-capitalize">Ads Views</p>
+                  <p class="text-sm mb-0 text-capitalize">total categories</p>
                   <h4 class="mb-0">3,462</h4>
                 </div>
                 <div class="icon icon-md icon-shape bg-gradient-dark shadow-dark shadow text-center border-radius-lg">
@@ -295,9 +295,7 @@
               </div>
             </div>
             <hr class="dark horizontal my-0">
-            <div class="card-footer p-2 ps-3">
-              <p class="mb-0 text-sm"><span class="text-danger font-weight-bolder">-2% </span>than yesterday</p>
-            </div>
+
           </div>
         </div>
         <div class="col-xl-3 col-sm-6">
@@ -305,7 +303,7 @@
             <div class="card-header p-2 ps-3">
               <div class="d-flex justify-content-between">
                 <div>
-                  <p class="text-sm mb-0 text-capitalize">Sales</p>
+                  <p class="text-sm mb-0 text-capitalize">total tags</p>
                   <h4 class="mb-0">$103,430</h4>
                 </div>
                 <div class="icon icon-md icon-shape bg-gradient-dark shadow-dark shadow text-center border-radius-lg">
@@ -314,79 +312,22 @@
               </div>
             </div>
             <hr class="dark horizontal my-0">
-            <div class="card-footer p-2 ps-3">
-              <p class="mb-0 text-sm"><span class="text-success font-weight-bolder">+5% </span>than yesterday</p>
-            </div>
+
           </div>
         </div>
       </div>
-      <div class="row">
-        <div class="col-lg-4 col-md-6 mt-4 mb-4">
-          <div class="card">
-            <div class="card-body">
-              <h6 class="mb-0 ">Website Views</h6>
-              <p class="text-sm ">Last Campaign Performance</p>
-              <div class="pe-2">
-                <div class="chart">
-                  <canvas id="chart-bars" class="chart-canvas" height="170"></canvas>
-                </div>
-              </div>
-              <hr class="dark horizontal">
-              <div class="d-flex ">
-                <i class="material-symbols-rounded text-sm my-auto me-1">schedule</i>
-                <p class="mb-0 text-sm"> campaign sent 2 days ago </p>
-              </div>
-            </div>
-          </div>
-        </div>
-        <div class="col-lg-4 col-md-6 mt-4 mb-4">
-          <div class="card ">
-            <div class="card-body">
-              <h6 class="mb-0 "> Daily Sales </h6>
-              <p class="text-sm "> (<span class="font-weight-bolder">+15%</span>) increase in today sales. </p>
-              <div class="pe-2">
-                <div class="chart">
-                  <canvas id="chart-line" class="chart-canvas" height="170"></canvas>
-                </div>
-              </div>
-              <hr class="dark horizontal">
-              <div class="d-flex ">
-                <i class="material-symbols-rounded text-sm my-auto me-1">schedule</i>
-                <p class="mb-0 text-sm"> updated 4 min ago </p>
-              </div>
-            </div>
-          </div>
-        </div>
-        <div class="col-lg-4 mt-4 mb-3">
-          <div class="card">
-            <div class="card-body">
-              <h6 class="mb-0 ">Completed Tasks</h6>
-              <p class="text-sm ">Last Campaign Performance</p>
-              <div class="pe-2">
-                <div class="chart">
-                  <canvas id="chart-line-tasks" class="chart-canvas" height="170"></canvas>
-                </div>
-              </div>
-              <hr class="dark horizontal">
-              <div class="d-flex ">
-                <i class="material-symbols-rounded text-sm my-auto me-1">schedule</i>
-                <p class="mb-0 text-sm">just updated</p>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
+    <div class="row">
+      <br>
+      <br>
+    </div>
       <div class="row mb-4">
         <div class="col-lg-8 col-md-6 mb-md-0 mb-4">
           <div class="card">
             <div class="card-header pb-0">
               <div class="row">
                 <div class="col-lg-6 col-7">
-                  <h6>Projects</h6>
-                  <p class="text-sm mb-0">
-                    <i class="fa fa-check text-info" aria-hidden="true"></i>
-                    <span class="font-weight-bold ms-1">30 done</span> this month
-                  </p>
+                  <h6>Top 3 teachers</h6>
+
                 </div>
                 <div class="col-lg-6 col-5 my-auto text-end">
                   <div class="dropdown float-lg-end pe-4">
