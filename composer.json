@@ -2,7 +2,7 @@
     "autoload": {
         "psr-4": {
             "Classes\\": "classes/",
-            "Handlers\\": "handlers/",
+            "Controllers\\": "controllers/",
             "Config\\": "config/",
             "Auth\\": "auth/"
         }
