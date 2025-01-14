@@ -42,87 +42,65 @@
     <div class="container-fluid py-2">
       <div class="row">
         <div class="ms-3">
-          <h3 class="mb-0 h4 font-weight-bolder">Dashboard</h3>
-          <p class="mb-4">Manage your categories</p>
+        <div class="container my-5">
+    <h3 class="mb-4">Manage Categories</h3>
 
-          <!-- Button to Open the Modal -->
-          <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#addCategoryModal">
-            Add New Category
-          </button>
-        </div>
-        <div class="card-body">
-                            <div class="table-responsive">
-                                <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
-                                    <thead>
-                                        <tr>
-                                            <th>Name</th>
-                                            <th>Position</th>
-                                            <th>Office</th>
-                                            <th>Age</th>
-                                            <th>Start date</th>
-                                            <th>Salary</th>
-                                        </tr>
-                                    </thead>
-                                    <tfoot>
-                                        <tr>
-                                            <th>Name</th>
-                                            <th>Position</th>
-                                            <th>Office</th>
-                                            <th>Age</th>
-                                            <th>Start date</th>
-                                            <th>Salary</th>
-                                        </tr>
-                                    </tfoot>
-                                    <tbody>
-                                        <tr>
-                                            <td>Tiger Nixon</td>
-                                            <td>System Architect</td>
-                                            <td>Edinburgh</td>
-                                            <td>61</td>
-                                            <td>2011/04/25</td>
-                                            <td>$320,800</td>
-                                        </tr>
-                                        <tr>
-                                            <td>Garrett Winters</td>
-                                            <td>Accountant</td>
-                                            <td>Tokyo</td>
-                                            <td>63</td>
-                                            <td>2011/07/25</td>
-                                            <td>$170,750</td>
-                                        </tr>
-                                        </tbody>
-      </div>
-      
-      <!-- Modal -->
-      <div class="modal fade" id="addCategoryModal" tabindex="-1" aria-labelledby="addCategoryModalLabel" aria-hidden="true">
-        <div class="modal-dialog">
-          <div class="modal-content">
-            <div class="modal-header">
-              <h5 class="modal-title" id="addCategoryModalLabel">Add New Category</h5>
-              <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-            </div>
-            <div class="modal-body">
-              <!-- Form to Add Category -->
-              <form action="your_php_script.php" method="POST">
-                <div class="mb-3">
-                  <label for="categoryName" class="form-label">Category Name</label>
-                  <input type="text" class="form-control" id="categoryName" name="categoryName" placeholder="Enter category name" required>
-                </div>
-                <div class="modal-footer">
-                  <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                  <button type="submit" class="btn btn-primary">Add Category</button>
-                </div>
-              </form>
-            </div>
+    <!-- Button to Open the Modal -->
+    <button type="button" class="btn btn-primary mb-3" data-bs-toggle="modal" data-bs-target="#addCategoryModal">
+      Add New Category
+    </button>
+
+    <!-- Categories Table -->
+    <div class="table-responsive">
+      <table class="table table-bordered">
+        <thead class="table-dark">
+          <tr>
+            <th>Category Name</th>
+            <th>Actions</th>
+          </tr>
+        </thead>
+        <tbody>
+        <?php foreach($getAllCategories as $categorie): ?>
+          <tr>
+            <td><?= htmlspecialchars($categorie['nom_categorie']) ?></td>
+            <td>
+              <button class="btn btn-warning btn-sm me-2">Update</button>
+              <a href="/deleteCategorie?id=<?= $categorie['id'] ?>" class="btn btn-danger btn-sm"> delete </a>
+            </td>
+          </tr>
+        <?php endforeach; ?>
+        </tbody>
+      </table>
+    </div>
+
+    <!-- Modal -->
+    <div class="modal fade" id="addCategoryModal" tabindex="-1" aria-labelledby="addCategoryModalLabel" aria-hidden="true">
+      <div class="modal-dialog">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title" id="addCategoryModalLabel">Add New Category</h5>
+            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+          </div>
+          <div class="modal-body">
+            <form action="/createCategorie" method="POST">
+              <div class="mb-3">
+                <label for="categoryName" class="form-label">Category Name</label>
+                <input type="text" class="form-control" id="categoryName" name="categoryName" placeholder="Enter category name" required>
+              </div>
+              <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                <button type="submit" class="btn btn-primary">Add Category</button>
+              </div>
+            </form>
           </div>
         </div>
       </div>
-      <!-- End Modal -->
     </div>
-  </main>
+  </div>
 
-  <!-- Bootstrap JS and dependencies -->
+  <!-- Bootstrap JS -->
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"></script>
+</body>
 </body>
   </div>
   <!--   Core JS Files   -->
