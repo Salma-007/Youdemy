@@ -11,6 +11,10 @@ class Student extends User{
         $this->role = 'etudiant';
     }
 
+    // setter id
+    public function setId($id){
+        $this->id = $id;
+    }
     // affichage des etudiants
     public function getAllStudents(){
         $condition = [
@@ -18,7 +22,6 @@ class Student extends User{
         ];
         return $this->crud->readWithCondition($this->table, $condition);
     }
-
     // student counts
     public function getCountStudents(){
         $condition = [
@@ -26,6 +29,8 @@ class Student extends User{
         ];
         return $this->crud->countWithCondition($this->table, $condition);
     }
+
+
     
 
 }

@@ -5,10 +5,15 @@ use Classes\BaseModel;
 use PDO;
 
 class Teacher extends User{
-
+    
     public function __construct(){
         parent::__construct();
         $this->role = 'enseignant';
+    }
+
+    // setter id
+    public function setId($id){
+        $this->id = $id;
     }
 
     // affichage des enseignants
@@ -44,7 +49,13 @@ class Teacher extends User{
         ];
         return $this->crud->countWithCondition($this->table, $condition);
     }
-    
+    // assign role teacher
+    public function assignRoleTeacher(){
+        $data = [
+            'enseignantConfirmed' => 1
+        ];
+        return $this->crud->updateRecord($this->table, $data, $this->id);
+    }
     
 
 }

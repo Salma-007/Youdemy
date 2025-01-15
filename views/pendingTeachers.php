@@ -75,7 +75,7 @@
                   <div class="d-flex flex-column">
                     <h6 class="mb-3 text-sm"><?php  echo htmlspecialchars($teacher['nom']);?></h6>
                     <span class="mb-2 text-xs">Email: <span class="text-dark font-weight-bold ms-sm-2"><?php  echo htmlspecialchars($teacher['email']);?></span></span>
-                    <span class="mb-2 text-xs">Ban: <span class="text-dark ms-sm-2 font-weight-bold"><?php  if($teacher['isBanned'] == 0) {echo 'Not Banned';};?></span></span>
+                    <span class="mb-2 text-xs">Ban: <span class="text-dark ms-sm-2 font-weight-bold"><?php echo $teacher['isBanned'] == 0 ? 'Not Banned' : 'Banned'; ?></span></span>
                   </div>
                   <div class="ms-auto text-end">
                     <a href="/assignRole?id=<?= $teacher['id'] ?>" class="btn btn-danger btn-sm"> assign role </a>

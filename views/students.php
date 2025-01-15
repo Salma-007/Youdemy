@@ -77,13 +77,13 @@
                   <div class="d-flex flex-column">
                     <h6 class="mb-3 text-sm"><?php  echo htmlspecialchars($student['nom']);?></h6>
                     <span class="mb-2 text-xs">Email: <span class="text-dark font-weight-bold ms-sm-2"><?php  echo htmlspecialchars($student['email']);?></span></span>
-                    <span class="mb-2 text-xs">Ban: <span class="text-dark ms-sm-2 font-weight-bold"><?php  if($student['isBanned'] == 0) {echo 'Not Banned';};?></span></span>
+                    <span class="mb-2 text-xs">Ban: <span class="text-dark ms-sm-2 font-weight-bold"><?php echo $student['isBanned'] == 0 ? 'Not Banned' : 'Banned'; ?></span></span>
                   </div>
                   <div class="ms-auto text-end">
-                    <a class="btn btn-link text-danger text-gradient px-3 mb-0" href="javascript:;"><i class="material-symbols-rounded text-sm me-2">delete</i>Delete</a>
-                    <a class="btn btn-link text-danger text-gradient px-3 mb-0" href="javascript:;"><i class="material-symbols-rounded text-sm me-2">delete</i>ban</a>
+                    <a class="btn btn-link text-danger text-gradient px-3 mb-0" href="/deleteStudent?id=<?= $student['id'] ?>"><i class="material-symbols-rounded text-sm me-2">delete</i>Delete</a>
+                    <a class="btn btn-link text-danger text-gradient px-3 mb-0" href="/banStudent?id=<?= $student['id'] ?>"><i class="material-symbols-rounded text-sm me-2">delete</i>ban</a>
                     <a class="btn btn-link text-dark px-3 mb-0" href="javascript:;"><i class="material-symbols-rounded text-sm me-2">edit</i>Edit</a>
-                    <a class="btn btn-link text-dark px-3 mb-0" href="javascript:;"><i class="material-symbols-rounded text-sm me-2">edit</i>Activate</a>
+                    <a class="btn btn-link text-dark px-3 mb-0" href="/activateStudent?id=<?= $student['id'] ?>"><i class="material-symbols-rounded text-sm me-2">edit</i>Activate</a>
                   </div>
                 </li>
               </ul>

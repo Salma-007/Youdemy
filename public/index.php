@@ -21,8 +21,15 @@ $route = [
     '/deleteTag' => 'controllers/TagController.php',
     '/updateTag' => 'controllers/TagController.php',
     '/students' => 'controllers/StudentController.php',
+    '/deleteStudent' => 'controllers/StudentController.php',
+    '/banStudent' => 'controllers/StudentController.php',
+    '/activateStudent' => 'controllers/StudentController.php',
     '/teachers' => 'controllers/TeacherController.php',
     '/pendingTeachers' => 'controllers/TeacherController.php',
+    '/assignRole' => 'controllers/TeacherController.php',
+    '/deleteTeacher' => 'controllers/TeacherController.php',
+    '/banTeacher' => 'controllers/TeacherController.php',
+    '/activateTeacher' => 'controllers/TeacherController.php',
 ];
 
 if(array_key_exists($url, $route)){
@@ -67,6 +74,18 @@ if(array_key_exists($url, $route)){
             $controller = new StudentController();
             $controller->renderStudents();
             break;
+        case '/deleteStudent': 
+            $controller = new StudentController();
+            $controller->deleteStudent();
+            break;
+        case '/banStudent': 
+            $controller = new StudentController();
+            $controller->banStudent();
+            break;
+        case '/activateStudent': 
+            $controller = new StudentController();
+            $controller->activateStudent();
+            break;
         case '/teachers': 
             $controller = new TeacherController();
             $controller->renderTeachers();
@@ -74,6 +93,22 @@ if(array_key_exists($url, $route)){
         case '/pendingTeachers': 
             $controller = new TeacherController();
             $controller->renderPendingTeachers();
+            break;
+        case '/assignRole': 
+            $controller = new TeacherController();
+            $controller->assignTeacher();
+            break;
+        case '/deleteTeacher': 
+            $controller = new TeacherController();
+            $controller->deleteTeacher();
+            break;
+        case '/banTeacher': 
+            $controller = new TeacherController();
+            $controller->banTeacher();
+            break;
+        case '/activateTeacher': 
+            $controller = new TeacherController();
+            $controller->activateTeacher();
             break;
     }
 }
