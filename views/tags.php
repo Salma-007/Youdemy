@@ -43,11 +43,11 @@
       <div class="row">
         <div class="ms-3">
         <div class="container my-5">
-    <h3 class="mb-4">Manage Categories</h3>
+    <h3 class="mb-4">Manage Tags</h3>
 
     <!-- Button to Open the Modal -->
-    <button type="button" class="btn btn-primary mb-3" data-bs-toggle="modal" data-bs-target="#addCategoryModal">
-      Add New Category
+    <button type="button" class="btn btn-primary mb-3" data-bs-toggle="modal" data-bs-target="#addTagModal">
+      Add New Tag
     </button>
 
     <!-- Categories Table -->
@@ -55,21 +55,21 @@
       <table class="table table-bordered">
         <thead class="table-dark">
           <tr>
-            <th>Category Name</th>
+            <th>Tag Name</th>
             <th>Actions</th>
           </tr>
         </thead>
         <tbody>
-        <?php foreach($getAllCategories as $categorie): ?>
+        <?php foreach($getAllTags as $tag): ?>
           <tr>
-            <td><?= htmlspecialchars($categorie['nom_categorie']) ?></td>
+            <td><?= htmlspecialchars($tag['nom_tag']) ?></td>
             <td>
-            <button class="btn btn-warning btn-sm me-2" data-bs-toggle="modal" data-bs-target="#editCategoryModal" 
-            data-id="<?= $categorie['id'] ?>" 
-            data-name="<?= htmlspecialchars($categorie['nom_categorie']) ?>">
+            <button class="btn btn-warning btn-sm me-2" data-bs-toggle="modal" data-bs-target="#editTagModal" 
+            data-id="<?= $tag['id'] ?>" 
+            data-name="<?= htmlspecialchars($tag['nom_tag']) ?>">
             Update
           </button>
-              <a href="/deleteCategorie?id=<?= $categorie['id'] ?>" class="btn btn-danger btn-sm"> delete </a>
+              <a href="/deleteTag?id=<?= $tag['id'] ?>" class="btn btn-danger btn-sm"> delete </a>
             </td>
           </tr>
         <?php endforeach; ?>
@@ -78,22 +78,22 @@
     </div>
 
     <!-- Modal -->
-    <div class="modal fade" id="addCategoryModal" tabindex="-1" aria-labelledby="addCategoryModalLabel" aria-hidden="true">
+    <div class="modal fade" id="addTagModal" tabindex="-1" aria-labelledby="addTagModalLabel" aria-hidden="true">
       <div class="modal-dialog">
         <div class="modal-content">
           <div class="modal-header">
-            <h5 class="modal-title" id="addCategoryModalLabel">Add New Category</h5>
+            <h5 class="modal-title" id="addTagModalLabel">Add New Tag</h5>
             <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
           </div>
           <div class="modal-body">
-            <form action="/createCategorie" method="POST">
+            <form action="/createTag" method="POST">
               <div class="mb-3">
-                <label for="categoryName" class="form-label">Category Name</label>
-                <input type="text" class="form-control" id="categoryName" name="categoryName" placeholder="Enter category name" required>
+                <label for="tagName" class="form-label">Tag Name</label>
+                <input type="text" class="form-control" id="tagName" name="tagName" placeholder="Enter tag name" required>
               </div>
               <div class="modal-footer">
                 <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                <button type="submit" class="btn btn-primary">Add Category</button>
+                <button type="submit" class="btn btn-primary">Add Tag</button>
               </div>
             </form>
           </div>
@@ -101,23 +101,23 @@
       </div>
     </div>
     <!-- Edit Category Modal -->
-<div class="modal fade" id="editCategoryModal" tabindex="-1" aria-labelledby="editCategoryModalLabel" aria-hidden="true">
+<div class="modal fade" id="editTagModal" tabindex="-1" aria-labelledby="editTagModalLabel" aria-hidden="true">
   <div class="modal-dialog">
     <div class="modal-content">
       <div class="modal-header">
-        <h5 class="modal-title" id="editCategoryModalLabel">Edit Category</h5>
+        <h5 class="modal-title" id="editTagModalLabel">Edit Tag</h5>
         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
       </div>
       <div class="modal-body">
-        <form action="/updateCategorie" method="POST">
-          <input type="hidden" name="categoryId" id="editCategoryId">
+        <form action="/updateTag" method="POST">
+          <input type="hidden" name="tagId" id="editTagId">
           <div class="mb-3">
-            <label for="categoryName" class="form-label">Category Name</label>
-            <input type="text" class="form-control" id="editCategoryName" name="categoryName" required>
+            <label for="tagName" class="form-label">Tag Name</label>
+            <input type="text" class="form-control" id="editTagName" name="tagName" required>
           </div>
           <div class="modal-footer">
             <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-            <button type="submit" class="btn btn-primary">Update Category</button>
+            <button type="submit" class="btn btn-primary">Update Tag</button>
           </div>
         </form>
       </div>
@@ -127,14 +127,14 @@
   </div>
   <script>
 
-  const editCategoryModal = document.getElementById('editCategoryModal');
-  editCategoryModal.addEventListener('show.bs.modal', function (event) {
+  const editTagModal = document.getElementById('editTagModal');
+  editTagModal.addEventListener('show.bs.modal', function (event) {
     const button = event.relatedTarget;
     const categoryId = button.getAttribute('data-id');
     const categoryName = button.getAttribute('data-name');
     
-    const modalCategoryId = editCategoryModal.querySelector('#editCategoryId');
-    const modalCategoryName = editCategoryModal.querySelector('#editCategoryName');
+    const modalCategoryId = editTagModal.querySelector('#editTagId');
+    const modalCategoryName = editTagModal.querySelector('#editTagName');
     
     modalCategoryId.value = categoryId;
     modalCategoryName.value = categoryName;

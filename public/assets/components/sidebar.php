@@ -10,7 +10,7 @@
     <div class="collapse navbar-collapse  w-auto " id="sidenav-collapse-main">
       <ul class="navbar-nav">
         <li class="nav-item">
-          <a class="nav-link active bg-gradient-dark text-white" href="../views/dashboard.php">
+          <a class="nav-link active bg-gradient-dark text-white" href="/dashboard">
             <i class="material-symbols-rounded opacity-5">dashboard</i>
             <span class="nav-link-text ms-1">Dashboard</span>
           </a>
@@ -22,25 +22,25 @@
           </a>
         </li>
         <li class="nav-item">
-          <a class="nav-link text-dark" href="">
+          <a class="nav-link text-dark" href="/categories">
             <i class="material-symbols-rounded opacity-5">receipt_long</i>
             <span class="nav-link-text ms-1">Categories</span>
           </a>
         </li>
         <li class="nav-item">
-          <a class="nav-link text-dark" href="">
+          <a class="nav-link text-dark" href="/tags">
             <i class="material-symbols-rounded opacity-5">view_in_ar</i>
             <span class="nav-link-text ms-1">Tags</span>
           </a>
         </li>
         <li class="nav-item">
-          <a class="nav-link text-dark" href="">
+          <a class="nav-link text-dark" href="/students">
             <i class="material-symbols-rounded opacity-5">person</i>
             <span class="nav-link-text ms-1">Students</span>
           </a>
         </li>
         <li class="nav-item">
-          <a class="nav-link text-dark" href="">
+          <a class="nav-link text-dark" href="/teachers">
             <i class="material-symbols-rounded opacity-5">person</i>
             <span class="nav-link-text ms-1">Teachers</span>
           </a>

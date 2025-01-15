@@ -15,12 +15,14 @@ class CategorieController{
         require(__DIR__ . '/../views/categories.php');  
 
     }
+    // add categorie
     public function addCategorie(){
         extract($_POST);
         $this->categorie->setNom($categoryName);
         $this->categorie->insertCategorie();
         return header('location: /categories');
     }
+    // delete category
     public function deleteCategorie(){
         if (isset($_GET['id'])) {
             $id = $_GET['id'];
@@ -32,6 +34,19 @@ class CategorieController{
             }
         } else {
             echo "ID manquant.";
+        }
+    }
+    // Update category
+    public function updateCategorie() {
+        if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+            extract($_POST);
+            $this->categorie->setId($categoryId);
+            $this->categorie->setNom($categoryName);
+            if ($this->categorie->updateCategorie()) {
+                return header('Location: /categories');
+            } else {
+                echo "Erreur lors de la mise à jour de la catégorie.";
+            }
         }
     }
 }

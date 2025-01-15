@@ -61,8 +61,8 @@ class Categorie{
         return $this->crud->readRecords($this->table);
     }
 
-    //get a record
-    public function getCategorie(){
+    //get a record by id
+    public function getCategoriebyId(){
         return $this->crud->getRecord($this->table,$this->id);
     }
 

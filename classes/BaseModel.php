@@ -97,6 +97,56 @@ class BaseModel{
         return $result['count'];
     }
     
+    // get records with condition
+    public function readWithCondition($table, $conditions){
+        $query = "SELECT * from $table";
+
+        try {
+
+            if (!empty($conditions)) {
+                $conditionFields = [];
+                foreach ($conditions as $column => $value) {
+                    $conditionFields[] = "$column= :$column";
+                }
+                $query .= " WHERE " . implode(" AND ", $conditionFields);
+            }
+
+            $result = $this->conn->prepare($query);
+
+            $result->execute($conditions);
+
+            return $result->fetchAll(PDO::FETCH_ASSOC);
+        } catch (PDOException $e) {
+            error_log("Error selecting records: " . $e->getMessage());
+            return;
+        }
+    }
+    
+    // get records with condition
+    public function countWithCondition($table, $conditions){
+            $query = "SELECT count(*) as count from $table";
+    
+            try {
+    
+                if (!empty($conditions)) {
+                    $conditionFields = [];
+                    foreach ($conditions as $column => $value) {
+                        $conditionFields[] = "$column= :$column";
+                    }
+                    $query .= " WHERE " . implode(" AND ", $conditionFields);
+                }
+    
+                $result = $this->conn->prepare($query);
+    
+                $result->execute($conditions);
+    
+                $stmt = $result->fetch(PDO::FETCH_ASSOC);
+                return $stmt['count'];
+            } catch (PDOException $e) {
+                error_log("Error selecting records: " . $e->getMessage());
+                return;
+            }
+    }
 
 }
 
