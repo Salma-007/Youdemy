@@ -15,7 +15,6 @@ class StudentController{
         $getCountStudent = $this->student->getCountStudents();
         require(__DIR__ . '/../views/students.php');  
     }
-
     // delete student 
     public function deleteStudent(){
         if (isset($_GET['id'])) {
