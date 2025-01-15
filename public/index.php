@@ -22,6 +22,7 @@ $route = [
     '/updateTag' => 'controllers/TagController.php',
     '/students' => 'controllers/StudentController.php',
     '/teachers' => 'controllers/TeacherController.php',
+    '/pendingTeachers' => 'controllers/TeacherController.php',
 ];
 
 if(array_key_exists($url, $route)){
@@ -69,6 +70,10 @@ if(array_key_exists($url, $route)){
         case '/teachers': 
             $controller = new TeacherController();
             $controller->renderTeachers();
+            break;
+        case '/pendingTeachers': 
+            $controller = new TeacherController();
+            $controller->renderPendingTeachers();
             break;
     }
 }

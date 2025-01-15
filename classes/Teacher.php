@@ -19,10 +19,28 @@ class Teacher extends User{
         return $this->crud->readWithCondition($this->table, $condition);
     }
 
+    // pending teachers
+    public function getAllPendingTeachers(){
+        $condition = [
+            'role' => 'enseignant',
+            'enseignantConfirmed' => 0
+        ];
+        return $this->crud->readWithCondition($this->table, $condition);
+    }
+
     // teachers counts
     public function getCountTeachers(){
         $condition = [
             'role' => 'enseignant'
+        ];
+        return $this->crud->countWithCondition($this->table, $condition);
+    }
+
+    // pending teachers counts
+    public function getCountPendingTeachers(){
+        $condition = [
+            'role' => 'enseignant',
+            'enseignantConfirmed' => 0
         ];
         return $this->crud->countWithCondition($this->table, $condition);
     }

@@ -69,7 +69,7 @@
           <div class="card">
             <div class="card-header pb-0 px-3" style = "display: flex; justify-content: space-between;">
               <h6 class="mb-0">Teachers Information</h6>
-              <a href="/deleteCategorie?id=<?= $teacher['id'] ?>" class="btn btn-primary btn-sm"> pending teachers </a>
+              <a href="/pendingTeachers" class="btn btn-outline-primary btn-sm mb-0"> pending teachers </a>
             </div>
             <div class="card-body pt-4 p-3">
             <?php foreach($getAllTeachers as $teacher): ?>

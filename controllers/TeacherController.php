@@ -16,6 +16,13 @@ class TeacherController{
         require(__DIR__ . '/../views/teachers.php');  
     }
 
+    // render teachers
+    public function renderPendingTeachers(){
+        $getAllTeachers= $this->teacher->getAllPendingTeachers();
+        $getCountTeacher = $this->teacher->getCountPendingTeachers();
+        require(__DIR__ . '/../views/pendingTeachers.php');  
+    }
+
 
 
 }

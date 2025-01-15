@@ -43,57 +43,105 @@
       <div class="row">
         <div class="ms-3">
         <div class="container my-5">
-    <h3 class="mb-4">Manage Categories</h3>
+    <h3 class="mb-4">Assign role Teacher</h3>
 
-    <!-- Button to Open the Modal -->
-    <button type="button" class="btn btn-primary mb-3" data-bs-toggle="modal" data-bs-target="#addCategoryModal">
-      Add New Category
-    </button>
+    <!-- stats of students -->
+    <div class="col-xl-3 col-sm-6 mb-xl-0 mb-4">
+          <div class="card">
+            <div class="card-header p-2 ps-3">
+              <div class="d-flex justify-content-between">
+                <div>
+                  <p class="text-sm mb-0 text-capitalize">total de requests</p>
+                  <h4 class="mb-0"><?php echo htmlspecialchars($getCountTeacher); ?></h4>
+                </div>
+                <div class="icon icon-md icon-shape bg-gradient-dark shadow-dark shadow text-center border-radius-lg">
+                  <i class="material-symbols-rounded opacity-10">weekend</i>
+                </div>
+              </div>
+            </div>
+            <hr class="dark horizontal my-0">
+            
+          </div>
+        </div>
+    
+    <div class="row">
+        <div class="col-md-9 mt-4">
+          <div class="card">
 
-    <!-- Categories Table -->
-    <div class="table-responsive">
-      <table class="table table-bordered">
-        <thead class="table-dark">
-          <tr>
-            <th>Category Name</th>
-            <th>Actions</th>
-          </tr>
-        </thead>
-        <tbody>
-        <?php foreach($getAllCategories as $categorie): ?>
-          <tr>
-            <td><?= htmlspecialchars($categorie['nom_categorie']) ?></td>
-            <td>
-            <button class="btn btn-warning btn-sm me-2" data-bs-toggle="modal" data-bs-target="#editCategoryModal" 
-            data-id="<?= $categorie['id'] ?>" 
-            data-name="<?= htmlspecialchars($categorie['nom_categorie']) ?>">
-            Update
-          </button>
-              <a href="/deleteCategorie?id=<?= $categorie['id'] ?>" class="btn btn-danger btn-sm"> delete </a>
-            </td>
-          </tr>
-        <?php endforeach; ?>
-        </tbody>
-      </table>
-    </div>
+            <div class="card-body pt-4 p-3">
+            <?php foreach($getAllTeachers as $teacher): ?>
+              <ul class="list-group">
+                <li class="list-group-item border-0 d-flex p-4 mb-2 bg-gray-100 border-radius-lg">
+                  <div class="d-flex flex-column">
+                    <h6 class="mb-3 text-sm"><?php  echo htmlspecialchars($teacher['nom']);?></h6>
+                    <span class="mb-2 text-xs">Email: <span class="text-dark font-weight-bold ms-sm-2"><?php  echo htmlspecialchars($teacher['email']);?></span></span>
+                    <span class="mb-2 text-xs">Ban: <span class="text-dark ms-sm-2 font-weight-bold"><?php  if($teacher['isBanned'] == 0) {echo 'Not Banned';};?></span></span>
+                  </div>
+                  <div class="ms-auto text-end">
+                    <a href="/assignRole?id=<?= $teacher['id'] ?>" class="btn btn-danger btn-sm"> assign role </a>
+                  </div>
+                </li>
+              </ul>
+              <?php endforeach; ?>
+            </div>
+          </div>
+        </div>
 
+      </div>
+
+    <!-- <div class="card-body">
+                            <div class="table-responsive">
+                                <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
+                                    <thead>
+                                        <tr>
+                                            <th>Username</th>
+                                            <th>Email</th>
+                                            <th>edit</th>
+                                            <th>Ban User</th>
+                                            <th>delete User</th>
+                                        </tr>
+                                    </thead>
+                                    <tfoot>
+                                        <tr>
+                                            <th>Username</th>
+                                            <th>Email</th>
+                                            <th>edit</th>
+                                            <th>Ban User</th>
+                                            <th>delete User</th>
+                                        </tr>
+                                    </tfoot>
+                                    <tbody>
+                                        <?php foreach($getAllStudents as $student): ?>
+                                        <tr>
+                                            <td><?php  echo htmlspecialchars($student['nom']);?></td>
+                                            <td><?php  echo htmlspecialchars($student['email']);?></td>
+                                            <td><a href="update-user.php?id=<?php echo htmlspecialchars($student['id']); ?>" class="btn btn-primary" >update</a></td>
+                                            <td><a href="controller-user.php?action=ban&id=<?php echo htmlspecialchars($student['id']); ?>" class="btn btn-danger">ban</a></td>
+                                            <td><a href="controller-user.php?action=ban&id=<?php echo htmlspecialchars($student['id']); ?>" class="btn btn-danger">delete</a></td>
+                                        </tr>
+                                        <?php endforeach; ?>
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                                        </div> -->
     <!-- Modal -->
-    <div class="modal fade" id="addCategoryModal" tabindex="-1" aria-labelledby="addCategoryModalLabel" aria-hidden="true">
+    <div class="modal fade" id="addTagModal" tabindex="-1" aria-labelledby="addTagModalLabel" aria-hidden="true">
       <div class="modal-dialog">
         <div class="modal-content">
           <div class="modal-header">
-            <h5 class="modal-title" id="addCategoryModalLabel">Add New Category</h5>
+            <h5 class="modal-title" id="addTagModalLabel">Add New Tag</h5>
             <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
           </div>
           <div class="modal-body">
-            <form action="/createCategorie" method="POST">
+            <form action="/createTag" method="POST">
               <div class="mb-3">
-                <label for="categoryName" class="form-label">Category Name</label>
-                <input type="text" class="form-control" id="categoryName" name="categoryName" placeholder="Enter category name" required>
+                <label for="tagName" class="form-label">Tag Name</label>
+                <input type="text" class="form-control" id="tagName" name="tagName" placeholder="Enter tag name" required>
               </div>
               <div class="modal-footer">
                 <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                <button type="submit" class="btn btn-primary">Add Category</button>
+                <button type="submit" class="btn btn-primary">Add Tag</button>
               </div>
             </form>
           </div>
@@ -101,23 +149,23 @@
       </div>
     </div>
     <!-- Edit Category Modal -->
-<div class="modal fade" id="editCategoryModal" tabindex="-1" aria-labelledby="editCategoryModalLabel" aria-hidden="true">
+<div class="modal fade" id="editTagModal" tabindex="-1" aria-labelledby="editTagModalLabel" aria-hidden="true">
   <div class="modal-dialog">
     <div class="modal-content">
       <div class="modal-header">
-        <h5 class="modal-title" id="editCategoryModalLabel">Edit Category</h5>
+        <h5 class="modal-title" id="editTagModalLabel">Edit Tag</h5>
         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
       </div>
       <div class="modal-body">
-        <form action="/updateCategorie" method="POST">
-          <input type="hidden" name="categoryId" id="editCategoryId">
+        <form action="/updateTag" method="POST">
+          <input type="hidden" name="tagId" id="editTagId">
           <div class="mb-3">
-            <label for="categoryName" class="form-label">Category Name</label>
-            <input type="text" class="form-control" id="editCategoryName" name="categoryName" required>
+            <label for="tagName" class="form-label">Tag Name</label>
+            <input type="text" class="form-control" id="editTagName" name="tagName" required>
           </div>
           <div class="modal-footer">
             <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-            <button type="submit" class="btn btn-primary">Update Category</button>
+            <button type="submit" class="btn btn-primary">Update Tag</button>
           </div>
         </form>
       </div>
@@ -125,21 +173,7 @@
   </div>
 </div>
   </div>
-  <script>
 
-  const editCategoryModal = document.getElementById('editCategoryModal');
-  editCategoryModal.addEventListener('show.bs.modal', function (event) {
-    const button = event.relatedTarget;
-    const categoryId = button.getAttribute('data-id');
-    const categoryName = button.getAttribute('data-name');
-    
-    const modalCategoryId = editCategoryModal.querySelector('#editCategoryId');
-    const modalCategoryName = editCategoryModal.querySelector('#editCategoryName');
-    
-    modalCategoryId.value = categoryId;
-    modalCategoryName.value = categoryName;
-  });
-</script>
   <!-- Bootstrap JS -->
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"></script>
 </body>
