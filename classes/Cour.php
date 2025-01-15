@@ -1,11 +1,10 @@
 <?php
 namespace Classes;
-// require realpath(__DIR__.'/../vendor/autoload.php');
 use Config\Database;
 use Classes\BaseModel;
 use PDO;
 
-abstract class Cour{
+class Cour{
     // protected $id;
     // protected $titre;
     // protected $description;
@@ -22,8 +21,6 @@ abstract class Cour{
         $this->crud  = new BaseModel($conn);
     }
 
-    public abstract function ajouterCour();
-    public abstract function afficherCour();
 
 
 }

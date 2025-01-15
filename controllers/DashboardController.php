@@ -2,17 +2,11 @@
 namespace Controllers;
 
 class DashboardController{
-    public function home()
-    {
+    public function home(){   
+        
         require(__DIR__ .'/../views/dashboard.php');
     }
 }
-
-
-
-
-
-
 
 
 

@@ -5,6 +5,7 @@ require __DIR__ . '/../vendor/autoload.php';
 use Controllers\CategorieController;
 use Controllers\TagController;
 use Controllers\DashboardController;
+use Controllers\DashboardTeacherController;
 use Controllers\StudentController;
 use Controllers\TeacherController;
 
@@ -30,12 +31,18 @@ $route = [
     '/deleteTeacher' => 'controllers/TeacherController.php',
     '/banTeacher' => 'controllers/TeacherController.php',
     '/activateTeacher' => 'controllers/TeacherController.php',
+    '/coursesTeacher' => 'controllers/DashboardTeacherController.php',
+    '/coursInscriptions' => 'controllers/DashboardTeacherController.php',
 ];
 
 if(array_key_exists($url, $route)){
     switch($url){
         case '/dashboard': 
             $controller = new DashboardController();
+            $controller->home();
+            break;
+        case '/coursesTeacher': 
+            $controller = new DashboardTeacherController();
             $controller->home();
             break;
         case '/categories': 
@@ -109,6 +116,10 @@ if(array_key_exists($url, $route)){
         case '/activateTeacher': 
             $controller = new TeacherController();
             $controller->activateTeacher();
+            break;
+        case '/coursInscriptions': 
+            $controller = new DashboardTeacherController();
+            $controller->inscriptions();
             break;
     }
 }

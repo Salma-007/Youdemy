@@ -94,43 +94,6 @@
         </div>
 
       </div>
-
-    <!-- <div class="card-body">
-                            <div class="table-responsive">
-                                <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
-                                    <thead>
-                                        <tr>
-                                            <th>Username</th>
-                                            <th>Email</th>
-                                            <th>edit</th>
-                                            <th>Ban User</th>
-                                            <th>delete User</th>
-                                        </tr>
-                                    </thead>
-                                    <tfoot>
-                                        <tr>
-                                            <th>Username</th>
-                                            <th>Email</th>
-                                            <th>edit</th>
-                                            <th>Ban User</th>
-                                            <th>delete User</th>
-                                        </tr>
-                                    </tfoot>
-                                    <tbody>
-                                        <?php foreach($getAllStudents as $student): ?>
-                                        <tr>
-                                            <td><?php  echo htmlspecialchars($student['nom']);?></td>
-                                            <td><?php  echo htmlspecialchars($student['email']);?></td>
-                                            <td><a href="update-user.php?id=<?php echo htmlspecialchars($student['id']); ?>" class="btn btn-primary" >update</a></td>
-                                            <td><a href="controller-user.php?action=ban&id=<?php echo htmlspecialchars($student['id']); ?>" class="btn btn-danger">ban</a></td>
-                                            <td><a href="controller-user.php?action=ban&id=<?php echo htmlspecialchars($student['id']); ?>" class="btn btn-danger">delete</a></td>
-                                        </tr>
-                                        <?php endforeach; ?>
-                                    </tbody>
-                                </table>
-                            </div>
-                        </div>
-                                        </div> -->
     <!-- Modal -->
     <div class="modal fade" id="addTagModal" tabindex="-1" aria-labelledby="addTagModalLabel" aria-hidden="true">
       <div class="modal-dialog">
