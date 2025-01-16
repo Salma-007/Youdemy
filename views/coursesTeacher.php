@@ -309,10 +309,14 @@
 
         <div class="form-container" id="courseForm">
             <h2>Ajouter un nouveau cours</h2>
-            <form action="/addCourse" method="POST" id="addCourseForm">
+            <form action="/addCourse" method="POST" id="addCourseForm" enctype="multipart/form-data">
                 <div class="form-group">
                     <label>Titre</label>
                     <input type="text" name="titreCour" class="form-control" required>
+                </div>
+                <div class="form-group">
+                    <label>Picture</label>
+                    <input type="file" id="photo_input" accept="image/*" class="form-control input-square" name="photo_input">
                 </div>
                 <div class="form-group">
                     <label>Description</label>
@@ -328,11 +332,11 @@
                 </div>
                 <div class="form-group content-input" id="textInput">
                     <label>Contenu texte</label>
-                    <textarea class="form-control" rows="5"></textarea>
+                    <textarea class="form-control" name="TextContenu" rows="5"></textarea>
                 </div>
                 <div class="form-group content-input" id="videoInput">
                     <label>URL de la vidéo</label>
-                    <input type="url" class="form-control">
+                    <input type="url" name="VideoContenu"  class="form-control">
                 </div>
                 <div class="form-group">
                     <label>Catégorie</label>

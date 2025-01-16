@@ -29,6 +29,10 @@ class Cour{
         $this->id = $id;
     }
 
+    public function setPicture($picture){
+        $this->picture = $picture;
+    }
+
     public function setTitre($titre){
         $this->titre = $titre;
     }
@@ -52,6 +56,8 @@ class Cour{
             'titre'=> $this->titre,
             'description'=> $this->description,
             'contenuDocument'=> $this->contenu,
+            'status' => $this->status,
+            'picture' => $this->picture,
             'id_categorie'=> $this->id_categorie,
         ];
         return $this->crud->insertRecord($this->table, $data);
@@ -61,8 +67,10 @@ class Cour{
         $data = [
             'titre'=> $this->titre,
             'description'=> $this->description,
-            'contenu'=> $this->contenu,
-            'contenuVideo'=> $this->id_categorie,
+            'contenuVideo'=> $this->contenu,
+            'status' => $this->status,
+            'picture' => $this->picture,
+            'id_categorie'=> $this->id_categorie,
         ];
         return $this->crud->insertRecord($this->table, $data);
     }

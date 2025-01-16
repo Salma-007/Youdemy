@@ -8,6 +8,8 @@
         Youdemy
     </title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet" />
+    <link rel="stylesheet" href="https://cdn.datatables.net/2.2.1/css/dataTables.dataTables.css" />
+
     <style>
         * {
             margin: 0;
@@ -310,20 +312,20 @@
         
         <div class="container mt-5">
     <h2>Liste des étudiants inscrits dans le cours</h2>
-    <table class="table table-striped">
+    <table id="myTable" class="table table-striped">
       <thead>
         <tr>
-          <th scope="col">N°</th>
-          <th scope="col">Nom</th>
-          <th scope="col">Prénom</th>
-          <th scope="col">Email</th>
-          <th scope="col">Date d'inscription</th>
-          <th scope="col">Statut</th>
+          <th>N°</th>
+          <th>Nom</th>
+          <th>Prénom</th>
+          <th>Email</th>
+          <th>Date d'inscription</th>
+          <th>Statut</th>
         </tr>
       </thead>
       <tbody>
         <tr>
-          <th scope="row">1</th>
+          <th>1</th>
           <td>Dupont</td>
           <td>Marie</td>
           <td>marie.dupont@email.com</td>
@@ -331,7 +333,7 @@
           <td>Inscrit</td>
         </tr>
         <tr>
-          <th scope="row">2</th>
+          <th>2</th>
           <td>Lefevre</td>
           <td>Jean</td>
           <td>jean.lefevre@email.com</td>
@@ -339,7 +341,7 @@
           <td>Inscrit</td>
         </tr>
         <tr>
-          <th scope="row">3</th>
+          <th>3</th>
           <td>Durand</td>
           <td>Pierre</td>
           <td>pierre.durand@email.com</td>
@@ -347,7 +349,7 @@
           <td>Inscrit</td>
         </tr>
         <tr>
-          <th scope="row">4</th>
+          <th>4</th>
           <td>Petit</td>
           <td>Claire</td>
           <td>claire.petit@email.com</td>
@@ -355,7 +357,7 @@
           <td>Inscrit</td>
         </tr>
         <tr>
-          <th scope="row">5</th>
+          <th>5</th>
           <td>Martin</td>
           <td>Luc</td>
           <td>luc.martin@email.com</td>
@@ -370,5 +372,11 @@
     </div>
 
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="https://cdn.datatables.net/2.2.1/js/dataTables.js"></script>
+    <script>
+        let table = new DataTable('#myTable', {
+            responsive: true
+        });
+    </script>
 </body>
 </html>
