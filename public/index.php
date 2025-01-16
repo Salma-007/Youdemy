@@ -36,6 +36,10 @@ $route = [
     '/coursesTeacher' => 'controllers/DashboardTeacherController.php',
     '/coursInscriptionsTeacher' => 'controllers/DashboardTeacherController.php',
     '/addCourse' => 'controllers/CourseController.php',
+    '/pendingCourses' => 'controllers/CourseController.php',
+    '/accepterCours' => 'controllers/DashboardController.php',
+    '/refuserCours' => 'controllers/DashboardController.php',
+    '/signUp' => 'controllers/DashboardController.php',
 ];
 
 if(array_key_exists($url, $route)){
@@ -131,6 +135,22 @@ if(array_key_exists($url, $route)){
         case '/addCourse': 
             $controller = new CourseController();
             $controller->addCourse();
+            break;
+        case '/pendingCourses': 
+            $controller = new DashboardController();
+            $controller->pendingCourses();
+            break;
+        case '/accepterCours': 
+            $controller = new DashboardController();
+            $controller->acceptCourse();
+            break;
+        case '/refuserCours': 
+            $controller = new DashboardController();
+            $controller->refuseCourse();
+            break;
+        case '/signUp': 
+            $controller = new DashboardController();
+            $controller->signUpPage();
             break;
     }
 }

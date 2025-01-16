@@ -84,13 +84,25 @@ class Cour{
             return $this->courDocument();
         }
     }
-
+    // recuperation de touts les cours
     public function getAllCourses(){
         $query = "select cours.id, titre, picture, status ,categories.nom_categorie as nom_categorie, description, GROUP_CONCAT(tags.nom_tag) AS tags 
         FROM cours 
         LEFT JOIN categories ON cours.id_categorie = categories.id 
         LEFT JOIN cour_tags ON cours.id = cour_tags.id_cour 
         left JOIN tags ON cour_tags.id_tag = tags.id 
+        GROUP BY cours.id;";
+        $stmt = $this->conn->query($query);
+        $result = $stmt->fetchAll(PDO::FETCH_ASSOC);
+        return $result;
+    }
+    // recuperation de pending cours
+    public function getPendingCourses(){
+        $query = "select cours.id, titre, picture, status ,categories.nom_categorie as nom_categorie, description, GROUP_CONCAT(tags.nom_tag) AS tags 
+        FROM cours 
+        LEFT JOIN categories ON cours.id_categorie = categories.id 
+        LEFT JOIN cour_tags ON cours.id = cour_tags.id_cour 
+        left JOIN tags ON cour_tags.id_tag = tags.id where status = 'pending'
         GROUP BY cours.id;";
         $stmt = $this->conn->query($query);
         $result = $stmt->fetchAll(PDO::FETCH_ASSOC);
@@ -108,7 +120,20 @@ class Cour{
     public function getCountCourses(){
         return $this->crud->getTableCount($this->table);
     }
-
+    // methode pour accepter cours
+    public function acceptCourse(){
+        $data = [
+            'status' => 'accepted'
+        ];
+        return $this->crud->updateRecord($this->table, $data, $this->id);
+    }
+    // methode pour refuser cours
+    public function refuseCourse(){
+        $data = [
+            'status' => 'refused'
+        ];
+        return $this->crud->updateRecord($this->table, $data, $this->id);
+    }
 
 
 

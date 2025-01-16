@@ -18,8 +18,11 @@ class TagController{
     // add tag
     public function addTag(){
         extract($_POST);
-        $this->tag->setNom($tagName);
-        $this->tag->insertTag();
+        $tags = explode(',', $tagName);
+        foreach($tags as $tag) :  
+            $this->tag->setNom($tag);
+            $this->tag->insertTag();
+        endforeach;
         return header('location: /tags');
     }
     // delete tag

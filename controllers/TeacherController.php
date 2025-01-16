@@ -15,14 +15,12 @@ class TeacherController{
         $getCountTeacher = $this->teacher->getCountTeachers();
         require(__DIR__ . '/../views/teachers.php');  
     }
-
     // render teachers
     public function renderPendingTeachers(){
         $getAllTeachers= $this->teacher->getAllPendingTeachers();
         $getCountTeacher = $this->teacher->getCountPendingTeachers();
         require(__DIR__ . '/../views/pendingTeachers.php');  
     }
-
     // assign roles
     public function assignTeacher(){
         if (isset($_GET['id'])) {
@@ -59,8 +57,6 @@ class TeacherController{
             return header('Location: /teachers');    
         }
     }
-
-
 
 
 }

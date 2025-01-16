@@ -371,7 +371,7 @@
                     <div class="course-actions">
                             <button class="btn-edit">Modifier</button>
                             <button class="btn-inscription">inscriptions</button>
-                            <button class="btn-delete">Supprimer</button>
+                            <button class="btn-delete" onclick="window.location.href='/accepterCours?id=<?php echo $course['id']; ?>'">Supprimer</button>
                         </div>
                     </div>
                     <p><?php  echo htmlspecialchars($course['description']);?></p>

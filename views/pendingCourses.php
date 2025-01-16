@@ -42,11 +42,10 @@
     <div class="container-fluid py-2">
       <div class="row">
         <div class="ms-3">
-        <a type="button" href="/pendingCourses" class="btn btn-outline-primary btn-sm mb-0">View pending courses</a>
         <div class="container my-5">
-    <h3 class="mb-4">All Courses</h3>
+    <h3 class="mb-4">Pending Courses</h3>
     <div class="row">
-            <?php foreach($getAllCourses as $course): ?>
+            <?php foreach($getPendingCourses as $course): ?>
                 <div class="col-xl-3 col-md-6 mb-xl-0 mb-4">
                   <div class="card card-blog card-plain">
                     <div class="card-header p-0 m-2">
@@ -64,19 +63,12 @@
                       <p class="mb-4 text-sm">
                       <?php  echo htmlspecialchars($course['description']);?>
                       </p>
-                      <div class="d-flex align-items-center justify-content-between">
-                      <button type="button" class="btn 
-                        <?php 
-                            if ($course['status'] == 'pending') {
-                                echo 'btn-warning'; 
-                            } elseif ($course['status'] == 'accepted') {
-                                echo 'btn-success'; 
-                            } elseif ($course['status'] == 'refused') {
-                                echo 'btn-danger'; 
-                            }
-                        ?> 
-                        btn-sm mb-0">
-                        <?php echo htmlspecialchars($course['status']); ?>
+                      <div class="d-flex align-items-center gap-3">
+                      <button type="button" class="btn btn-success btn-sm mb-0" onclick="window.location.href='/accepterCours?id=<?php echo $course['id']; ?>'">
+                        Accepter
+                      </button>
+                    <button type="button" class="btn btn-danger btn-sm mb-0" onclick="window.location.href='/refuserCours?id=<?php echo $course['id']; ?>'">
+                        Refuser
                     </button>
                       </div>
                     </div>
