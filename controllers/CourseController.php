@@ -21,7 +21,7 @@ class CourseController{
         $type = $contenuType;
         var_dump($type);
         $this->cour->ajout($type);
-        return header('location:/coursesTeacher');
+        return header('location:/coursesTeacher');  
     }
 
 }
