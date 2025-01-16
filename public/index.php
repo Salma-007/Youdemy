@@ -8,6 +8,7 @@ use Controllers\DashboardController;
 use Controllers\DashboardTeacherController;
 use Controllers\StudentController;
 use Controllers\TeacherController;
+use Controllers\CourseController;
 
 $url = parse_url($_SERVER['REQUEST_URI'])['path'];
 // var_dump($url);
@@ -32,7 +33,8 @@ $route = [
     '/banTeacher' => 'controllers/TeacherController.php',
     '/activateTeacher' => 'controllers/TeacherController.php',
     '/coursesTeacher' => 'controllers/DashboardTeacherController.php',
-    '/coursInscriptions' => 'controllers/DashboardTeacherController.php',
+    '/coursInscriptionsTeacher' => 'controllers/DashboardTeacherController.php',
+    '/addCourse' => 'controllers/CourseController.php',
 ];
 
 if(array_key_exists($url, $route)){
@@ -117,9 +119,13 @@ if(array_key_exists($url, $route)){
             $controller = new TeacherController();
             $controller->activateTeacher();
             break;
-        case '/coursInscriptions': 
+        case '/coursInscriptionsTeacher': 
             $controller = new DashboardTeacherController();
             $controller->inscriptions();
+            break;
+        case '/addCourse': 
+            $controller = new CourseController();
+            $controller->addCourse();
             break;
     }
 }

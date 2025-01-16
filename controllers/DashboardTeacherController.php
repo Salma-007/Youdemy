@@ -16,7 +16,7 @@ class DashboardTeacherController{
         require(__DIR__ .'/../views/coursesTeacher.php');
     }
     public function inscriptions(){   
-        require(__DIR__ .'/../views/coursInscriptions.php');
+        require(__DIR__ .'/../views/coursInscriptionsTeacher.php');
     }
 }
 

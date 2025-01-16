@@ -312,15 +312,15 @@
             <form action="/addCourse" method="POST" id="addCourseForm">
                 <div class="form-group">
                     <label>Titre</label>
-                    <input type="text" class="form-control" required>
+                    <input type="text" name="titreCour" class="form-control" required>
                 </div>
                 <div class="form-group">
                     <label>Description</label>
-                    <textarea class="form-control" rows="3" required></textarea>
+                    <textarea class="form-control" name="descriptionCour" rows="3" required></textarea>
                 </div>
                 <div class="form-group">
                     <label>Type de contenu</label>
-                    <select class="form-control" id="contentType" required>
+                    <select class="form-control" id="contentType" name ="contenuType" required>
                         <option value="">Sélectionner le type</option>
                         <option value="text">Document</option>
                         <option value="video">Video</option>
@@ -336,7 +336,7 @@
                 </div>
                 <div class="form-group">
                     <label>Catégorie</label>
-                    <select class="form-control" id="categorie" required>
+                    <select class="form-control" id="categorie" name="category_name" required>
                     <?php foreach ($getAllCategories as $categorie): ?>
                         <option value="<?= htmlspecialchars($categorie['id']) ?>"><?= htmlspecialchars($categorie['nom_categorie']) ?></option>
                     <?php endforeach; ?>
