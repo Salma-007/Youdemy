@@ -14,6 +14,7 @@ $url = parse_url($_SERVER['REQUEST_URI'])['path'];
 // var_dump($url);
 $route = [
     '/dashboard' => 'controllers/DashboardController.php',
+    '/coursesAdmin' => 'controllers/DashboardController.php',
     '/categories' => 'controllers/CategorieController.php',
     '/createCategorie' => 'controllers/CategorieController.php',
     '/deleteCategorie' => 'controllers/CategorieController.php',
@@ -42,6 +43,10 @@ if(array_key_exists($url, $route)){
         case '/dashboard': 
             $controller = new DashboardController();
             $controller->home();
+            break;
+        case '/coursesAdmin': 
+            $controller = new DashboardController();
+            $controller->courses();
             break;
         case '/coursesTeacher': 
             $controller = new DashboardTeacherController();

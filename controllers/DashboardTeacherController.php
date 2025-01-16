@@ -5,6 +5,9 @@ use Classes\Tag;
 use Classes\Cour;
 
 class DashboardTeacherController{
+    private $cour;
+    private $categorie;
+    private $tag;
 
     public function __construct(){
         $this->categorie = new Categorie();

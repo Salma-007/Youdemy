@@ -66,4 +66,9 @@ class Categorie{
         return $this->crud->getRecord($this->table,$this->id);
     }
 
+    // count des categories
+    public function getCountCategories(){
+        return $this->crud->getTableCount($this->table);
+    }
+
 }

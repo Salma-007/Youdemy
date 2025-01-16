@@ -66,4 +66,9 @@ class Tag{
         return $this->crud->getRecord($this->table,$this->id);
     }
 
+    // count des tags
+    public function getCountTags(){
+        return $this->crud->getTableCount($this->table);
+    }
+
 }

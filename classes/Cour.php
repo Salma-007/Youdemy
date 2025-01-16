@@ -51,7 +51,6 @@ class Cour{
         $this->id_categorie = $id_categorie;
     }    
 
-
     // method pour ajouter cours en document
     public function courDocument(){
         $data = [
@@ -87,7 +86,7 @@ class Cour{
     }
 
     public function getAllCourses(){
-        $query = "select cours.id, titre, categories.nom_categorie as nom_categorie, description, GROUP_CONCAT(tags.nom_tag) AS tags 
+        $query = "select cours.id, titre, picture, status ,categories.nom_categorie as nom_categorie, description, GROUP_CONCAT(tags.nom_tag) AS tags 
         FROM cours 
         LEFT JOIN categories ON cours.id_categorie = categories.id 
         LEFT JOIN cour_tags ON cours.id = cour_tags.id_cour 
@@ -97,7 +96,6 @@ class Cour{
         $result = $stmt->fetchAll(PDO::FETCH_ASSOC);
         return $result;
     }
-
     // ajout des tags en table pivot
     public function addTagsCourse($tag){
         $data = [
@@ -106,7 +104,10 @@ class Cour{
         ];
         return $this->crud->insertRecord('cour_tags', $data);
     }
-
+    // count des cours
+    public function getCountCourses(){
+        return $this->crud->getTableCount($this->table);
+    }
 
 
 

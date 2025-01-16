@@ -43,7 +43,7 @@
               <div class="d-flex justify-content-between">
                 <div>
                   <p class="text-sm mb-0 text-capitalize">total de cours</p>
-                  <h4 class="mb-0">$53k</h4>
+                  <h4 class="mb-0"><?php echo htmlspecialchars($getCountCourses); ?></h4>
                 </div>
                 <div class="icon icon-md icon-shape bg-gradient-dark shadow-dark shadow text-center border-radius-lg">
                   <i class="material-symbols-rounded opacity-10">weekend</i>
@@ -77,7 +77,7 @@
               <div class="d-flex justify-content-between">
                 <div>
                   <p class="text-sm mb-0 text-capitalize">total categories</p>
-                  <h4 class="mb-0">3,462</h4>
+                  <h4 class="mb-0"><?php echo htmlspecialchars($getCountCategorie); ?></h4>
                 </div>
                 <div class="icon icon-md icon-shape bg-gradient-dark shadow-dark shadow text-center border-radius-lg">
                   <i class="material-symbols-rounded opacity-10">leaderboard</i>
@@ -94,7 +94,7 @@
               <div class="d-flex justify-content-between">
                 <div>
                   <p class="text-sm mb-0 text-capitalize">total tags</p>
-                  <h4 class="mb-0">$103,430</h4>
+                  <h4 class="mb-0"><?php echo htmlspecialchars($getCountTags); ?></h4>
                 </div>
                 <div class="icon icon-md icon-shape bg-gradient-dark shadow-dark shadow text-center border-radius-lg">
                   <i class="material-symbols-rounded opacity-10">weekend</i>
@@ -102,7 +102,6 @@
               </div>
             </div>
             <hr class="dark horizontal my-0">
-
           </div>
         </div>
       </div>

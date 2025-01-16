@@ -374,11 +374,15 @@
                             <button class="btn-delete">Supprimer</button>
                         </div>
                     </div>
-                    <p>course description</p>
-                    <p><strong>Type:</strong> <?php  echo htmlspecialchars($course['nom_categorie']);?></p>
-                    <p><strong>Catégorie:</strong> courecategory</p>
+                    <p><?php  echo htmlspecialchars($course['description']);?></p>
+                    <p><strong>Type:</strong> Text/ Video</p>
+                    <p><strong>Catégorie:</strong> <?php  echo htmlspecialchars($course['nom_categorie']);?></p>
                     <div class="tags-container">
-                        <span class="tag">tag</span>
+                        <?php                  
+                            $tags = explode(',', $course['tags']);
+                            foreach($tags as $tag) :  ?>
+                        <span class="tag"><?php  echo htmlspecialchars($tag);?></span>
+                        <?php endforeach; ?>
                     </div>
                 </div>
         </div>
