@@ -15,14 +15,16 @@ class Cour{
     protected $status = 'pending';
     protected $table = 'cours';
     protected $crud;
+    protected $tags = [];
+    protected $conn;
     
     public function __construct($titre = null , $description = null, $contenu = null, $id_categorie = -1){
         $this->id_categorie = $id_categorie;
         $this->description = $description;
         $this->titre = $titre;
         $this->contenu = $contenu;
-        $conn = Database::connect();
-        $this->crud  = new BaseModel($conn);
+        $this->conn = Database::connect();
+        $this->crud  = new BaseModel($this->conn );
     }
 
     public function setId($id){
@@ -85,7 +87,24 @@ class Cour{
     }
 
     public function getAllCourses(){
-        return $this->crud->readRecords($this->table);
+        $query = "select cours.id, titre, categories.nom_categorie as nom_categorie, description, GROUP_CONCAT(tags.nom_tag) AS tags 
+        FROM cours 
+        LEFT JOIN categories ON cours.id_categorie = categories.id 
+        LEFT JOIN cour_tags ON cours.id = cour_tags.id_cour 
+        left JOIN tags ON cour_tags.id_tag = tags.id 
+        GROUP BY cours.id;";
+        $stmt = $this->conn->query($query);
+        $result = $stmt->fetchAll(PDO::FETCH_ASSOC);
+        return $result;
+    }
+
+    // ajout des tags en table pivot
+    public function addTagsCourse($tag){
+        $data = [
+            'id_cour' => $this->id,
+            'id_tag'=> $tag
+        ];
+        return $this->crud->insertRecord('cour_tags', $data);
     }
 
 

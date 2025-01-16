@@ -174,6 +174,7 @@
         }
 
         .course-card {
+            margin: 25px 30px;
             background: white;
             padding: 1.5rem;
             border-radius: var(--border-radius);
@@ -288,8 +289,8 @@
 <body>
     <div class="container">
         <div class="dashboard-header">
-            <h1>Tableau de bord Enseignant</h1>
-            <button class="btn btn-primary" id="addCourseBtn">+ Nouveau Cours</button>
+            <h1>My Youdemy Courses</h1>
+            <button class="btn btn-primary" id="addCourseBtn">Nouveau Cours</button>
         </div>
 
         <div class="stats-container">
@@ -348,7 +349,7 @@
                 </div>
                 <div class="form-group">
                     <label>Tags</label>
-                    <select class="form-control" multiple id="categorie" required>
+                    <select class="form-control" name="tags[]" multiple id="categorie" required>
                     <?php foreach ($getAllTags as $tag): ?>
                         <option  value="<?= htmlspecialchars($tag['id']) ?>"><?= htmlspecialchars($tag['nom_tag']) ?></option>
                     <?php endforeach; ?>
@@ -356,30 +357,33 @@
                 </div>
                 <div style="text-align: right;">
                     <button type="button" class="btn" id="cancelBtn">Annuler</button>
-                    <button type="submit" class="btn btn-primary">Enregistrer</button>
+                    <button type="submit" class="btn btn-primary">Ajouter</button>
                 </div>
             </form>
         </div>
-
+        <?php foreach($getAllCourses as $course): ?>
         <div class="courses-list" id="coursesList">
-            <!-- Les cours seront ajoutés ici dynamiquement -->
+            <!-- Les cours -->
+             
             <div class="course-card">
-                        <div class="course-header">
-                            <h3>${course.title}</h3>
-                            <div class="course-actions">
-                                <button class="btn-edit">Modifier</button>
-                                <button class="btn-inscription">inscriptions</button>
-                                <button class="btn-delete">Supprimer</button>
-                            </div>
-                        </div>
-                        <p>course description</p>
-                        <p><strong>Type:</strong> coursetype</p>
-                        <p><strong>Catégorie:</strong> courecategory</p>
-                        <div class="tags-container">
-                            <span class="tag">tag</span>
+                <div class="course-header">
+                    <h3><?php  echo htmlspecialchars($course['titre']);?></h3>
+                    <div class="course-actions">
+                            <button class="btn-edit">Modifier</button>
+                            <button class="btn-inscription">inscriptions</button>
+                            <button class="btn-delete">Supprimer</button>
                         </div>
                     </div>
+                    <p>course description</p>
+                    <p><strong>Type:</strong> <?php  echo htmlspecialchars($course['nom_categorie']);?></p>
+                    <p><strong>Catégorie:</strong> courecategory</p>
+                    <div class="tags-container">
+                        <span class="tag">tag</span>
+                    </div>
+                </div>
         </div>
+        <?php endforeach; ?>
+        
     </div>
 
     <script>

@@ -27,7 +27,7 @@ class BaseModel{
             die("Error in prepared statement: " . print_r($conn->errorInfo(), true));
         }
         $result = $stmt->execute(array_values($data));
-        return $result;
+        return $this->conn->lastInsertId();;
     }
 
     // methode de suppression 
@@ -100,9 +100,7 @@ class BaseModel{
     // get records with condition
     public function readWithCondition($table, $conditions){
         $query = "SELECT * from $table";
-
         try {
-
             if (!empty($conditions)) {
                 $conditionFields = [];
                 foreach ($conditions as $column => $value) {
@@ -110,7 +108,6 @@ class BaseModel{
                 }
                 $query .= " WHERE " . implode(" AND ", $conditionFields);
             }
-
             $result = $this->conn->prepare($query);
 
             $result->execute($conditions);
@@ -125,7 +122,6 @@ class BaseModel{
     // get records with condition
     public function countWithCondition($table, $conditions){
             $query = "SELECT count(*) as count from $table";
-    
             try {
     
                 if (!empty($conditions)) {

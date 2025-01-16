@@ -13,13 +13,14 @@ class CourseController{
     // add course
     public function addCourse(){
         extract($_POST);
-
         $photo = $_FILES['photo_input']['name'];
         $photo_tmp = $_FILES['photo_input']['tmp_name'];
         $photo_folder = '../public/assets/uploads/' . $photo; 
-        move_uploaded_file($photo_tmp, $photo_folder);
-
-        $categorieID =  intval($category_name);
+        // checking of the same photo already exists in file
+        if(!file_exists($photo_folder)){
+            move_uploaded_file($photo_tmp, $photo_folder);
+        }
+        $categorieID = intval($category_name);
         $this->cour->setPicture($photo);
         $this->cour->setTitre($titreCour);
         $this->cour->setDescription($descriptionCour);
@@ -30,14 +31,24 @@ class CourseController{
         $text = $TextContenu;
         if($type === 'text'){
             $this->cour->setContenu($TextContenu);
-            $this->cour->ajout($type);
+            $id = intval($this->cour->ajout($type));
+            $this->cour->setId($id);
+            foreach($tags as $tag){
+                $this->cour->addTagsCourse($tag);
+            };
         }
         elseif($type === 'video'){
             $this->cour->setContenu($VideoContenu);
-            $this->cour->ajout($type);
+            $id =intval($this->cour->ajout($type));
+            $this->cour->setId($id);
+            foreach($tags as $tag){
+                $this->cour->addTagsCourse($tag);
+            };
         }
-        
+
         return header('location:/coursesTeacher');  
     }
+
+    // render courses
 
 }
