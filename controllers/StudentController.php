@@ -42,5 +42,17 @@ class StudentController{
             return header('Location: /students');    
         }
     }
+    // sign up
+    public function signUpUser(){
+        extract($_POST);
+        $this->student->setNom($username);
+        $this->student->setEmail($email);
+        if (isset($role)) {
+            $this->student->setRole($role);
+        }
+        $this->student->setPassword($pswd);
+        $this->student->registerUser();
+        return header('location: /signUp');
+    }
 
 }

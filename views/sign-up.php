@@ -61,14 +61,6 @@
                   </a>
                 </li>
               </ul>
-              <ul class="navbar-nav d-lg-flex d-none">
-                <li class="nav-item d-flex align-items-center">
-                  <a class="btn btn-outline-primary btn-sm mb-0 me-2" target="_blank" href="https://www.creative-tim.com/builder?ref=navbar-material-dashboard">Online Builder</a>
-                </li>
-                <li class="nav-item">
-                  <a href="https://www.creative-tim.com/product/material-dashboard" class="btn btn-sm mb-0 me-1 bg-gradient-dark">Free download</a>
-                </li>
-              </ul>
             </div>
           </div>
         </nav>
@@ -106,32 +98,32 @@
                 </div>
               </div>
               <div class="card-body">
-                <form role="form" class="text-start">
+                <form role="form" class="text-start" action="/add_user" method="POST">
                 <div class="input-group input-group-outline my-3">
-                    <label class="form-label">Name</label>
-                    <input type="text" class="form-control">
+                    <!-- <label class="form-label">Name</label> -->
+                    <input type="text" name="username" class="form-control" placeholder="Name">
                   </div>
                   <div class="input-group input-group-outline my-3">
-                    <label class="form-label">Email</label>
-                    <input type="email" class="form-control">
+                    <!-- <label class="form-label">Email</label> -->
+                    <input type="email" name="email" class="form-control" placeholder="Email">
                   </div>
                   <div class="input-group input-group-outline mb-3">
-                    <label class="form-label">Password</label>
-                    <input type="password" class="form-control">
+                    <!-- <label class="form-label">Password</label> -->
+                    <input type="password" name="pswd" class="form-control" placeholder="Password">
                   </div>
                   <div class="mb-3">
                   <label class="form-label">Select your role</label><br>
                   <div class="form-check form-check-inline">
-                    <input class="form-check-input" type="radio" name="role" value="student" id="student">
+                    <input class="form-check-input" type="radio" name="role" value="etudiant" id="student">
                     <label class="form-check-label" for="student">Student</label>
                   </div>
                   <div class="form-check form-check-inline">
-                    <input class="form-check-input" type="radio" name="role" value="teacher" id="teacher">
+                    <input class="form-check-input" type="radio" name="role" value="enseignant" id="teacher">
                     <label class="form-check-label" for="teacher">Teacher</label>
                   </div>
                 </div>
                   <div class="text-center">
-                    <button type="button" class="btn bg-gradient-dark w-100 my-4 mb-2">Sign up</button>
+                    <button type="submit" class="btn bg-gradient-dark w-100 my-4 mb-2">Sign up</button>
                   </div>
 
                 </form>
@@ -140,38 +132,7 @@
           </div>
         </div>
       </div>
-      <footer class="footer position-absolute bottom-2 py-2 w-100">
-        <div class="container">
-          <div class="row align-items-center justify-content-lg-between">
-            <div class="col-12 col-md-6 my-auto">
-              <div class="copyright text-center text-sm text-white text-lg-start">
-                © <script>
-                  document.write(new Date().getFullYear())
-                </script>,
-                made with <i class="fa fa-heart" aria-hidden="true"></i> by
-                <a href="https://www.creative-tim.com" class="font-weight-bold text-white" target="_blank">Creative Tim</a>
-                for a better web.
-              </div>
-            </div>
-            <div class="col-12 col-md-6">
-              <ul class="nav nav-footer justify-content-center justify-content-lg-end">
-                <li class="nav-item">
-                  <a href="https://www.creative-tim.com" class="nav-link text-white" target="_blank">Creative Tim</a>
-                </li>
-                <li class="nav-item">
-                  <a href="https://www.creative-tim.com/presentation" class="nav-link text-white" target="_blank">About Us</a>
-                </li>
-                <li class="nav-item">
-                  <a href="https://www.creative-tim.com/blog" class="nav-link text-white" target="_blank">Blog</a>
-                </li>
-                <li class="nav-item">
-                  <a href="https://www.creative-tim.com/license" class="nav-link pe-0 text-white" target="_blank">License</a>
-                </li>
-              </ul>
-            </div>
-          </div>
-        </div>
-      </footer>
+
     </div>
   </main>
   <!--   Core JS Files   -->

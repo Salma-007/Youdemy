@@ -9,6 +9,9 @@ abstract class User{
     protected $table = 'users';
     protected $crud;
     protected $role;
+    protected $nom;
+    protected $email;
+    protected $password;
     protected $id;
     protected $connection;
 
@@ -16,6 +19,27 @@ abstract class User{
         $conn = Database::connect();
         $this->connection = $conn;
         $this->crud  = new BaseModel($conn);
+    }
+
+    // setter id
+    public function setId($id){
+        $this->id = $id;
+    }
+    // setter nom
+    public function setNom($nom){
+        $this->nom = $nom;
+    }
+    // setter email
+    public function setEmail($email){
+        $this->email = $email;
+    }
+    // setter role
+    public function setRole($role){
+        $this->role = $role;
+    }
+    // setter password
+    public function setPassword($password){
+        $this->password = $password;
     }
 
     // Login method 
@@ -71,5 +95,16 @@ abstract class User{
         ];
         return $this->crud->updateRecord($this->table, $data, $this->id);
     }
+    // sign up
+    public function registerUser(){
+        $data = [
+            'nom' => $this->nom,
+            'email' => $this->email,
+            'password_hash' => password_hash($this->password, PASSWORD_DEFAULT),
+            'role' => $this->role
+        ];
+        return $this->crud->insertRecord($this->table, $data);
+    
+}
 
 }

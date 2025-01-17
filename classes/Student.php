@@ -11,10 +11,11 @@ class Student extends User{
         $this->role = 'etudiant';
     }
 
-    // setter id
-    public function setId($id){
-        $this->id = $id;
+    // setter role
+    public function setRole($role){
+        $this->role = $role;
     }
+
     // affichage des etudiants
     public function getAllStudents(){
         $condition = [

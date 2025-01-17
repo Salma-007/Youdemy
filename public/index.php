@@ -40,6 +40,7 @@ $route = [
     '/accepterCours' => 'controllers/DashboardController.php',
     '/refuserCours' => 'controllers/DashboardController.php',
     '/signUp' => 'controllers/DashboardController.php',
+    '/add_user' => 'controllers/StudentController.php',
 ];
 
 if(array_key_exists($url, $route)){
@@ -151,6 +152,10 @@ if(array_key_exists($url, $route)){
         case '/signUp': 
             $controller = new DashboardController();
             $controller->signUpPage();
+            break;
+        case '/add_user': 
+            $controller = new StudentController();
+            $controller->signUpUser();
             break;
     }
 }
