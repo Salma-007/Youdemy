@@ -242,10 +242,15 @@
 </head>
 <body>
     <nav class="navbar">
-        <a href="/" class="logo">Youdemy</a>
+        <a href="/youdemy" class="logo">Youdemy</a>
         <div class="nav-buttons">
+          <?php if($_SESSION['user_id']){  ?>
+        <a href="/signIn" class="nav-btn signin-btn">Mes cours</a>
+        <a href="/logOut" class="nav-btn signup-btn">Se deconnecter</a>
+            <?php } else {?>
             <a href="/signIn" class="nav-btn signin-btn">Se connecter</a>
             <a href="/signUp" class="nav-btn signup-btn">S'inscrire</a>
+            <?php } ?>
         </div>
     </nav>
 
@@ -273,7 +278,7 @@
                         </p>
                         <div class="course-meta">
                             <span class="course-author">Par: <?php echo htmlspecialchars($course['enseignant']); ?></span>
-                            <a class="course-price">Enroll</a>
+                            <a href='/enroll?id=<?php echo $course['id'];?>' class="course-price">s'inscrire</a>
                         </div>
                     </div>
                 </article>

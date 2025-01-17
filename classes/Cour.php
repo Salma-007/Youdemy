@@ -114,7 +114,7 @@ class Cour{
                   LEFT JOIN categories ON cours.id_categorie = categories.id
                   LEFT JOIN cour_tags ON cours.id = cour_tags.id_cour
                   LEFT JOIN tags ON cour_tags.id_tag = tags.id
-                  LEFT JOIN users ON cours.id_enseignant = users.id
+                  LEFT JOIN users ON cours.id_enseignant = users.id where status = 'accepted'
                   GROUP BY cours.id
                   LIMIT :offset, :limit";  // Utilisation de :offset et :limit pour la pagination
     
@@ -135,16 +135,33 @@ class Cour{
     }
     
     // get courses by categorie
-    public function getCoursesByCategory($categoryId){
-        $query = "select cours.id, titre, picture, status ,categories.nom_categorie as nom_categorie, description, GROUP_CONCAT(tags.nom_tag) AS tags 
-        FROM cours 
-        LEFT JOIN categories ON cours.id_categorie = categories.id 
-        LEFT JOIN cour_tags ON cours.id = cour_tags.id_cour 
-        left JOIN tags ON cour_tags.id_tag = tags.id where categories.id = $categoryId
-        GROUP BY cours.id;";
-        $stmt = $this->conn->query($query);
+    public function getCoursesByCategory($categoryId, $coursesPerPage, $offset){
+        // Requête SQL avec LIMIT et OFFSET pour la pagination
+        $query = "SELECT cours.id, titre, picture, status, categories.nom_categorie AS nom_categorie, 
+                            description, GROUP_CONCAT(tags.nom_tag) AS tags
+                    FROM cours
+                    LEFT JOIN categories ON cours.id_categorie = categories.id
+                    LEFT JOIN cour_tags ON cours.id = cour_tags.id_cour
+                    LEFT JOIN tags ON cour_tags.id_tag = tags.id
+                    WHERE categories.id = :categoryId and status = 'accepted'
+                    GROUP BY cours.id
+                    LIMIT :offset, :limit";  // Utilisation de :offset et :limit
+
+        // Préparer la requête
+        $stmt = $this->conn->prepare($query);
+
+        // Exécuter la requête avec les paramètres directement passés dans execute
+        $stmt->execute([
+            ':categoryId' => $categoryId,
+            ':offset' => $offset,
+            ':limit' => $coursesPerPage
+        ]);
+
+        // Récupérer les résultats
         $result = $stmt->fetchAll(PDO::FETCH_ASSOC);
+
         return $result;
+
     }
     // recuperation des cours by teacher
     public function getAllCoursesByTeacher($id_enseignant){
@@ -182,12 +199,19 @@ class Cour{
     public function getCountCourses(){
         return $this->crud->getTableCount($this->table);
     }
+    // count des cours acceptés
+    public function getCountCoursesAccepted(){
+        $data = [
+            'status' => 'accepted',
+        ];
+        return $this->crud->countWithCondition($this->table, $data);
+    }
     // count courses per category
     public function countCoursesByCategory($categoryId){
         $query = "select count(*) 
         FROM cours 
         LEFT JOIN categories ON cours.id_categorie = categories.id 
-        where categories.id = 2;";
+        where categories.id = $categoryId and status = 'accepted';";
         $stmt = $this->conn->query($query);
         $result = $stmt->fetch(PDO::FETCH_ASSOC);
         return $result;

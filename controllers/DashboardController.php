@@ -3,6 +3,7 @@ namespace Controllers;
 use Classes\Cour;
 use Classes\Categorie;
 use Classes\Tag;
+use Classes\User;
 
 class DashboardController{
     private $cour;
@@ -17,6 +18,7 @@ class DashboardController{
     }
 
     public function home(){   
+        // User::isAuth();
         $getCountCourses = $this->cour->getCountCourses();
         $getCountCategorie = $this->categorie->getCountCategories();
         $getCountTags = $this->tag->getCountTags();
@@ -26,9 +28,7 @@ class DashboardController{
     // affichage des cours
     public function CoursesHome(){
         $categories = $this->categorie->getAllCategories();
-        // $courses = $this->cour->getAllCourses();
-
-        // Récupérer la page courante et la catégorie
+        
         $currentPage = isset($_GET['page']) ? (int)$_GET['page'] : 1;
         $categoryId = isset($_GET['category']) ? (int)$_GET['category'] : null;
 
@@ -41,7 +41,7 @@ class DashboardController{
             $totalCourses = $this->cour->countCoursesByCategory($categoryId);
         } else {
             $courses = $this->cour->getAllCoursesLimit($this->coursesPerPage, $offset);
-            $totalCourses = $this->cour->getCountCourses();
+            $totalCourses = $this->cour->getCountCoursesAccepted();
         }
 
         // Calculer le nombre total de pages

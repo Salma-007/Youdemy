@@ -66,7 +66,7 @@ abstract class User{
                     header('Location: /coursesTeacher');
                     exit();
                 } else {
-                    header('Location: /');
+                    header('Location: /youdemy');
                     exit();
                 }
                 return true;
@@ -132,6 +132,24 @@ abstract class User{
         $stmt = $this->conn->query($query);
         $result = $stmt->fetchAll(PDO::FETCH_ASSOC);
         return $result;
+    }
+    public static function isAuth(){
+        if($_SESSION['user_id']){
+            if ($user['role'] === 'admin') {
+                header('Location: /dashboard');
+                exit();
+            } else if ($user['role'] === 'enseignant') {
+                header('Location: /coursesTeacher');
+                exit();
+            } else {
+                header('Location: /youdemy');
+                exit();
+            }
+        }
+        else{
+            header('Location: /youdemy');
+            exit();
+        }
     }
 
 }

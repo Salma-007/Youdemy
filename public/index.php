@@ -11,6 +11,7 @@ use Controllers\DashboardTeacherController;
 use Controllers\StudentController;
 use Controllers\TeacherController;
 use Controllers\CourseController;
+use Controllers\InscriptionController;
 
 $url = parse_url($_SERVER['REQUEST_URI'])['path'];
 // var_dump($url);
@@ -50,6 +51,7 @@ $route = [
     '/updateCourseAction' => 'controllers/CourseController.php',
     '/deleteCourse' => 'controllers/DashboardTeacherController.php',
     '/youdemy' => 'controllers/DashboardController.php',
+    '/enroll' => 'controllers/InscriptionController.php',
 ];
 
 if(array_key_exists($url, $route)){
@@ -193,6 +195,10 @@ if(array_key_exists($url, $route)){
         case '/youdemy': 
             $controller = new DashboardController();
             $controller->CoursesHome();
+            break;
+        case '/enroll': 
+            $controller = new InscriptionController();
+            $controller->enrollStudent();
             break;
     }
 }
