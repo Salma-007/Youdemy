@@ -54,5 +54,11 @@ class StudentController{
         $this->student->registerUser();
         return header('location: /signUp');
     }
+    // sign in
+    public function signInUser(){
+        extract($_POST);
+        $this->student->login($email, $pswd);
+        // return header('location: /signUp');
+    }
 
 }

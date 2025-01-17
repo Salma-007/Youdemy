@@ -54,6 +54,10 @@ class DashboardController{
     public function signUpPage(){
         require(__DIR__ . '/../views/sign-up.php');  
     }
+    // sign in page
+    public function signInPage(){
+        require(__DIR__ . '/../views/sign-in.php');  
+    }
 }
 
 

@@ -1,6 +1,8 @@
 <?php
 
 require __DIR__ . '/../vendor/autoload.php';
+session_start();
+
 
 use Controllers\CategorieController;
 use Controllers\TagController;
@@ -40,7 +42,9 @@ $route = [
     '/accepterCours' => 'controllers/DashboardController.php',
     '/refuserCours' => 'controllers/DashboardController.php',
     '/signUp' => 'controllers/DashboardController.php',
+    '/signIn' => 'controllers/DashboardController.php',
     '/add_user' => 'controllers/StudentController.php',
+    '/verify_user' => 'controllers/StudentController.php',
 ];
 
 if(array_key_exists($url, $route)){
@@ -153,9 +157,17 @@ if(array_key_exists($url, $route)){
             $controller = new DashboardController();
             $controller->signUpPage();
             break;
+        case '/signIn': 
+            $controller = new DashboardController();
+            $controller->signInPage();
+            break;
         case '/add_user': 
             $controller = new StudentController();
             $controller->signUpUser();
+            break;
+        case '/verify_user': 
+            $controller = new StudentController();
+            $controller->signInUser();
             break;
     }
 }

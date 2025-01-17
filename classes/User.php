@@ -47,8 +47,7 @@ abstract class User{
         // Sanitize input
         $email = trim($email);
         $password = trim($password);
-        
-        $query = "SELECT id, password_hash, role FROM " . $this->table . " WHERE email = :email";
+        $query = "SELECT id, password_hash, nom, role FROM " . $this->table . " WHERE email = :email";
         $stmt = $this->connection->prepare($query);
         $stmt->bindParam(':email', $email, PDO::PARAM_STR);
         $stmt->execute();
@@ -56,20 +55,34 @@ abstract class User{
         // Check if the user exists
         if ($stmt->rowCount() > 0) {
             $user = $stmt->fetch(PDO::FETCH_ASSOC);
-            
             // Verify the password
-            if (password_verify($password, $user['password'])) {
-                session_start();
+            if (password_verify($password, $user['password_hash'])) {
                 $_SESSION['user_id'] = $user['id'];
                 $_SESSION['role'] = $user['role'];
-                
+                $_SESSION['nom'] = $user['nom'];
+                if ($user['role'] === 'admin') {
+                    header('Location: /dashboard');
+                    exit();
+                } else if ($user['role'] === 'enseignant') {
+                    header('Location: /coursesTeacher');
+                    exit();
+                } else {
+                    header('Location: /');
+                    exit();
+                }
                 return true;
             } else {
-                return false; 
+                $_SESSION['error_message'] = "password not correct";
+                header('Location: /signIn');  
+                exit(); 
             }
-        }
-        
-        return false; 
+        }  
+        else {
+            $_SESSION['error_message'] = "erreur d'authentification";
+            header('Location: /signIn');  
+            exit(); 
+        } 
+
     }
     // logout method
     public function logout() {
