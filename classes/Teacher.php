@@ -40,7 +40,6 @@ class Teacher extends User{
         ];
         return $this->crud->countWithCondition($this->table, $condition);
     }
-
     // pending teachers counts
     public function getCountPendingTeachers(){
         $condition = [

@@ -39,7 +39,6 @@ class BaseModel{
             die("Error in prepared statement: " . print_r($conn->errorInfo(), true));
         }
         $result = $stmt->execute([':id' => $id]);
-        
         return $result;
     }
 
@@ -76,9 +75,9 @@ class BaseModel{
         return $result;
     }
 
-    //methode d'afficher une record
+    //methode d'afficher une record de table cours
     public function getRecordCour($table, $id){
-        $query = "select cours.id as id, titre, picture, status ,categories.id as categorie_id, description, GROUP_CONCAT(tags.id) AS tags 
+        $query = "select cours.id as id, titre, picture, status, contenuVideo, contenuDocument ,categories.id as categorie_id, description, GROUP_CONCAT(tags.id) AS tags 
         FROM cours 
         LEFT JOIN categories ON cours.id_categorie = categories.id 
         LEFT JOIN cour_tags ON cours.id = cour_tags.id_cour 
@@ -148,6 +147,17 @@ class BaseModel{
                 error_log("Error selecting records: " . $e->getMessage());
                 return;
             }
+    }
+    //methode d'afficher une record
+    public function getRecord($table, $id){
+        $query = "SELECT * FROM $table WHERE id = :id";
+        $stmt = $this->conn->prepare($query);
+            if ($stmt->execute(['id' => $id])) {
+            $resultat = $stmt->fetch(PDO::FETCH_ASSOC);
+            return $resultat;
+        } else {
+            return null;
+        }
     }
 
 }

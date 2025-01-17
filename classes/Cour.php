@@ -17,6 +17,8 @@ class Cour{
     protected $crud;
     protected $tags = [];
     protected $conn;
+    protected $contenuDocument;
+    protected $contenuVideo;    
     
     public function __construct($titre = null , $description = null, $contenu = null, $id_categorie = -1){
         $this->id_categorie = $id_categorie;
@@ -42,10 +44,15 @@ class Cour{
     public function setDescription($description){
         $this->description = $description;
     }
-
     public function setContenu($contenu){
         $this->contenu = $contenu;
     }    
+    public function setContenuVideo($contenuVideo){
+        $this->contenuVideo = $contenuVideo;
+    }
+    public function setContenuDocument($contenuDocument){
+        $this->contenuDocument = $contenuDocument;
+    }
 
     public function setId_categorie($id_categorie){
         $this->id_categorie = $id_categorie;
@@ -97,6 +104,18 @@ class Cour{
         $result = $stmt->fetchAll(PDO::FETCH_ASSOC);
         return $result;
     }
+    // recuperation des cours by teacher
+    public function getAllCoursesByTeacher($id_enseignant){
+        $query = "select cours.id, titre, picture, status ,categories.nom_categorie as nom_categorie, description, GROUP_CONCAT(tags.nom_tag) AS tags 
+        FROM cours 
+        LEFT JOIN categories ON cours.id_categorie = categories.id 
+        LEFT JOIN cour_tags ON cours.id = cour_tags.id_cour 
+        left JOIN tags ON cour_tags.id_tag = tags.id where id_enseignant = $id_enseignant
+        GROUP BY cours.id;";
+        $stmt = $this->conn->query($query);
+        $result = $stmt->fetchAll(PDO::FETCH_ASSOC);
+        return $result;
+    }
     // recuperation de pending cours
     public function getPendingCourses(){
         $query = "select cours.id, titre, picture, status ,categories.nom_categorie as nom_categorie, description, GROUP_CONCAT(tags.nom_tag) AS tags 
@@ -139,6 +158,40 @@ class Cour{
     public function getCourseById(){
         return $this->crud->getRecordCour($this->table, $this->id);
     }
+    // update course
+    public function updateCourse(){
+        $data = [
+            'titre'=>$this->titre,
+            'description'=>$this->description,
+            'id_categorie'=>$this->id_categorie,
+            'contenuVideo'=>$this->contenuVideo,
+            'contenuDocument'=>$this->contenuDocument,
+        ];
+        return $this->crud->updateRecord($this->table, $data, $this->id);
+    }
+    // delete tags by course if
+    public function deleteTagsbyCourse(){
+        $sql = "DELETE FROM cour_tags  WHERE id_cour = :id";
+        $stmt = $this->conn->prepare($sql);
+        if (!$stmt) {
+            die("Error in prepared statement: " . print_r($conn->errorInfo(), true));
+        }
+        $result = $stmt->execute([':id' => $this->id]);
+        
+        return $result;
+    }
+    // get count of courses by teacher
+    public function getCountCoursesByTeacher($id_enseignant){
+        $data = [
+            'id_enseignant' => $id_enseignant,
+        ];
+        return $this->crud->countWithCondition($this->table, $data);
+    }
+    // supprimer cours
+    public function deleteCourse(){
+        return $this->crud->deleteRecord($this->table, $this->id);
+    }
+
 
 
 }

@@ -34,7 +34,25 @@
             color: var(--secondary-color);
             line-height: 1.6;
         }
+        .status-pending {
+            color: orange;
+            font-weight: bold;
+        }
 
+        .status-accepted {
+            color: green;
+            font-weight: bold;
+        }
+
+        .status-deleted {
+            color: red;
+            font-weight: bold;
+        }
+
+        .status-unknown {
+            color: gray;
+            font-weight: normal;
+        }
         .container {
             max-width: 1200px;
             margin: 0 auto;
@@ -297,11 +315,11 @@
         <div class="stats-container">
             <div class="stat-card">
                 <h3>Total Cours</h3>
-                <div class="stat-value" id="totalCourses">0</div>
+                <div class="stat-value" id="totalCourses"><?php  echo htmlspecialchars($getCountCourses);?></div>
             </div>
             <div class="stat-card">
                 <h3>Total Étudiants</h3>
-                <div class="stat-value" id="totalStudents">12</div>
+                <div class="stat-value" id="totalStudents">0</div>
             </div>
             <div class="stat-card">
                 <h3>Moyenne Étudiants/Cours</h3>
@@ -372,11 +390,24 @@
                     <div class="course-actions">
                             <button class="btn-edit" onclick="window.location.href='/updateCourse?id=<?php echo $course['id']; ?>'">Modifier</button>
                             <button class="btn-inscription">inscriptions</button>
-                            <button class="btn-delete" onclick="window.location.href='/accepterCours?id=<?php echo $course['id']; ?>'">Supprimer</button>
+                            <button class="btn-delete" onclick="window.location.href='/deleteCourse?id=<?php echo $course['id']; ?>'">Supprimer</button>
                         </div>
                     </div>
                     <p><?php  echo htmlspecialchars($course['description']);?></p>
-                    <p><strong>Type:</strong> Text/ Video</p>
+                    <p><strong>Status:</strong> 
+                    <span class="
+                        <?php 
+                            if ($course['status'] == 'pending') {
+                                echo 'status-pending';
+                            } elseif ($course['status'] == 'accepted') {
+                                echo 'status-accepted';
+                            } elseif ($course['status'] == 'deleted') {
+                                echo 'status-deleted';
+                            } 
+                        ?>">
+                        <?php echo htmlspecialchars($course['status']); ?>
+                    </span>
+                    </p>
                     <p><strong>Catégorie:</strong> <?php  echo htmlspecialchars($course['nom_categorie']);?></p>
                     <div class="tags-container">
                         <?php                  
@@ -409,13 +440,11 @@
                 courseForm.style.display = 'none';
             });
 
-            // Gestion du type de contenu
             contentType.addEventListener('change', (e) => {
-                // Cacher d'abord tous les inputs de contenu
+
                 textInput.style.display = 'none';
                 videoInput.style.display = 'none';
 
-                // Afficher l'input approprié selon le type sélectionné
                 if (e.target.value === 'text') {
                     textInput.style.display = 'block';
                 } else if (e.target.value === 'video') {

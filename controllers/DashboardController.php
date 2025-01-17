@@ -21,6 +21,14 @@ class DashboardController{
         $getCountTags = $this->tag->getCountTags();
         require(__DIR__ .'/../views/dashboard.php');
     }
+
+    // affichage des cours
+    public function CoursesHome(){
+        $categories = $this->categorie->getAllCategories();
+        $courses = $this->cour->getAllCourses();
+        $getAllTags = $this->tag->getAllTags();
+        require(__DIR__ .'/../views/youdemy.php');
+    }
     public function courses(){
         $getAllCourses = $this->cour->getAllCourses();
         require(__DIR__ .'/../views/coursesAdmin.php');

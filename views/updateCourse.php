@@ -3,6 +3,8 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="apple-touch-icon" sizes="76x76" href="../assets/img/apple-icon.png">
+    <link rel="icon" type="image/png" href="../assets/img/favicon.png">
     <title>Youdemy</title>
     <style>
         :root {
@@ -125,20 +127,20 @@
         </div>
 
         <div class="edit-form">
-            <form action="/updateCourse" method="POST" enctype="multipart/form-data">
+            <form action="/updateCourseAction" method="POST" enctype="multipart/form-data">
                 <input type="hidden" name="courseId" value="<?php echo htmlspecialchars($courseData['id']); ?>">
                 
                 <div class="form-group">
                     <label>Titre du cours</label>
                     <input type="text" name="titreCour" class="form-control" required
-                           value="<?php echo htmlspecialchars($courseData['titre']); ?>">
+                        value="<?php echo htmlspecialchars($courseData['titre']); ?>">
                 </div>
                 <div class="form-group">
                     <label>Image du cours</label>
                     <input type="file" name="photo_input" class="form-control" accept="image/*">
                     <?php if ($courseData['picture']): ?>
                     <div class="current-image">
-                        <p>Image actuelle : <?php echo htmlspecialchars($courseData['picture']); ?></p>
+                        <p>Couverture actuelle : <?php echo htmlspecialchars($courseData['picture']); ?></p>
                         <img src="/assets/uploads/<?php echo htmlspecialchars($courseData['picture']); ?>" 
                              alt="Current course image" style="max-width: 200px;">
                     </div>
@@ -155,32 +157,31 @@
                 <div class="form-group">
                     <label>Type de contenu</label>
                     <select name="contenuType" class="form-control" required id="contentTypeSelect">
-                        <option value="text" <?php echo $courseData['type_contenu'] === 'text' ? 'selected' : ''; ?>>
-                            Document
-                        </option>
-                        <option value="video" <?php echo $courseData['type_contenu'] === 'video' ? 'selected' : ''; ?>>
-                            Vidéo
-                        </option>
+                    <option value="text" <?php echo $courseData['contenuDocument'] !== null ? 'selected' : ''; ?>>
+                        Document
+                    </option>
+                    <option value="video" <?php echo $courseData['contenuVideo'] !== null ? 'selected' : ''; ?>>
+                        Vidéo
+                    </option>
+
                     </select>
                 </div>
-
-                <div id="textContent" class="content-toggle <?php echo $courseData['type_contenu'] === 'text' ? 'active' : ''; ?>">
+                <div id="textContent" class="content-toggle <?php echo $courseData['contenuDocument'] !== null ? 'active' : ''; ?>">
                     <div class="form-group">
                         <label>Contenu texte</label>
                         <textarea name="TextContenu" class="form-control" rows="6"><?php 
-                            echo $courseData['type_contenu'] === 'text' ? htmlspecialchars($courseData['contenuDocument']) : ''; 
+                            echo $courseData['contenuDocument'] !== null ? htmlspecialchars($courseData['contenuDocument']) : ''; 
                         ?></textarea>
                     </div>
                 </div>
 
-                <div id="videoContent" class="content-toggle <?php echo $courseData['type_contenu'] === 'video' ? 'active' : ''; ?>">
+                <div id="videoContent" class="content-toggle <?php echo $courseData['contenuVideo'] !== null ? 'active' : ''; ?>">
                     <div class="form-group">
                         <label>URL de la vidéo</label>
                         <input type="url" name="VideoContenu" class="form-control"
-                               value="<?php echo $courseData['type_contenu'] === 'video' ? htmlspecialchars($courseData['contenuVideo']) : ''; ?>">
+                            value="<?php echo $courseData['contenuVideo'] !== null ? htmlspecialchars($courseData['contenuVideo']) : ''; ?>">
                     </div>
                 </div>
-
                 <div class="form-group">
                     <label>Catégorie</label>
                     <select name="category_name" class="form-control" required>

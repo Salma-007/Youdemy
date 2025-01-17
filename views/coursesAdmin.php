@@ -62,7 +62,7 @@
                         </h5>
                       </a>
                       <p class="mb-4 text-sm">
-                      <?php  echo htmlspecialchars($course['description']);?>
+                      <?php  echo htmlspecialchars(substr($course['description'], 0, 100)),'...';?>
                       </p>
                       <div class="d-flex align-items-center justify-content-between">
                       <button type="button" class="btn 

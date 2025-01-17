@@ -47,6 +47,9 @@ $route = [
     '/verify_user' => 'controllers/StudentController.php',
     '/logOut' => 'controllers/TeacherController.php',
     '/updateCourse' => 'controllers/DashboardTeacherController.php',
+    '/updateCourseAction' => 'controllers/CourseController.php',
+    '/deleteCourse' => 'controllers/DashboardTeacherController.php',
+    '/youdemy' => 'controllers/DashboardController.php',
 ];
 
 if(array_key_exists($url, $route)){
@@ -178,6 +181,18 @@ if(array_key_exists($url, $route)){
         case '/updateCourse': 
             $controller = new DashboardTeacherController();
             $controller->getCoursebyId();
+            break;
+        case '/updateCourseAction': 
+            $controller = new CourseController();
+            $controller->updateCoursebyTeacher();
+            break;
+        case '/deleteCourse': 
+            $controller = new DashboardTeacherController();
+            $controller->deleteCourse();
+            break;
+        case '/youdemy': 
+            $controller = new DashboardController();
+            $controller->CoursesHome();
             break;
     }
 }

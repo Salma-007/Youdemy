@@ -48,6 +48,22 @@ class CourseController{
         return header('location: /coursesTeacher');  
     }
 
-    // render courses
+    // update course
+    public function updateCoursebyTeacher(){
+        extract($_POST);
+        $this->cour->setId($courseId);
+        $this->cour->setTitre($titreCour);
+        $this->cour->setDescription($descriptionCour);
+        $this->cour->setContenuDocument($TextContenu);
+        $this->cour->setContenuVideo($VideoContenu);
+        $this->cour->setId_categorie($category_name);
+        $this->cour->updateCourse();
+        $this->cour->deleteTagsbyCourse();
+        foreach($tags as $tag){
+            $this->cour->addTagsCourse($tag);
+        };
+        return header('location: /coursesTeacher'); 
+        // var_dump($_POST);
+    }
 
 }
