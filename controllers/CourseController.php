@@ -45,8 +45,7 @@ class CourseController{
                 $this->cour->addTagsCourse($tag);
             };
         }
-
-        return header('location:/coursesTeacher');  
+        return header('location: /coursesTeacher');  
     }
 
     // render courses

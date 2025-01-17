@@ -50,7 +50,6 @@ class Cour{
     public function setId_categorie($id_categorie){
         $this->id_categorie = $id_categorie;
     }    
-
     // method pour ajouter cours en document
     public function courDocument(){
         $data = [
@@ -60,6 +59,7 @@ class Cour{
             'status' => $this->status,
             'picture' => $this->picture,
             'id_categorie'=> $this->id_categorie,
+            'id_enseignant'=> $_SESSION['user_id'],
         ];
         return $this->crud->insertRecord($this->table, $data);
     }
@@ -72,6 +72,7 @@ class Cour{
             'status' => $this->status,
             'picture' => $this->picture,
             'id_categorie'=> $this->id_categorie,
+            'id_enseignant'=> $_SESSION['user_id'],
         ];
         return $this->crud->insertRecord($this->table, $data);
     }
@@ -134,7 +135,10 @@ class Cour{
         ];
         return $this->crud->updateRecord($this->table, $data, $this->id);
     }
-
+    // get course by id
+    public function getCourseById(){
+        return $this->crud->getRecordCour($this->table, $this->id);
+    }
 
 
 }

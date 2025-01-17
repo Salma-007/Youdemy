@@ -100,14 +100,14 @@
                 </div>
               </div>
               <div class="card-body">
-                <form role="form" method="post" class="text-start" action="/verify_user">
+                <form role="form" class="form" method="post" class="text-start" action="/verify_user">
                   <div class="input-group input-group-outline my-3">
-                    <label class="form-label">Email</label>
-                    <input type="email" name="email" class="form-control">
+                    <!-- <label class="form-label">Email</label> -->
+                    <input type="email" name="email" class="form-control" placeholder="Email">
                   </div>
                   <div class="input-group input-group-outline mb-3">
-                    <label class="form-label" >Password</label>
-                    <input type="password" name="pswd" class="form-control">
+                    <!-- <label class="form-label" >Password</label> -->
+                    <input type="password" name="pswd" class="form-control" placeholder="Password">
                   </div>
 
                   <div class="text-center">
@@ -133,6 +133,27 @@
     </div>
   </main>
   <!--   Core JS Files   -->
+     <script>
+    document.querySelector(".form").addEventListener("submit", function(event) {
+        var email = document.querySelector("input[name='email']").value;
+        var password = document.querySelector("input[name='pswd']").value;
+
+        // Vérification de l'email
+        var emailRegex = /^[a-zA-Z0-9._-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,6}$/;
+        if (!emailRegex.test(email)) {
+            event.preventDefault(); 
+            alert("Veuillez entrer un email valide.");
+            return;
+        }
+        // Vérification du mot de passe
+        if (password.length < 4) {
+            event.preventDefault();
+            alert("Le mot de passe doit comporter au moins 4 caractères.");
+            return;
+        }
+    });
+</script>
+
   <script src="../assets/js/core/popper.min.js"></script>
   <script src="../assets/js/core/bootstrap.min.js"></script>
   <script src="../assets/js/plugins/perfect-scrollbar.min.js"></script>

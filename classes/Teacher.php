@@ -57,5 +57,6 @@ class Teacher extends User{
         return $this->crud->updateRecord($this->table, $data, $this->id);
     }
     
+    
 
 }

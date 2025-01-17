@@ -41,7 +41,6 @@ abstract class User{
     public function setPassword($password){
         $this->password = $password;
     }
-
     // Login method 
     public function login($email, $password) {
         // Sanitize input
@@ -86,9 +85,12 @@ abstract class User{
     }
     // logout method
     public function logout() {
-        session_start();
+        if (session_status() === PHP_SESSION_NONE) {
+            session_start();
+        }
         session_unset();   
         session_destroy(); 
+        header('Location: /signIn');
     }
     // delete user 
     public function deleteUser(){
@@ -118,6 +120,18 @@ abstract class User{
         ];
         return $this->crud->insertRecord($this->table, $data);
     
-}
+    }
+    // courses per teacher
+    public function coursesPerTeacher(){
+        $query = "select cours.id, titre, picture, status ,categories.nom_categorie as nom_categorie, description, GROUP_CONCAT(tags.nom_tag) AS tags 
+        FROM cours 
+        LEFT JOIN categories ON cours.id_categorie = categories.id 
+        LEFT JOIN cour_tags ON cours.id = cour_tags.id_cour 
+        left JOIN tags ON cour_tags.id_tag = tags.id where users.role = 'enseignant'
+        GROUP BY cours.id;";
+        $stmt = $this->conn->query($query);
+        $result = $stmt->fetchAll(PDO::FETCH_ASSOC);
+        return $result;
+    }
 
 }

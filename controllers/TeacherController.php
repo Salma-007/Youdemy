@@ -57,8 +57,10 @@ class TeacherController{
             return header('Location: /teachers');    
         }
     }
-    // sign up
-
+    //logout
+    public function logingOut(){
+        $this->teacher->logout();
+    }
 
 
 }

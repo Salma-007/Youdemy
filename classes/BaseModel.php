@@ -27,7 +27,7 @@ class BaseModel{
             die("Error in prepared statement: " . print_r($conn->errorInfo(), true));
         }
         $result = $stmt->execute(array_values($data));
-        return $this->conn->lastInsertId();;
+        return $this->conn->lastInsertId();
     }
 
     // methode de suppression 
@@ -77,8 +77,14 @@ class BaseModel{
     }
 
     //methode d'afficher une record
-    public function getRecord($table, $id){
-        $query = "SELECT * FROM $table WHERE id = :id";
+    public function getRecordCour($table, $id){
+        $query = "select cours.id as id, titre, picture, status ,categories.id as categorie_id, description, GROUP_CONCAT(tags.id) AS tags 
+        FROM cours 
+        LEFT JOIN categories ON cours.id_categorie = categories.id 
+        LEFT JOIN cour_tags ON cours.id = cour_tags.id_cour 
+        left JOIN tags ON cour_tags.id_tag = tags.id WHERE cours.id = :id
+        GROUP BY cours.id;";
+        // $query = "SELECT * FROM $table WHERE id = :id";
         $stmt = $this->conn->prepare($query);
             if ($stmt->execute(['id' => $id])) {
             $resultat = $stmt->fetch(PDO::FETCH_ASSOC);

@@ -45,6 +45,8 @@ $route = [
     '/signIn' => 'controllers/DashboardController.php',
     '/add_user' => 'controllers/StudentController.php',
     '/verify_user' => 'controllers/StudentController.php',
+    '/logOut' => 'controllers/TeacherController.php',
+    '/updateCourse' => 'controllers/DashboardTeacherController.php',
 ];
 
 if(array_key_exists($url, $route)){
@@ -168,6 +170,14 @@ if(array_key_exists($url, $route)){
         case '/verify_user': 
             $controller = new StudentController();
             $controller->signInUser();
+            break;
+        case '/logOut': 
+            $controller = new TeacherController();
+            $controller->logingOut();
+            break;
+        case '/updateCourse': 
+            $controller = new DashboardTeacherController();
+            $controller->getCoursebyId();
             break;
     }
 }

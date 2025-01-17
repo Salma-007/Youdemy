@@ -21,19 +21,15 @@ class Categorie{
     public function setNom($nom){
         $this->nom_categorie = $nom;
     }
-
     public function getNom(){
         return $this->nom_categorie;
     }
-
     public function setId($id){
         $this->id = $id;
     }
-
     public function getId(){
         return $this->id;
     }
-
     // fonction d'ajout
     public function insertCategorie(){
         $data = [

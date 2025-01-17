@@ -24,6 +24,17 @@ class DashboardTeacherController{
     public function inscriptions(){   
         require(__DIR__ .'/../views/coursInscriptionsTeacher.php');
     }
+    // get course by id
+    public function getCoursebyId(){
+        $getAllCategories = $this->categorie->getAllCategories();
+        $getAllTags = $this->tag->getAllTags();
+        if (isset($_GET['id'])) {
+            $id = $_GET['id'];
+            $this->cour->setId($id);
+            $courseData = $this->cour->getCourseById();
+            require(__DIR__ . '/../views/updateCourse.php');  
+        }
+    }
 }
 
 
