@@ -94,11 +94,53 @@ class Cour{
     }
     // recuperation de touts les cours
     public function getAllCourses(){
-        $query = "select cours.id, titre, picture, status ,categories.nom_categorie as nom_categorie, description, GROUP_CONCAT(tags.nom_tag) AS tags 
+        $query = "select cours.id, titre, cours.picture, status, users.nom as enseignant ,categories.nom_categorie as nom_categorie, description, GROUP_CONCAT(tags.nom_tag) AS tags 
         FROM cours 
         LEFT JOIN categories ON cours.id_categorie = categories.id 
         LEFT JOIN cour_tags ON cours.id = cour_tags.id_cour 
         left JOIN tags ON cour_tags.id_tag = tags.id 
+        left join users on cours.id_enseignant = users.id
+        GROUP BY cours.id;";
+        $stmt = $this->conn->query($query);
+        $result = $stmt->fetchAll(PDO::FETCH_ASSOC);
+        return $result;
+    }
+    public function getAllCoursesLimit($coursesPerPage, $offset){
+        // Requête SQL avec paramètres limit et offset
+        $query = "SELECT cours.id, titre, cours.picture, status, users.nom AS enseignant,
+                         categories.nom_categorie AS nom_categorie, description, 
+                         GROUP_CONCAT(tags.nom_tag) AS tags
+                  FROM cours
+                  LEFT JOIN categories ON cours.id_categorie = categories.id
+                  LEFT JOIN cour_tags ON cours.id = cour_tags.id_cour
+                  LEFT JOIN tags ON cour_tags.id_tag = tags.id
+                  LEFT JOIN users ON cours.id_enseignant = users.id
+                  GROUP BY cours.id
+                  LIMIT :offset, :limit";  // Utilisation de :offset et :limit pour la pagination
+    
+        // Préparer la requête
+        $stmt = $this->conn->prepare($query);
+        
+        // Lier les paramètres
+        $stmt->bindParam(':offset', $offset, PDO::PARAM_INT);
+        $stmt->bindParam(':limit', $coursesPerPage, PDO::PARAM_INT);
+        
+        // Exécuter la requête
+        $stmt->execute();
+        
+        // Récupérer les résultats
+        $result = $stmt->fetchAll(PDO::FETCH_ASSOC);
+        
+        return $result;
+    }
+    
+    // get courses by categorie
+    public function getCoursesByCategory($categoryId){
+        $query = "select cours.id, titre, picture, status ,categories.nom_categorie as nom_categorie, description, GROUP_CONCAT(tags.nom_tag) AS tags 
+        FROM cours 
+        LEFT JOIN categories ON cours.id_categorie = categories.id 
+        LEFT JOIN cour_tags ON cours.id = cour_tags.id_cour 
+        left JOIN tags ON cour_tags.id_tag = tags.id where categories.id = $categoryId
         GROUP BY cours.id;";
         $stmt = $this->conn->query($query);
         $result = $stmt->fetchAll(PDO::FETCH_ASSOC);
@@ -139,6 +181,16 @@ class Cour{
     // count des cours
     public function getCountCourses(){
         return $this->crud->getTableCount($this->table);
+    }
+    // count courses per category
+    public function countCoursesByCategory($categoryId){
+        $query = "select count(*) 
+        FROM cours 
+        LEFT JOIN categories ON cours.id_categorie = categories.id 
+        where categories.id = 2;";
+        $stmt = $this->conn->query($query);
+        $result = $stmt->fetch(PDO::FETCH_ASSOC);
+        return $result;
     }
     // methode pour accepter cours
     public function acceptCourse(){

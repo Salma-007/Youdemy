@@ -8,6 +8,7 @@ class DashboardController{
     private $cour;
     private $categorie;
     private $tag;
+    private $coursesPerPage = 4;
 
     public function __construct(){
         $this->cour = new Cour();
@@ -25,8 +26,26 @@ class DashboardController{
     // affichage des cours
     public function CoursesHome(){
         $categories = $this->categorie->getAllCategories();
-        $courses = $this->cour->getAllCourses();
-        $getAllTags = $this->tag->getAllTags();
+        // $courses = $this->cour->getAllCourses();
+
+        // Récupérer la page courante et la catégorie
+        $currentPage = isset($_GET['page']) ? (int)$_GET['page'] : 1;
+        $categoryId = isset($_GET['category']) ? (int)$_GET['category'] : null;
+
+        // Calculer l'offset pour la pagination
+        $offset = ($currentPage - 1) * $this->coursesPerPage;
+
+        // Récupérer les cours selon les filtres
+        if ($categoryId) {
+            $courses = $this->cour->getCoursesByCategory($categoryId, $this->coursesPerPage, $offset);
+            $totalCourses = $this->cour->countCoursesByCategory($categoryId);
+        } else {
+            $courses = $this->cour->getAllCoursesLimit($this->coursesPerPage, $offset);
+            $totalCourses = $this->cour->getCountCourses();
+        }
+
+        // Calculer le nombre total de pages
+        $totalPages = ceil($totalCourses / $this->coursesPerPage);
         require(__DIR__ .'/../views/youdemy.php');
     }
     public function courses(){

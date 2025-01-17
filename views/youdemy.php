@@ -3,7 +3,9 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Youdemy - Plateforme d'apprentissage en ligne</title>
+    <link rel="apple-touch-icon" sizes="76x76" href="../assets/img/apple-icon.png">
+    <link rel="icon" type="image/png" href="../assets/img/favicon.png">
+    <title>Youdemy </title>
     <style>
         /* Reset CSS */
         * {
@@ -270,8 +272,8 @@
                             <?php echo substr(htmlspecialchars($course['description']), 0, 100) . '...'; ?>
                         </p>
                         <div class="course-meta">
-                            <span class="course-author">Par <?php echo htmlspecialchars($course['enseignant']); ?></span>
-                            <button class="course-price">Enroll</button>
+                            <span class="course-author">Par: <?php echo htmlspecialchars($course['enseignant']); ?></span>
+                            <a class="course-price">Enroll</a>
                         </div>
                     </div>
                 </article>
