@@ -389,7 +389,7 @@
                     <h3><?php  echo htmlspecialchars($course['titre']);?></h3>
                     <div class="course-actions">
                             <button class="btn-edit" onclick="window.location.href='/updateCourse?id=<?php echo $course['id']; ?>'">Modifier</button>
-                            <button class="btn-inscription">inscriptions</button>
+                            <button class="btn-inscription" onclick="window.location.href='/coursInscriptionsTeacher?id=<?php echo $course['id']; ?>'">inscriptions</button>
                             <button class="btn-delete" onclick="window.location.href='/deleteCourse?id=<?php echo $course['id']; ?>'">Supprimer</button>
                         </div>
                     </div>

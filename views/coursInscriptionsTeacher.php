@@ -292,22 +292,7 @@
     <div class="container">
         <div class="dashboard-header">
             <h1>Inscriptions pour : Cours</h1>
-            <button class="btn btn-primary" id="addCourseBtn">Back</button>
-        </div>
-
-        <div class="stats-container">
-            <div class="stat-card">
-                <h3>Total Cours</h3>
-                <div class="stat-value" id="totalCourses">0</div>
-            </div>
-            <div class="stat-card">
-                <h3>Total Étudiants</h3>
-                <div class="stat-value" id="totalStudents">12</div>
-            </div>
-            <div class="stat-card">
-                <h3>Moyenne Étudiants/Cours</h3>
-                <div class="stat-value" id="avgStudents">0</div>
-            </div>
+            <a href="/coursesTeacher" class="btn btn-primary" id="addCourseBtn">Back</a>
         </div>
         
         <div class="container mt-5">
@@ -317,58 +302,33 @@
         <tr>
           <th>N°</th>
           <th>Nom</th>
-          <th>Prénom</th>
-          <th>Email</th>
-          <th>Date d'inscription</th>
           <th>Statut</th>
+          <th>Email</th>
         </tr>
       </thead>
       <tbody>
-        <tr>
-          <th>1</th>
-          <td>Dupont</td>
-          <td>Marie</td>
-          <td>marie.dupont@email.com</td>
-          <td>10/01/2025</td>
-          <td>Inscrit</td>
-        </tr>
-        <tr>
-          <th>2</th>
-          <td>Lefevre</td>
-          <td>Jean</td>
-          <td>jean.lefevre@email.com</td>
-          <td>12/01/2025</td>
-          <td>Inscrit</td>
-        </tr>
-        <tr>
-          <th>3</th>
-          <td>Durand</td>
-          <td>Pierre</td>
-          <td>pierre.durand@email.com</td>
-          <td>13/01/2025</td>
-          <td>Inscrit</td>
-        </tr>
-        <tr>
-          <th>4</th>
-          <td>Petit</td>
-          <td>Claire</td>
-          <td>claire.petit@email.com</td>
-          <td>14/01/2025</td>
-          <td>Inscrit</td>
-        </tr>
-        <tr>
-          <th>5</th>
-          <td>Martin</td>
-          <td>Luc</td>
-          <td>luc.martin@email.com</td>
-          <td>15/01/2025</td>
-          <td>Inscrit</td>
-        </tr>
+      <?php $count = 1;
+        foreach ($users as $user): ?>
+            <tr>
+                <th><?php echo $count++; ?></th>
+                <td><?php echo htmlspecialchars($user['nom']); ?></td>
+                <td><?php if($user['isFinished'] == 0){
+                    echo 'in progress';}
+                    else {
+                        echo'finished';
+                    }
+                ?><</td>
+                <td><?php echo htmlspecialchars($user['email']); ?></td>
+            </tr>
+        <?php endforeach; 
+              if(!$users){ ?>
+                <td><?php echo 'no inscriptions yet!'; ?></td>
+             <?php  }?>
+        
       </tbody>
     </table>
   </div>
-
-
+  
     </div>
 
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"></script>

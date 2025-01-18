@@ -18,7 +18,7 @@ class DashboardController{
     }
 
     public function home(){   
-        // User::isAuth();
+        User::isAuth();
         $getCountCourses = $this->cour->getCountCourses();
         $getCountCategorie = $this->categorie->getCountCategories();
         $getCountTags = $this->tag->getCountTags();

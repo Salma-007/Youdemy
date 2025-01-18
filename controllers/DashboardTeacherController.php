@@ -3,6 +3,7 @@ namespace Controllers;
 use Classes\Categorie;
 use Classes\Tag;
 use Classes\Cour;
+use Classes\User;
 
 class DashboardTeacherController{
     private $cour;
@@ -15,7 +16,8 @@ class DashboardTeacherController{
         $this->cour = new Cour();
     }
 
-    public function home(){   
+    public function home(){  
+        // User::isAuth(); 
         $getAllCategories = $this->categorie->getAllCategories();
         $getAllTags = $this->tag->getAllTags();
         $getAllCourses = $this->cour->getAllCoursesByTeacher($_SESSION['user_id']);
@@ -23,7 +25,13 @@ class DashboardTeacherController{
         require(__DIR__ .'/../views/coursesTeacher.php');
     }
     public function inscriptions(){   
+        if (isset($_GET['id'])) {
+            $id = $_GET['id'];
+            $this->cour->setId($id);
+        $users = $this->cour->getInscriptions();
         require(__DIR__ .'/../views/coursInscriptionsTeacher.php');
+        }
+        // echo $users;
     }
     // get course by id
     public function getCoursebyId(){

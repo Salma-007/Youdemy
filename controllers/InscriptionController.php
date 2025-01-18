@@ -14,7 +14,7 @@ class InscriptionController{
         $this->enroll->setIdCour($_GET['id']);
         $this->enroll->setIdEtudiant($_SESSION['user_id']);
         $this->enroll->enrollStudent();
-        return header('Location: /youdemy');
+        return header('Location: /myCourses');
     }
 
     // mark a course as finished
@@ -22,7 +22,7 @@ class InscriptionController{
         $this->enroll->setIdCour($_GET['id']);
         $this->enroll->setIdEtudiant($_SESSION['user_id']);
         $this->enroll->FinishedCourse();
-        return header('Location: /singleCourse?id=' . $_GET['id']);
+        return header('Location: /myCourses');
     }
 
     // get the courses for a student

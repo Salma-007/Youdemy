@@ -136,7 +136,6 @@ class Cour{
     
     // get courses by categorie
     public function getCoursesByCategory($categoryId, $coursesPerPage, $offset){
-        // Requête SQL avec LIMIT et OFFSET pour la pagination
         $query = "SELECT cours.id, titre, picture, status, categories.nom_categorie AS nom_categorie, 
                             description, GROUP_CONCAT(tags.nom_tag) AS tags
                     FROM cours
@@ -145,14 +144,11 @@ class Cour{
                     LEFT JOIN tags ON cour_tags.id_tag = tags.id
                     WHERE categories.id = :categoryId and status = 'accepted'
                     GROUP BY cours.id
-                    LIMIT :offset, :limit";  // Utilisation de :offset et :limit
+                    LIMIT :offset, :limit";  
 
-        // Préparer la requête
         $stmt = $this->conn->prepare($query);
-
-        // Exécuter la requête avec les paramètres directement passés dans execute
         $stmt->execute([
-            ':categoryId' => $categoryId,
+            ':categoryId' => intval($categoryId),
             ':offset' => $offset,
             ':limit' => $coursesPerPage
         ]);
@@ -269,29 +265,38 @@ class Cour{
     }
     // savoir si un etudiant est inscrit ou pas
     public function isInscrit($id_etudiant){
-        // Requête SQL pour vérifier si l'étudiant est inscrit au cours
         $sql = "SELECT 1 FROM `cours` 
                 JOIN inscriptions ON cours.id = inscriptions.id_cour 
                 JOIN users ON inscriptions.id_etudiant = users.id
                 WHERE cours.id = :id and inscriptions.id_etudiant = :id_etudiant LIMIT 1";
     
         $stmt = $this->conn->prepare($sql);
-    
         if (!$stmt) {
             die("Error in prepared statement: " . print_r($this->conn->errorInfo(), true));
         }
-    
-        // Exécuter la requête avec les paramètres bindés
+
         $stmt->execute([':id' => $this->id, ':id_etudiant' => $id_etudiant]);
-    
-        // Vérifier si un résultat a été trouvé
+
         if ($stmt->rowCount() > 0) {
-            // L'étudiant est inscrit, retourner 1
             return 1;
         } else {
-            // L'étudiant n'est pas inscrit, retourner 0
             return 0;
         }
+    }
+
+    // savoir les inscriptions d'un cour
+    public function getInscriptions(){
+        $query = "SELECT * FROM `users` 
+                    JOIN inscriptions ON users.id = inscriptions.id_etudiant 
+                    JOIN cours ON inscriptions.id_cour = cours.id
+                    WHERE cours.id = :id_cour;";  
+        $stmt = $this->conn->prepare($query);
+        $stmt->execute([
+        ':id_cour' => $this->id,
+        ]);
+        $result = $stmt->fetchAll(PDO::FETCH_ASSOC);
+        return $result;
+
     }
     
 

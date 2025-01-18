@@ -215,6 +215,10 @@ if(array_key_exists($url, $route)){
             $controller = new InscriptionController();
             $controller->getMyCourses();
             break;
+        case '/': 
+            $controller = new DashboardController();
+            $controller->CoursesHome();
+            break;
     }
 }
 
