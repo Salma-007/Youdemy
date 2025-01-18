@@ -54,6 +54,7 @@ $route = [
     '/enroll' => 'controllers/InscriptionController.php',
     '/singleCourse' => 'controllers/CourseController.php',
     '/markCourseAsFinished' => 'controllers/InscriptionController.php',
+    '/myCourses' => 'controllers/InscriptionController.php',
 ];
 
 if(array_key_exists($url, $route)){
@@ -209,6 +210,10 @@ if(array_key_exists($url, $route)){
         case '/markCourseAsFinished': 
             $controller = new InscriptionController();
             $controller->finishedCourse();
+            break;
+        case '/myCourses': 
+            $controller = new InscriptionController();
+            $controller->getMyCourses();
             break;
     }
 }

@@ -267,7 +267,33 @@ class Cour{
     public function deleteCourse(){
         return $this->crud->deleteRecord($this->table, $this->id);
     }
-
+    // savoir si un etudiant est inscrit ou pas
+    public function isInscrit($id_etudiant){
+        // Requête SQL pour vérifier si l'étudiant est inscrit au cours
+        $sql = "SELECT 1 FROM `cours` 
+                JOIN inscriptions ON cours.id = inscriptions.id_cour 
+                JOIN users ON inscriptions.id_etudiant = users.id
+                WHERE cours.id = :id and inscriptions.id_etudiant = :id_etudiant LIMIT 1";
+    
+        $stmt = $this->conn->prepare($sql);
+    
+        if (!$stmt) {
+            die("Error in prepared statement: " . print_r($this->conn->errorInfo(), true));
+        }
+    
+        // Exécuter la requête avec les paramètres bindés
+        $stmt->execute([':id' => $this->id, ':id_etudiant' => $id_etudiant]);
+    
+        // Vérifier si un résultat a été trouvé
+        if ($stmt->rowCount() > 0) {
+            // L'étudiant est inscrit, retourner 1
+            return 1;
+        } else {
+            // L'étudiant n'est pas inscrit, retourner 0
+            return 0;
+        }
+    }
+    
 
 
 }

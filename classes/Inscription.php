@@ -25,7 +25,6 @@ class Inscription{
     public function setProgress($isFinished){
         $this->isFinished = $isFinished;
     }
-
     // inscription d'un étudiant
     public function enrollStudent() {
         // Vérifier si l'étudiant est deja inscrit dans le cours
@@ -48,7 +47,6 @@ class Inscription{
             return $this->crud->insertRecord($this->table, $data);
         }
     }
-
     // finish course
     public function FinishedCourse(){
         $sql = "UPDATE $this->table SET isFinished = 1 where id_cour = :id_cour and id_etudiant = :id_etudiant";
@@ -59,5 +57,25 @@ class Inscription{
         $result = $stmt->execute([':id_cour' => $this->id_cour, ':id_etudiant' => $this->id_etudiant]);
         return $result;
     }
+    // get the finished courses for a student
+    public function FinishedCoursesStudent($progress){
+        $query = "select cours.id as id, titre, cours.picture, status, contenuVideo, contenuDocument ,categories.nom_categorie as categorie_id, description, GROUP_CONCAT(tags.nom_tag) AS tags 
+        FROM cours 
+        JOIN inscriptions ON cours.id = inscriptions.id_cour 
+        LEFT JOIN categories ON cours.id_categorie = categories.id 
+        LEFT JOIN cour_tags ON cours.id = cour_tags.id_cour 
+        left JOIN tags ON cour_tags.id_tag = tags.id 
+        JOIN users ON inscriptions.id_etudiant = users.id
+        WHERE inscriptions.isFinished = :isFinished and inscriptions.id_etudiant = :id_etudiant
+        GROUP BY cours.id;";
+        $stmt = $this->conn->prepare($query);
+            if ($stmt->execute(['id_etudiant' => $this->id_etudiant, 'isFinished' => $progress])) {
+            $resultat = $stmt->fetchAll(PDO::FETCH_ASSOC);
+            return $resultat;
+        } else {
+            return null;
+        }
+    }
+
 
 }

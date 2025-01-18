@@ -72,6 +72,13 @@ class CourseController{
             $id = $_GET['id'];
             $this->cour->setId($id);
             $course = $this->cour->getCourseById();
+            if(isset($_SESSION['user_id'])){
+                $inscrit = $this->cour->isInscrit($_SESSION['user_id']); 
+            }
+            else{
+             $inscrit = 0;   
+            }
+            // var_dump($this->cour->isInscrit($_SESSION['user_id']));
             require(__DIR__ .'/../views/SingleCourse.php');
         }
     }

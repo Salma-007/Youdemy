@@ -214,7 +214,47 @@
             color: white;
             border-color: var(--primary);
         }
+        /* Réduction de la taille des boutons "voir" et "s'inscrire" */
+        .course-meta .course-price {
+            padding: 0.4rem 1rem; /* Réduire le padding pour un bouton plus petit */
+            font-size: 0.9rem; /* Ajuster la taille de la police */
+            background-color: var(--text);
+            color: white;
+            border: none;
+            border-radius: var(--radius);
+            cursor: pointer;
+            font-weight: 600;
+            transition: background-color 0.3s ease, transform 0.3s ease;
+            text-decoration: none;
+            text-align: center;
+            display: inline-block;
+            margin-left: 8px; /* Réduire l'espacement entre les boutons */
+        }
 
+
+        /* Effet hover pour les boutons */
+        .course-meta .course-price:hover {
+            background-color: var(--accent);
+            transform: translateY(-1px); /* Effet léger au survol */
+        }
+
+        /* Bouton "voir" avec fond transparent */
+        .course-meta .course-price:first-child {
+            background-color: transparent;
+            color: var(--primary);
+            border: 2px solid var(--primary);
+        }
+
+        .course-meta .course-price:first-child:hover {
+            background-color: var(--primary);
+            color: white;
+        }
+
+        /* Espacement entre l'enseignant et les boutons */
+        .course-meta .course-author {
+            margin-right: 10px;
+            font-size: 0.9rem; /* Ajuster la taille du texte de l'enseignant */
+        }
         /* Responsive Design */
         @media (max-width: 768px) {
             .navbar {
@@ -245,7 +285,7 @@
         <a href="/youdemy" class="logo">Youdemy</a>
         <div class="nav-buttons">
           <?php if($_SESSION['user_id']){  ?>
-        <a href="/signIn" class="nav-btn signin-btn">Mes cours</a>
+        <a href="/myCourses" class="nav-btn signin-btn">Mes cours</a>
         <a href="/logOut" class="nav-btn signup-btn">Se deconnecter</a>
             <?php } else {?>
             <a href="/signIn" class="nav-btn signin-btn">Se connecter</a>
@@ -281,6 +321,7 @@
                             <a href='/enroll?id=<?php echo $course['id'];?>' class="course-price">s'inscrire</a>
                             <a href='/singleCourse?id=<?php echo $course['id'];?>' class="course-price">voir</a>
                         </div>
+
                     </div>
                 </article>
             <?php endforeach; ?>

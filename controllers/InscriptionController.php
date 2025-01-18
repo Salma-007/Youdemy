@@ -25,5 +25,14 @@ class InscriptionController{
         return header('Location: /singleCourse?id=' . $_GET['id']);
     }
 
+    // get the courses for a student
+    public function getMyCourses(){
+        // $this->enroll->setProgress(0);
+        $this->enroll->setIdEtudiant($_SESSION['user_id']);
+        $unfinishedCourses = $this->enroll->FinishedCoursesStudent(0);
+        $finishedCourses = $this->enroll->FinishedCoursesStudent(1);
+        // var_dump($unfinishedCourses);
+        require(__DIR__ .'/../views/mesCours.php');
+    }
 
 }

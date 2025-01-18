@@ -1,8 +1,3 @@
-<?php
-// Extraction des tags en tableau
-$tags = explode(',', $course['tags']);
-?>
-
 <!DOCTYPE html>
 <html lang="fr">
 <head>
@@ -227,7 +222,9 @@ $tags = explode(',', $course['tags']);
                 <button class="back-btn" onclick="window.history.back();">Retour</button>
                 <form action="/markCourseAsFinished?id=<?php echo $course['id'];?>" method="POST">
                     <input type="hidden" name="course_id" value="<?php echo $course['id']; ?>" />
-                    <button type="submit" class="finish-btn">Terminer le cours</button>
+                    <?php if ($_SESSION['user_id'] && $inscrit) { ?>
+                        <button type="submit" class="finish-btn">Terminer le cours</button>
+                    <?php }  ?>
                 </form>
             </div>
 
