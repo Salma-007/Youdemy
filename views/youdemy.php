@@ -266,7 +266,7 @@
 
         <div class="courses-grid">
             <?php foreach($courses as $course): ?>
-                <article class="course-card">
+                <article class="course-card" >
                     <img src="<?php echo $course['picture'] ? '/assets/uploads/'.$course['picture'] : '/assets/default-course.jpg'; ?>" 
                          alt="<?php echo htmlspecialchars($course['titre']); ?>" 
                          class="course-image">
@@ -279,6 +279,7 @@
                         <div class="course-meta">
                             <span class="course-author">Par: <?php echo htmlspecialchars($course['enseignant']); ?></span>
                             <a href='/enroll?id=<?php echo $course['id'];?>' class="course-price">s'inscrire</a>
+                            <a href='/singleCourse?id=<?php echo $course['id'];?>' class="course-price">voir</a>
                         </div>
                     </div>
                 </article>

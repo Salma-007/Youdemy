@@ -66,4 +66,13 @@ class CourseController{
         // var_dump($_POST);
     }
 
+    // get course by id for the single pag course
+    public function getCourseSinglePage(){
+        if (isset($_GET['id'])) {
+            $id = $_GET['id'];
+            $this->cour->setId($id);
+            $course = $this->cour->getCourseById();
+            require(__DIR__ .'/../views/SingleCourse.php');
+        }
+    }
 }

@@ -77,7 +77,7 @@ class BaseModel{
 
     //methode d'afficher une record de table cours
     public function getRecordCour($table, $id){
-        $query = "select cours.id as id, titre, picture, status, contenuVideo, contenuDocument ,categories.id as categorie_id, description, GROUP_CONCAT(tags.id) AS tags 
+        $query = "select cours.id as id, titre, picture, status, contenuVideo, contenuDocument ,categories.nom_categorie as categorie_id, description, GROUP_CONCAT(tags.nom_tag) AS tags 
         FROM cours 
         LEFT JOIN categories ON cours.id_categorie = categories.id 
         LEFT JOIN cour_tags ON cours.id = cour_tags.id_cour 

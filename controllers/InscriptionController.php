@@ -17,5 +17,13 @@ class InscriptionController{
         return header('Location: /youdemy');
     }
 
+    // mark a course as finished
+    public function finishedCourse(){
+        $this->enroll->setIdCour($_GET['id']);
+        $this->enroll->setIdEtudiant($_SESSION['user_id']);
+        $this->enroll->FinishedCourse();
+        return header('Location: /singleCourse?id=' . $_GET['id']);
+    }
+
 
 }

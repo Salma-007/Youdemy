@@ -52,6 +52,8 @@ $route = [
     '/deleteCourse' => 'controllers/DashboardTeacherController.php',
     '/youdemy' => 'controllers/DashboardController.php',
     '/enroll' => 'controllers/InscriptionController.php',
+    '/singleCourse' => 'controllers/CourseController.php',
+    '/markCourseAsFinished' => 'controllers/InscriptionController.php',
 ];
 
 if(array_key_exists($url, $route)){
@@ -199,6 +201,14 @@ if(array_key_exists($url, $route)){
         case '/enroll': 
             $controller = new InscriptionController();
             $controller->enrollStudent();
+            break;
+        case '/singleCourse': 
+            $controller = new CourseController();
+            $controller->getCourseSinglePage();
+            break;
+        case '/markCourseAsFinished': 
+            $controller = new InscriptionController();
+            $controller->finishedCourse();
             break;
     }
 }
