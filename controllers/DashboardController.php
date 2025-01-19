@@ -34,30 +34,35 @@ class DashboardController{
             return header('Location: /youdemy');
         }
     }
-
     // affichage des cours
     public function CoursesHome(){
         $categories = $this->categorie->getAllCategories();
         
         $currentPage = isset($_GET['page']) ? (int)$_GET['page'] : 1;
         $categoryId = isset($_GET['category']) ? (int)$_GET['category'] : null;
-        $categoryId = intval($categoryId);
-        // Calculer l'offset pour la pagination
+        $searchTerm = isset($_GET['search']) ? trim($_GET['search']) : ''; 
+
         $offset = ($currentPage - 1) * $this->coursesPerPage;
 
-        // Récupérer les cours selon les filtres
-        if ($categoryId) {
+        if ($categoryId && $searchTerm) {
+            $courses = $this->cour->getCoursesByCategoryAndSearch($categoryId, $searchTerm, $this->coursesPerPage, $offset);
+            $totalCourses = $this->cour->countCoursesByCategoryAndSearch($categoryId, $searchTerm);
+        } elseif ($categoryId) {
             $courses = $this->cour->getCoursesByCategory($categoryId, $this->coursesPerPage, $offset);
             $totalCourses = $this->cour->countCoursesByCategory($categoryId);
+        } elseif ($searchTerm) {
+            $courses = $this->cour->getCoursesBySearch($searchTerm, $this->coursesPerPage, $offset);
+            $totalCourses = $this->cour->countCoursesBySearch($searchTerm);
         } else {
             $courses = $this->cour->getAllCoursesLimit($this->coursesPerPage, $offset);
             $totalCourses = $this->cour->getCountCoursesAccepted();
         }
-
+    
         // Calculer le nombre total de pages
         $totalPages = ceil($totalCourses / $this->coursesPerPage);
-        require(__DIR__ .'/../views/youdemy.php');
+        require(__DIR__ . '/../views/youdemy.php');
     }
+    
     public function courses(){
         $getAllCourses = $this->cour->getAllCourses();
         require(__DIR__ .'/../views/coursesAdmin.php');

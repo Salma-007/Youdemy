@@ -55,6 +55,7 @@ $route = [
     '/singleCourse' => 'controllers/CourseController.php',
     '/markCourseAsFinished' => 'controllers/InscriptionController.php',
     '/myCourses' => 'controllers/InscriptionController.php',
+    '/RefuseAssignRole' => 'controllers/TeacherController.php',
 ];
 
 if(array_key_exists($url, $route)){
@@ -130,6 +131,10 @@ if(array_key_exists($url, $route)){
         case '/assignRole': 
             $controller = new TeacherController();
             $controller->assignTeacher();
+            break;
+        case '/RefuseAssignRole': 
+            $controller = new TeacherController();
+            $controller->NOassignRoleTeacher();
             break;
         case '/deleteTeacher': 
             $controller = new TeacherController();

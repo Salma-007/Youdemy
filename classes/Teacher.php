@@ -10,12 +10,10 @@ class Teacher extends User{
         parent::__construct();
         $this->role = 'enseignant';
     }
-
     // setter id
     public function setId($id){
         $this->id = $id;
     }
-
     // affichage des enseignants
     public function getAllTeachers(){
         $condition = [
@@ -23,7 +21,6 @@ class Teacher extends User{
         ];
         return $this->crud->readWithCondition($this->table, $condition);
     }
-
     // pending teachers
     public function getAllPendingTeachers(){
         $condition = [
@@ -32,7 +29,6 @@ class Teacher extends User{
         ];
         return $this->crud->readWithCondition($this->table, $condition);
     }
-
     // teachers counts
     public function getCountTeachers(){
         $condition = [
@@ -55,7 +51,13 @@ class Teacher extends User{
         ];
         return $this->crud->updateRecord($this->table, $data, $this->id);
     }
-    
+    // refuse to assign role teacher
+    public function RefuseassignRoleTeacher(){
+        $data = [
+            'role' => 'etudiant'
+        ];
+        return $this->crud->updateRecord($this->table, $data, $this->id);
+    }
     
 
 }

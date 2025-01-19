@@ -60,14 +60,11 @@
               </div>
             </div>
             <hr class="dark horizontal my-0">
-            
           </div>
         </div>
-    
     <div class="row">
         <div class="col-md-9 mt-4">
           <div class="card">
-
             <div class="card-body pt-4 p-3">
             <?php foreach($getAllTeachers as $teacher): ?>
               <ul class="list-group">
@@ -78,7 +75,8 @@
                     <span class="mb-2 text-xs">Account: <span <?php echo $teacher['isBanned'] == 0 ? 'class="badge badge-sm bg-gradient-success"' : 'class="badge badge-sm bg-gradient-secondary"'; ?> ><?php echo $teacher['isBanned'] == 0 ? 'Not Banned' : 'Banned'; ?></span></span>
                   </div>
                   <div class="ms-auto text-end">
-                    <a href="/assignRole?id=<?= $teacher['id'] ?>" class="btn btn-danger btn-sm"> assign role </a>
+                    <a href="/assignRole?id=<?= $teacher['id'] ?>" class="btn btn-success btn-sm"> assign role </a>
+                    <a href="/RefuseAssignRole?id=<?= $teacher['id'] ?>" class="btn btn-danger btn-sm"> refuse </a>
                   </div>
                 </li>
               </ul>
@@ -86,7 +84,6 @@
             </div>
           </div>
         </div>
-
       </div>
 
     <!-- <div class="card-body">
@@ -149,29 +146,29 @@
       </div>
     </div>
     <!-- Edit Category Modal -->
-<div class="modal fade" id="editTagModal" tabindex="-1" aria-labelledby="editTagModalLabel" aria-hidden="true">
-  <div class="modal-dialog">
-    <div class="modal-content">
-      <div class="modal-header">
-        <h5 class="modal-title" id="editTagModalLabel">Edit Tag</h5>
-        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-      </div>
-      <div class="modal-body">
-        <form action="/updateTag" method="POST">
-          <input type="hidden" name="tagId" id="editTagId">
-          <div class="mb-3">
-            <label for="tagName" class="form-label">Tag Name</label>
-            <input type="text" class="form-control" id="editTagName" name="tagName" required>
-          </div>
-          <div class="modal-footer">
-            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-            <button type="submit" class="btn btn-primary">Update Tag</button>
-          </div>
-        </form>
+  <div class="modal fade" id="editTagModal" tabindex="-1" aria-labelledby="editTagModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="editTagModalLabel">Edit Tag</h5>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div class="modal-body">
+          <form action="/updateTag" method="POST">
+            <input type="hidden" name="tagId" id="editTagId">
+            <div class="mb-3">
+              <label for="tagName" class="form-label">Tag Name</label>
+              <input type="text" class="form-control" id="editTagName" name="tagName" required>
+            </div>
+            <div class="modal-footer">
+              <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+              <button type="submit" class="btn btn-primary">Update Tag</button>
+            </div>
+          </form>
+        </div>
       </div>
     </div>
   </div>
-</div>
   </div>
 
   <!-- Bootstrap JS -->
@@ -229,8 +226,6 @@
           fill: "E91E63"
         }
       },
-
-
     });
   </script>
   <script>

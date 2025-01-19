@@ -30,6 +30,15 @@ class TeacherController{
             return header('Location: /pendingTeachers');
         }
     }
+    // NO assign roles
+    public function NOassignRoleTeacher(){
+        if (isset($_GET['id'])) {
+            $id = $_GET['id'];
+            $this->teacher->setId($id);
+            $this->teacher->RefuseassignRoleTeacher();
+            return header('Location: /pendingTeachers');
+        }
+    }
     // delete teacher 
     public function deleteTeacher(){
         if (isset($_GET['id'])) {
@@ -61,6 +70,5 @@ class TeacherController{
     public function logingOut(){
         $this->teacher->logout();
     }
-
 
 }

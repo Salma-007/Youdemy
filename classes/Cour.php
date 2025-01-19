@@ -311,5 +311,72 @@ class Cour{
         $result = $stmt->fetchAll(PDO::FETCH_ASSOC);
         return $result;
     }
-    
+    // Recherche de cours par titre
+    public function getCoursesBySearch($searchTerm, $coursesPerPage, $offset){
+        $query = "SELECT cours.id, titre, picture, status, categories.nom_categorie AS nom_categorie, 
+                        description, GROUP_CONCAT(tags.nom_tag) AS tags
+                FROM cours
+                LEFT JOIN categories ON cours.id_categorie = categories.id
+                LEFT JOIN cour_tags ON cours.id = cour_tags.id_cour
+                LEFT JOIN tags ON cour_tags.id_tag = tags.id
+                WHERE titre LIKE :searchTerm AND status = 'accepted'
+                GROUP BY cours.id
+                LIMIT :offset, :limit";
+
+        $stmt = $this->conn->prepare($query);
+        $stmt->bindValue(':searchTerm', '%' . $searchTerm . '%', PDO::PARAM_STR);
+        $stmt->bindValue(':offset', $offset, PDO::PARAM_INT);
+        $stmt->bindValue(':limit', $coursesPerPage, PDO::PARAM_INT);
+        $stmt->execute();
+
+        return $stmt->fetchAll(PDO::FETCH_ASSOC);
+    }
+    // Compter les cours par recherche
+    public function countCoursesBySearch($searchTerm){
+        $query = "SELECT COUNT(*) AS total
+                FROM cours
+                WHERE titre LIKE :searchTerm AND status = 'accepted'";
+
+        $stmt = $this->conn->prepare($query);
+        $stmt->bindValue(':searchTerm', '%' . $searchTerm . '%', PDO::PARAM_STR);
+        $stmt->execute();
+        $result = $stmt->fetch(PDO::FETCH_ASSOC);
+        return $result['total'];
+    }
+    // Recherche par catégorie et par titre
+    public function getCoursesByCategoryAndSearch($categoryId, $searchTerm, $coursesPerPage, $offset){
+        $query = "SELECT cours.id, titre, picture, status, categories.nom_categorie AS nom_categorie, 
+                        description, GROUP_CONCAT(tags.nom_tag) AS tags
+                FROM cours
+                LEFT JOIN categories ON cours.id_categorie = categories.id
+                LEFT JOIN cour_tags ON cours.id = cour_tags.id_cour
+                LEFT JOIN tags ON cour_tags.id_tag = tags.id
+                WHERE categories.id = :categoryId AND titre LIKE :searchTerm AND status = 'accepted'
+                GROUP BY cours.id
+                LIMIT :offset, :limit";
+
+        $stmt = $this->conn->prepare($query);
+        $stmt->bindValue(':categoryId', $categoryId, PDO::PARAM_INT);
+        $stmt->bindValue(':searchTerm', '%' . $searchTerm . '%', PDO::PARAM_STR);
+        $stmt->bindValue(':offset', $offset, PDO::PARAM_INT);
+        $stmt->bindValue(':limit', $coursesPerPage, PDO::PARAM_INT);
+        $stmt->execute();
+
+        return $stmt->fetchAll(PDO::FETCH_ASSOC);
+    }
+    // Compter les cours par catégorie et recherche
+    public function countCoursesByCategoryAndSearch($categoryId, $searchTerm){
+        $query = "SELECT COUNT(*) AS total
+                FROM cours
+                LEFT JOIN categories ON cours.id_categorie = categories.id
+                WHERE categories.id = :categoryId AND titre LIKE :searchTerm AND status = 'accepted'";
+
+        $stmt = $this->conn->prepare($query);
+        $stmt->bindValue(':categoryId', $categoryId, PDO::PARAM_INT);
+        $stmt->bindValue(':searchTerm', '%' . $searchTerm . '%', PDO::PARAM_STR);
+        $stmt->execute();
+        $result = $stmt->fetch(PDO::FETCH_ASSOC);
+        return $result['total'];
+    }
+
 }
