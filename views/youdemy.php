@@ -359,7 +359,7 @@
         
         // Si le bouton "Tous" est cliqué, on ne passe pas de paramètre de catégorie
         const categoryId = this.dataset.category || '';
-        window.location.href = `/?category=${categoryId}&page=1`;
+        window.location.href = `youdemy?category=${categoryId}&page=1`;
     });
 });
 

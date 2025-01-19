@@ -128,7 +128,6 @@ class BaseModel{
     public function countWithCondition($table, $conditions){
             $query = "SELECT count(*) as count from $table";
             try {
-    
                 if (!empty($conditions)) {
                     $conditionFields = [];
                     foreach ($conditions as $column => $value) {

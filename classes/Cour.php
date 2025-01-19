@@ -189,13 +189,14 @@ class Cour{
     }
     // count courses per category
     public function countCoursesByCategory($categoryId){
-        $query = "select count(*) AS total
+        $categoryId = intval($categoryId);
+        $query = "select count(*) AS count
         FROM cours 
         LEFT JOIN categories ON cours.id_categorie = categories.id 
         where categories.id = $categoryId and status = 'accepted';";
         $stmt = $this->conn->query($query);
         $result = $stmt->fetch(PDO::FETCH_ASSOC);
-        return $result['total'];
+        return $result['count'];
     }
     // methode pour accepter cours
     public function acceptCourse(){

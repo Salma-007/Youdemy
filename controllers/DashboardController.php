@@ -41,7 +41,7 @@ class DashboardController{
         
         $currentPage = isset($_GET['page']) ? (int)$_GET['page'] : 1;
         $categoryId = isset($_GET['category']) ? (int)$_GET['category'] : null;
-
+        $categoryId = intval($categoryId);
         // Calculer l'offset pour la pagination
         $offset = ($currentPage - 1) * $this->coursesPerPage;
 
