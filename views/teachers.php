@@ -78,7 +78,7 @@
                   <div class="d-flex flex-column">
                     <h6 class="mb-3 text-sm"><?php  echo htmlspecialchars($teacher['nom']);?></h6>
                     <span class="mb-2 text-xs">Email: <span class="text-dark font-weight-bold ms-sm-2"><?php  echo htmlspecialchars($teacher['email']);?></span></span>
-                    <span class="mb-2 text-xs">Account: <span <?php echo $teacher['isBanned'] == 0 ? 'class="badge badge-sm bg-gradient-success"' : 'class="badge badge-sm bg-gradient-secondary"'; ?> ><?php echo $teacher['isBanned'] == 0 ? 'Not Banned' : 'Banned'; ?></span></span>
+                    <span class="mb-2 text-xs">Account: <span <?php echo $teacher['isBanned'] == 0 ? 'class="badge badge-sm bg-gradient-success"' : 'class="badge badge-sm bg-gradient-secondary"'; ?> ><?php echo $teacher['isBanned'] == 0 ? 'Active' : 'Banned'; ?></span></span>
                   </div>
                   <div class="ms-auto text-end">
                     <a class="btn btn-link text-danger text-gradient px-3 mb-0" href="/deleteTeacher?id=<?= $teacher['id'] ?>"><i class="material-symbols-rounded text-sm me-2">delete</i>Delete</a>

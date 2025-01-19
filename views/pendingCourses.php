@@ -61,7 +61,7 @@
                         </h5>
                       </a>
                       <p class="mb-4 text-sm">
-                      <?php  echo htmlspecialchars($course['description']);?>
+                      <?php  echo htmlspecialchars(substr($course['description'], 0, 100)),'...';?>
                       </p>
                       <div class="d-flex align-items-center gap-3">
                       <button type="button" class="btn btn-success btn-sm mb-0" onclick="window.location.href='/accepterCours?id=<?php echo $course['id']; ?>'">

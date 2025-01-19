@@ -76,6 +76,18 @@ class Inscription{
             return null;
         }
     }
-
+    // get count inscriptions by teacher
+    public function getCountInscriptions($id){
+        $query = "SELECT COUNT(*) as count FROM `inscriptions` 
+        JOIN cours ON inscriptions.id_cour = cours.id 
+        JOIN users ON cours.id_enseignant = users.id 
+        WHERE users.id = :id;";  
+        $stmt = $this->conn->prepare($query);
+        $stmt->execute([
+        ':id' => $id,
+        ]);
+        $result = $stmt->fetch(PDO::FETCH_ASSOC);
+        return $result['count'];
+        }
 
 }

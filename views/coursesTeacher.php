@@ -308,7 +308,11 @@
     <div class="container">
         <div class="dashboard-header">
             <h1>My Youdemy Courses</h1>
+            <?php 
+            // var_dump($_SESSION['confirmedTeacher']);
+            if($_SESSION['confirmedTeacher'] === 1){ ?>
             <button class="btn btn-primary" id="addCourseBtn">Nouveau Cours</button>
+            <?php } ?>
             <a href="/logOut" class="btn btn-delete" id="addCourseBtn">Logout</a>
         </div>
 
@@ -319,14 +323,16 @@
             </div>
             <div class="stat-card">
                 <h3>Total Étudiants</h3>
-                <div class="stat-value" id="totalStudents">0</div>
+                <div class="stat-value" id="totalStudents"><?php  echo htmlspecialchars($getCountInscriptions);?></div>
             </div>
             <div class="stat-card">
-                <h3>Moyenne Étudiants/Cours</h3>
-                <div class="stat-value" id="avgStudents">0</div>
+                <h3>Nombre Categories</h3>
+                <div class="stat-value" id="avgStudents"><?php  echo htmlspecialchars($getCountCategorie);?></div>
             </div>
         </div>
-
+        <?php 
+            // var_dump($_SESSION['confirmedTeacher']);
+            if($_SESSION['confirmedTeacher'] === 1){ ?>
         <div class="form-container" id="courseForm">
             <h2>Ajouter un nouveau cours</h2>
             <form action="/addCourse" method="POST" id="addCourseForm" enctype="multipart/form-data">
@@ -379,7 +385,7 @@
                     <button type="submit" class="btn btn-primary">Ajouter</button>
                 </div>
             </form>
-        </div>
+        </div> <?php } ?>
         <?php foreach($getAllCourses as $course): ?>
         <div class="courses-list" id="coursesList">
             <!-- Les cours -->

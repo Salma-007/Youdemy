@@ -106,7 +106,6 @@ class Cour{
         return $result;
     }
     public function getAllCoursesLimit($coursesPerPage, $offset){
-        // Requête SQL avec paramètres limit et offset
         $query = "SELECT cours.id, titre, cours.picture, status, users.nom AS enseignant,
                          categories.nom_categorie AS nom_categorie, description, 
                          GROUP_CONCAT(tags.nom_tag) AS tags
@@ -116,7 +115,7 @@ class Cour{
                   LEFT JOIN tags ON cour_tags.id_tag = tags.id
                   LEFT JOIN users ON cours.id_enseignant = users.id where status = 'accepted'
                   GROUP BY cours.id
-                  LIMIT :offset, :limit";  // Utilisation de :offset et :limit pour la pagination
+                  LIMIT :offset, :limit"; 
     
         // Préparer la requête
         $stmt = $this->conn->prepare($query);
@@ -133,7 +132,6 @@ class Cour{
         
         return $result;
     }
-    
     // get courses by categorie
     public function getCoursesByCategory($categoryId, $coursesPerPage, $offset){
         $query = "SELECT cours.id, titre, picture, status, categories.nom_categorie AS nom_categorie, 
@@ -157,7 +155,6 @@ class Cour{
         $result = $stmt->fetchAll(PDO::FETCH_ASSOC);
 
         return $result;
-
     }
     // recuperation des cours by teacher
     public function getAllCoursesByTeacher($id_enseignant){
@@ -283,7 +280,6 @@ class Cour{
             return 0;
         }
     }
-
     // savoir les inscriptions d'un cour
     public function getInscriptions(){
         $query = "SELECT * FROM `users` 
@@ -296,9 +292,19 @@ class Cour{
         ]);
         $result = $stmt->fetchAll(PDO::FETCH_ASSOC);
         return $result;
-
     }
-    
+    // get top course title
+    public function topCourse(){
+        $query = "SELECT cours.titre FROM `inscriptions` 
+        JOIN cours ON inscriptions.id_cour = cours.id 
+        GROUP BY cours.titre 
+        ORDER BY count(*) DESC 
+        LIMIT 1;";  
+        $stmt = $this->conn->prepare($query);
+        $stmt->execute();
+        $result = $stmt->fetch(PDO::FETCH_ASSOC);
+        return $result['titre'];
+        }
 
 
 }

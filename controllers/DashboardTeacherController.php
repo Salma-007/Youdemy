@@ -4,22 +4,27 @@ use Classes\Categorie;
 use Classes\Tag;
 use Classes\Cour;
 use Classes\User;
+use Classes\Inscription;
 
 class DashboardTeacherController{
     private $cour;
     private $categorie;
     private $tag;
+    private $inscriptions;
 
     public function __construct(){
         $this->categorie = new Categorie();
         $this->tag = new Tag();
         $this->cour = new Cour();
+        $this->inscriptions = new Inscription();
     }
 
     public function home(){  
         // User::isAuth(); 
         $getAllCategories = $this->categorie->getAllCategories();
         $getAllTags = $this->tag->getAllTags();
+        $getCountCategorie = $this->categorie->getCountCategories();
+        $getCountInscriptions = $this->inscriptions->getCountInscriptions($_SESSION['user_id']);
         $getAllCourses = $this->cour->getAllCoursesByTeacher($_SESSION['user_id']);
         $getCountCourses = $this->cour->getCountCoursesByTeacher($_SESSION['user_id']);
         require(__DIR__ .'/../views/coursesTeacher.php');

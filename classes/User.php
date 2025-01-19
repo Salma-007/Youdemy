@@ -46,8 +46,8 @@ abstract class User{
         // Sanitize input
         $email = trim($email);
         $password = trim($password);
-        $query = "SELECT id, password_hash, nom, role FROM " . $this->table . " WHERE email = :email";
-        $stmt = $this->connection->prepare($query);
+        $query = "SELECT id, password_hash, nom, role, enseignantConfirmed, isBanned FROM " . $this->table . " WHERE email = :email";
+        $stmt = $this->connection->prepare($query); 
         $stmt->bindParam(':email', $email, PDO::PARAM_STR);
         $stmt->execute();
         
@@ -59,15 +59,21 @@ abstract class User{
                 $_SESSION['user_id'] = $user['id'];
                 $_SESSION['role'] = $user['role'];
                 $_SESSION['nom'] = $user['nom'];
-                if ($user['role'] === 'admin') {
+                $_SESSION['confirmedTeacher'] = $user['enseignantConfirmed'];
+                $_SESSION['banned'] = $user['isBanned'];
+                if ($user['role'] === 'admin' ) {
                     header('Location: /dashboard');
                     exit();
-                } else if ($user['role'] === 'enseignant') {
+                } else if ($user['role'] === 'enseignant' && $user['isBanned'] === 0) {
                     header('Location: /coursesTeacher');
                     exit();
-                } else {
+                } else if ($user['role'] === 'etudiant' && $user['isBanned'] === 0) {
                     header('Location: /youdemy');
                     exit();
+                }else{
+                    $_SESSION['error_message'] = "you are banned";
+                    header('Location: /signIn');  
+                exit(); 
                 }
                 return true;
             } else {
@@ -119,7 +125,6 @@ abstract class User{
             'role' => $this->role
         ];
         return $this->crud->insertRecord($this->table, $data);
-    
     }
     // courses per teacher
     public function coursesPerTeacher(){
