@@ -10,9 +10,11 @@ class Categorie{
     private $nom_categorie;
     private $table = 'categories';
     private $crud;
+    private $connn;
 
     public function __construct($nom = null, $id = -1 ){
         $conn = Database::connect();
+        $this->connn = $conn;
         $this->id = $id;
         $this->nom_categorie = $nom;
         $this->crud  = new BaseModel($conn);
@@ -66,5 +68,22 @@ class Categorie{
     public function getCountCategories(){
         return $this->crud->getTableCount($this->table);
     }
+
+    // nombre de cour par categorie
+    public function getCoursesCountByCategory(){
+        $query = "
+            SELECT c.nom_categorie as category_name, COUNT(cours.id) AS cour_count
+            FROM categories c
+            LEFT JOIN cours ON c.id = cours.id_categorie
+            WHERE cours.status = 'accepted'
+            GROUP BY c.id
+        ";
+
+        $stmt = $this->connn->prepare($query);
+        $stmt->execute();
+        $result = $stmt->fetchAll(PDO::FETCH_ASSOC);
+        return $result;
+    }
+    
 
 }

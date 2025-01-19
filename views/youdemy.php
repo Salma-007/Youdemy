@@ -295,14 +295,15 @@
     </nav>
 
     <main class="main-content">
-        <div class="categories">
-            <button class="category-btn active">Tous</button>
-            <?php foreach($categories as $category): ?>
-                <button class="category-btn" data-category="<?php echo $category['id']; ?>">
-                    <?php echo htmlspecialchars($category['nom_categorie']); ?>
-                </button>
-            <?php endforeach; ?>
-        </div>
+    <div class="categories">
+    <button class="category-btn <?php echo !$categoryId ? 'active' : ''; ?>">Tous</button>
+    <?php foreach($categories as $category): ?>
+        <button class="category-btn <?php echo $category['id'] == $categoryId ? 'active' : ''; ?>" 
+                data-category="<?php echo $category['id']; ?>">
+            <?php echo htmlspecialchars($category['nom_categorie']); ?>
+        </button>
+    <?php endforeach; ?>
+</div>
 
         <div class="courses-grid">
             <?php foreach($courses as $course): ?>
@@ -351,21 +352,30 @@
     <script>
         // Gestion des catégories
         document.querySelectorAll('.category-btn').forEach(button => {
-            button.addEventListener('click', function() {
-                document.querySelectorAll('.category-btn').forEach(btn => btn.classList.remove('active'));
-                this.classList.add('active');
-                
-                const categoryId = this.dataset.category;
-                window.location.href = `/?category=${categoryId}&page=1`;
-            });
-        });
+    button.addEventListener('click', function() {
+        // Retirer la classe active de tous les boutons
+        document.querySelectorAll('.category-btn').forEach(btn => btn.classList.remove('active'));
+        this.classList.add('active');
+        
+        // Si le bouton "Tous" est cliqué, on ne passe pas de paramètre de catégorie
+        const categoryId = this.dataset.category || '';
+        window.location.href = `/?category=${categoryId}&page=1`;
+    });
+});
 
         // Gestion de la pagination
         function changePage(page) {
-            const urlParams = new URLSearchParams(window.location.search);
-            urlParams.set('page', page);
-            window.location.href = '?' + urlParams.toString();
-        }
+    const urlParams = new URLSearchParams(window.location.search);
+    urlParams.set('page', page);
+
+    // Conserver le paramètre de catégorie dans l'URL
+    const categoryId = document.querySelector('.category-btn.active')?.dataset.category || '';
+    if (categoryId) {
+        urlParams.set('category', categoryId);
+    }
+
+    window.location.href = '?' + urlParams.toString();
+}
     </script>
 </body>
 </html>

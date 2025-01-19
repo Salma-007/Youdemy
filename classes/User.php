@@ -140,10 +140,10 @@ abstract class User{
     }
     public static function isAuth(){
         if($_SESSION['user_id']){
-            if ($user['role'] === 'admin') {
+            if ($_SESSION['role'] === 'admin') {
                 header('Location: /dashboard');
                 exit();
-            } else if ($user['role'] === 'enseignant') {
+            } else if ($_SESSION['role'] === 'enseignant') {
                 header('Location: /coursesTeacher');
                 exit();
             } else {

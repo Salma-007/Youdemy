@@ -26,7 +26,7 @@ class Cour{
         $this->titre = $titre;
         $this->contenu = $contenu;
         $this->conn = Database::connect();
-        $this->crud  = new BaseModel($this->conn );
+        $this->crud  = new BaseModel($this->conn);
     }
 
     public function setId($id){
@@ -116,20 +116,12 @@ class Cour{
                   LEFT JOIN users ON cours.id_enseignant = users.id where status = 'accepted'
                   GROUP BY cours.id
                   LIMIT :offset, :limit"; 
-    
-        // Préparer la requête
+
         $stmt = $this->conn->prepare($query);
-        
-        // Lier les paramètres
         $stmt->bindParam(':offset', $offset, PDO::PARAM_INT);
         $stmt->bindParam(':limit', $coursesPerPage, PDO::PARAM_INT);
-        
-        // Exécuter la requête
         $stmt->execute();
-        
-        // Récupérer les résultats
         $result = $stmt->fetchAll(PDO::FETCH_ASSOC);
-        
         return $result;
     }
     // get courses by categorie
@@ -145,15 +137,11 @@ class Cour{
                     LIMIT :offset, :limit";  
 
         $stmt = $this->conn->prepare($query);
-        $stmt->execute([
-            ':categoryId' => intval($categoryId),
-            ':offset' => $offset,
-            ':limit' => $coursesPerPage
-        ]);
-
-        // Récupérer les résultats
+        $stmt->bindParam(':offset', $offset, PDO::PARAM_INT);
+        $stmt->bindParam(':limit', $coursesPerPage, PDO::PARAM_INT);
+        $stmt->bindParam(':categoryId', $categoryId, PDO::PARAM_INT);
+        $stmt->execute();
         $result = $stmt->fetchAll(PDO::FETCH_ASSOC);
-
         return $result;
     }
     // recuperation des cours by teacher
@@ -201,13 +189,13 @@ class Cour{
     }
     // count courses per category
     public function countCoursesByCategory($categoryId){
-        $query = "select count(*) 
+        $query = "select count(*) AS total
         FROM cours 
         LEFT JOIN categories ON cours.id_categorie = categories.id 
         where categories.id = $categoryId and status = 'accepted';";
         $stmt = $this->conn->query($query);
         $result = $stmt->fetch(PDO::FETCH_ASSOC);
-        return $result;
+        return $result['total'];
     }
     // methode pour accepter cours
     public function acceptCourse(){
@@ -304,7 +292,23 @@ class Cour{
         $stmt->execute();
         $result = $stmt->fetch(PDO::FETCH_ASSOC);
         return $result['titre'];
-        }
+    }
+    // get top 3 enseignants
+    public function getTop3Enseignants(){
+        $query = "
+            SELECT u.id, u.nom, u.email, COUNT(i.id_etudiant) AS nb_inscriptions
+            FROM users u
+            JOIN cours c ON u.id = c.id_enseignant
+            LEFT JOIN inscriptions i ON c.id = i.id_cour
+            GROUP BY u.id
+            ORDER BY nb_inscriptions DESC
+            LIMIT 3
+        ";
 
-
+        $stmt = $this->conn->prepare($query);
+        $stmt->execute();
+        $result = $stmt->fetchAll(PDO::FETCH_ASSOC);
+        return $result;
+    }
+    
 }

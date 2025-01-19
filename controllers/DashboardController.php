@@ -18,12 +18,21 @@ class DashboardController{
     }
 
     public function home(){   
-        // User::isAuth();
-        $topCourseTitre = $this->cour->topCourse();
-        $getCountCourses = $this->cour->getCountCourses();
-        $getCountCategorie = $this->categorie->getCountCategories();
-        $getCountTags = $this->tag->getCountTags();
-        require(__DIR__ .'/../views/dashboard.php');
+        if($_SESSION['role'] === 'admin'){
+            $topCourseTitre = $this->cour->topCourse();
+            $getCountCourses = $this->cour->getCountCourses();
+            $getCountCategorie = $this->categorie->getCountCategories();
+            $getCountTags = $this->tag->getCountTags();
+            $getTopTeachers = $this->cour->getTop3Enseignants();
+            $category_stats = $this->categorie->getCoursesCountByCategory();
+            require(__DIR__ .'/../views/dashboard.php');
+        }
+        else if ($_SESSION['role'] === 'enseignant'){
+            return header('Location: /coursesTeacher');
+        }
+        else {
+            return header('Location: /youdemy');
+        }
     }
 
     // affichage des cours

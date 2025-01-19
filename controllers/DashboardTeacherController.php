@@ -21,6 +21,7 @@ class DashboardTeacherController{
 
     public function home(){  
         // User::isAuth(); 
+        if($_SESSION['role'] === 'enseignant'){
         $getAllCategories = $this->categorie->getAllCategories();
         $getAllTags = $this->tag->getAllTags();
         $getCountCategorie = $this->categorie->getCountCategories();
@@ -28,6 +29,13 @@ class DashboardTeacherController{
         $getAllCourses = $this->cour->getAllCoursesByTeacher($_SESSION['user_id']);
         $getCountCourses = $this->cour->getCountCoursesByTeacher($_SESSION['user_id']);
         require(__DIR__ .'/../views/coursesTeacher.php');
+        }
+        else if ($_SESSION['role'] === 'admin'){
+            return header('Location: /dashboard');
+        }
+        else {
+            return header('Location: /youdemy');
+        }
     }
     public function inscriptions(){   
         if (isset($_GET['id'])) {
