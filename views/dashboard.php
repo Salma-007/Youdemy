@@ -197,10 +197,9 @@ foreach ($category_stats as $stat) {
                                     <h6 class="m-0 font-weight-bold text-primary">Category Distribution</h6>
                                 </div>
                                 <!-- Card Body -->
-                                <div class="card-body">
-                                    <div class="chart-pie pt-4 pb-2">
-                                        <canvas id="categoryPieChart"></canvas>
-                                    </div>
+                                <div>
+                            <canvas id="myChart"></canvas>
+                        </div>
                                     <div class="mt-4 text-center small">
                                         <?php foreach ($category_stats as $index => $stat): ?>
                                             <span class="mr-2">
@@ -307,56 +306,24 @@ foreach ($category_stats as $stat) {
 
   <script src="/assets/vendor/jquery/jquery.min.js"></script>
   <script src="/assets/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
-
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 
   <!-- Initialize the pie chart -->
-     <script>
-        // Set new default font family and font color to mimic Bootstrap's default styling
-        Chart.defaults.global.defaultFontFamily = 'Nunito', '-apple-system,system-ui,BlinkMacSystemFont,"Segoe UI",Roboto,"Helvetica Neue",Arial,sans-serif';
-        Chart.defaults.global.defaultFontColor = '#858796';
-
-        // Pie Chart
-        var ctx = document.getElementById("categoryPieChart");
-        var categoryPieChart = new Chart(ctx, {
-            type: 'doughnut',
-            data: {
-                labels: <?= json_encode($categories) ?>,
-                datasets: [{
-                    data: <?= json_encode($counts) ?>,
-                    backgroundColor: <?= json_encode(array_slice($colors, 0, count($categories))) ?>,
-                    hoverBackgroundColor: <?= json_encode(array_slice($colors, 0, count($categories))) ?>,
-                    hoverBorderColor: "rgba(234, 236, 244, 1)",
-                }],
-            },
-            options: {
-                maintainAspectRatio: false,
-                tooltips: {
-                    backgroundColor: "rgb(255,255,255)",
-                    bodyFontColor: "#858796",
-                    borderColor: '#dddfeb',
-                    borderWidth: 1,
-                    xPadding: 15,
-                    yPadding: 15,
-                    displayColors: false,
-                    caretPadding: 10,
-                    callbacks: {
-                        label: function(tooltipItem, data) {
-                            var dataset = data.datasets[tooltipItem.datasetIndex];
-                            var total = dataset.data.reduce(function(previousValue, currentValue) {
-                                return previousValue + currentValue;
-                            });
-                            var currentValue = dataset.data[tooltipItem.index];
-                            var percentage = Math.floor(((currentValue/total) * 100)+0.5);
-                            return data.labels[tooltipItem.index] + ': ' + currentValue + ' (' + percentage + '%)';
-                        }
-                    }
-                },
-                legend: {
-                    display: false
-                },
-                cutoutPercentage: 80,
-            },
-        });
+  <script>
+    const data = {
+        labels: <?php echo json_encode($categories) ?>,
+        datasets: [{
+            label: 'Categorie Stats',
+            data: <?php echo json_encode($counts) ?>,
+            backgroundColor:  <?php echo json_encode($colors) ?>,
+            hoverOffset: 9
+        }]
+    };
+    const doughnut = document.getElementById('myChart');
+    new Chart(doughnut, {
+        type: 'doughnut',
+        data: data
+    });
     </script>
   <!-- Github buttons -->
   <script async defer src="https://buttons.github.io/buttons.js"></script>

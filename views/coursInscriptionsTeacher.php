@@ -317,7 +317,7 @@
                     else {
                         echo'finished';
                     }
-                ?><</td>
+                ?></td>
                 <td><?php echo htmlspecialchars($user['email']); ?></td>
             </tr>
         <?php endforeach; 
