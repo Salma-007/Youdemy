@@ -11,12 +11,10 @@ $colors = [
   'rgb(90, 92, 105)',     // dark
   'rgb(244, 246, 249)'    // light
 ];
-
 foreach ($category_stats as $stat) {
   $categories[] = $stat['category_name'];
   $counts[] = $stat['cour_count'];
 }
-
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -197,18 +195,6 @@ foreach ($category_stats as $stat) {
                                 <div
                                     class="card-header py-3 d-flex flex-row align-items-center justify-content-between">
                                     <h6 class="m-0 font-weight-bold text-primary">Category Distribution</h6>
-                                    <div class="dropdown no-arrow">
-                                        <a class="dropdown-toggle" href="#" role="button" id="dropdownMenuLink"
-                                            data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                            <i class="fas fa-ellipsis-v fa-sm fa-fw text-gray-400"></i>
-                                        </a>
-                                        <div class="dropdown-menu dropdown-menu-right shadow animated--fade-in"
-                                            aria-labelledby="dropdownMenuLink">
-                                            <div class="dropdown-header">Category Actions:</div>
-                                            <a class="dropdown-item" href="/devblog brief/public/categories/list-categories.php">View all Categories</a>
-                                            <a class="dropdown-item" href="/devblog brief/public/categories/add-category.php">Add Category</a>
-                                        </div>
-                                    </div>
                                 </div>
                                 <!-- Card Body -->
                                 <div class="card-body">
@@ -312,10 +298,11 @@ foreach ($category_stats as $stat) {
   <script src="/assets/js/plugins/smooth-scrollbar.min.js"></script>
 
   <script src="/assets/vendor/chart.js/Chart.min.js"></script>
+  <script src="/assets/vendor/jquery-easing/jquery.easing.min.js"></script>
 
 <!-- Page level custom scripts -->
-<script src="/assets/js/demo/chart-area-demo.js"></script>
-<script src="/assets/js/demo/chart-pie-demo.js"></script>
+  <script src="/assets/js/demo/chart-area-demo.js"></script>
+  <script src="/assets/js/demo/chart-pie-demo.js"></script>
   <script src="/assets/js/plugins/chartjs.min.js"></script>
   <script>
     var ctx = document.getElementById("chart-bars").getContext("2d");
@@ -559,8 +546,8 @@ foreach ($category_stats as $stat) {
       Scrollbar.init(document.querySelector('#sidenav-scrollbar'), options);
     }
   </script>
-        <!-- Initialize the pie chart -->
-        <script>
+  <!-- Initialize the pie chart -->
+  <script>
         // Set new default font family and font color to mimic Bootstrap's default styling
         Chart.defaults.global.defaultFontFamily = 'Nunito', '-apple-system,system-ui,BlinkMacSystemFont,"Segoe UI",Roboto,"Helvetica Neue",Arial,sans-serif';
         Chart.defaults.global.defaultFontColor = '#858796';
@@ -607,7 +594,7 @@ foreach ($category_stats as $stat) {
                 cutoutPercentage: 80,
             },
         });
-    </script>
+  </script>
   <!-- Github buttons -->
   <script async defer src="https://buttons.github.io/buttons.js"></script>
   <!-- Control Center for Material Dashboard: parallax effects, scripts for the example pages etc -->

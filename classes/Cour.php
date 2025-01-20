@@ -59,29 +59,52 @@ class Cour{
     }    
     // method pour ajouter cours en document
     public function courDocument(){
-        $data = [
-            'titre'=> $this->titre,
-            'description'=> $this->description,
-            'contenuDocument'=> $this->contenu,
-            'status' => $this->status,
-            'picture' => $this->picture,
-            'id_categorie'=> $this->id_categorie,
-            'id_enseignant'=> $_SESSION['user_id'],
-        ];
-        return $this->crud->insertRecord($this->table, $data);
+        $query = "SELECT * FROM " . $this->table . " WHERE titre = :titre";
+        $stmt = $this->conn->prepare($query); 
+        $stmt->bindParam(':titre', $this->titre, PDO::PARAM_STR);
+        $stmt->execute();
+        if ($stmt->rowCount() > 0) {
+            $_SESSION['error_course'] = "course already exists!";
+            header('Location: /coursesTeacher');  
+            exit(); 
+        }
+        else{
+            $data = [
+                'titre'=> $this->titre,
+                'description'=> $this->description,
+                'contenuDocument'=> $this->contenu,
+                'status' => $this->status,
+                'picture' => $this->picture,
+                'id_categorie'=> $this->id_categorie,
+                'id_enseignant'=> $_SESSION['user_id'],
+            ];
+            return $this->crud->insertRecord($this->table, $data);
+        }
+
     }
     // method pour ajouter cours en video
     public function courVideo(){
-        $data = [
-            'titre'=> $this->titre,
-            'description'=> $this->description,
-            'contenuVideo'=> $this->contenu,
-            'status' => $this->status,
-            'picture' => $this->picture,
-            'id_categorie'=> $this->id_categorie,
-            'id_enseignant'=> $_SESSION['user_id'],
-        ];
-        return $this->crud->insertRecord($this->table, $data);
+        $query = "SELECT * FROM " . $this->table . " WHERE titre = :titre";
+        $stmt = $this->conn->prepare($query); 
+        $stmt->bindParam(':titre', $this->titre, PDO::PARAM_STR);
+        $stmt->execute();
+        if ($stmt->rowCount() > 0) {
+            $_SESSION['error_course'] = "course already exists!";
+            header('Location: /coursesTeacher');  
+            exit(); 
+        }
+        else{
+            $data = [
+                'titre'=> $this->titre,
+                'description'=> $this->description,
+                'contenuVideo'=> $this->contenu,
+                'status' => $this->status,
+                'picture' => $this->picture,
+                'id_categorie'=> $this->id_categorie,
+                'id_enseignant'=> $_SESSION['user_id'],
+            ];
+            return $this->crud->insertRecord($this->table, $data);
+        }
     }
     // overloading en cours type
     function __call($method, $arguments){

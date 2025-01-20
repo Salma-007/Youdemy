@@ -34,6 +34,10 @@
             color: var(--secondary-color);
             line-height: 1.6;
         }
+        .alert{
+            color: red;
+            font-weight: bold;
+        }
         .status-pending {
             color: orange;
             font-weight: bold;
@@ -335,6 +339,12 @@
             if($_SESSION['confirmedTeacher'] === 1){ ?>
         <div class="form-container" id="courseForm">
             <h2>Ajouter un nouveau cours</h2>
+            <?php
+                    if (isset($_SESSION['error_course'])) {
+                        echo '<div class="alert alert-danger text-center">' . $_SESSION['error_course'] . '</div>';
+                        unset($_SESSION['error_course']); 
+                    }
+                  ?>
             <form action="/addCourse" method="POST" id="addCourseForm" enctype="multipart/form-data">
                 <div class="form-group">
                     <label>Titre</label>

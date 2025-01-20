@@ -78,7 +78,6 @@ class Categorie{
             WHERE cours.status = 'accepted'
             GROUP BY c.id
         ";
-
         $stmt = $this->connn->prepare($query);
         $stmt->execute();
         $result = $stmt->fetchAll(PDO::FETCH_ASSOC);

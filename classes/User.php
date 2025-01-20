@@ -118,6 +118,16 @@ abstract class User{
     }
     // sign up
     public function registerUser(){
+        $query = "SELECT * FROM " . $this->table . " WHERE email = :email";
+        $stmt = $this->connection->prepare($query); 
+        $stmt->bindParam(':email', $this->email, PDO::PARAM_STR);
+        $stmt->execute();
+        if ($stmt->rowCount() > 0) {
+            $_SESSION['error_signup'] = "email already exists!";
+            header('Location: /signUp');  
+            exit(); 
+        }
+        else{
         $data = [
             'nom' => $this->nom,
             'email' => $this->email,
@@ -125,6 +135,7 @@ abstract class User{
             'role' => $this->role
         ];
         return $this->crud->insertRecord($this->table, $data);
+        }
     }
     // courses per teacher
     public function coursesPerTeacher(){

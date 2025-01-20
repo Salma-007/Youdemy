@@ -125,7 +125,12 @@
                   <div class="text-center">
                     <button type="submit" class="btn bg-gradient-dark w-100 my-4 mb-2">Sign up</button>
                   </div>
-
+                  <?php
+                    if (isset($_SESSION['error_signup'])) {
+                        echo '<div class="alert alert-danger text-center">' . $_SESSION['error_signup'] . '</div>';
+                        unset($_SESSION['error_signup']); 
+                    }
+                  ?>
                 </form>
               </div>
             </div>
