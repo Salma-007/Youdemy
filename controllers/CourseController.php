@@ -14,10 +14,14 @@ class CourseController{
         extract($_POST);
         $photo = $_FILES['photo_input']['name'];
         $photo_tmp = $_FILES['photo_input']['tmp_name'];
-        $photo_folder = '../public/assets/uploads/' . $photo; 
-        // checking of the same photo already exists in file
-        if(!file_exists($photo_folder)){
-            move_uploaded_file($photo_tmp, $photo_folder);
+
+        if ($photo) {
+            $photo_folder = '../public/assets/uploads/' . $photo;
+            if (!file_exists($photo_folder)) {
+                move_uploaded_file($photo_tmp, $photo_folder);
+            }
+        } else {
+            $photo = 'cover-scrum-board.png';
         }
         $categorieID = intval($category_name);
         $this->cour->setPicture($photo);
