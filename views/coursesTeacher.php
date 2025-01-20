@@ -19,7 +19,7 @@
             if($_SESSION['confirmedTeacher'] === 1){ ?>
             <button class="btn btn-primary" id="addCourseBtn">Nouveau Cours</button>
             <?php } ?>
-            <?php echo 'Weclome '.$_SESSION['nom'].'!'; ?>
+            <?php echo ' Weclome '.$_SESSION['nom'].'!'; ?>
             <a href="/logOut" class="btn btn-delete" id="addCourseBtn">Logout</a>
         </div>
 

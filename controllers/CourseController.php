@@ -9,7 +9,6 @@ class CourseController{
     public function __construct(){
         $this->cour = new Cour();
     }
-
     // add course
     public function addCourse(){
         extract($_POST);

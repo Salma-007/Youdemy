@@ -135,17 +135,7 @@
                     <input type="text" name="titreCour" class="form-control" required
                         value="<?php echo htmlspecialchars($courseData['titre']); ?>">
                 </div>
-                <div class="form-group">
-                    <label>Image du cours</label>
-                    <input type="file" name="photo_input" class="form-control" accept="image/*">
-                    <?php if ($courseData['picture']): ?>
-                    <div class="current-image">
-                        <p>Couverture actuelle : <?php echo htmlspecialchars($courseData['picture']); ?></p>
-                        <img src="/assets/uploads/<?php echo htmlspecialchars($courseData['picture']); ?>" 
-                             alt="Current course image" style="max-width: 200px;">
-                    </div>
-                    <?php endif; ?>
-                </div>
+
 
                 <div class="form-group">
                     <label>Description</label>
