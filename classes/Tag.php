@@ -10,10 +10,12 @@ class Tag{
     private $nom_tag;
     private $table = 'tags';
     private $crud;
+    private $connn;
 
     public function __construct($nom = null, $id = -1 ){
         $conn = Database::connect();
         $this->id = $id;
+        $this->connn = $conn;
         $this->nom_Tag = $nom;
         $this->crud  = new BaseModel($conn);
     }
@@ -36,11 +38,21 @@ class Tag{
 
     // fonction d'ajout
     public function insertTag(){
+        $query = "SELECT * FROM " . $this->table . " WHERE nom_tag = :nom_tag";
+        $stmt = $this->connn->prepare($query); 
+        $stmt->bindParam(':nom_tag', $this->nom_tag, PDO::PARAM_STR);
+        $stmt->execute();
+        if ($stmt->rowCount() > 0) {
+            $_SESSION['error_tag'] = "tag already exists!";
+            header('Location: /tags');  
+            exit(); 
+        }
+        else{
         $data = [
             'nom_tag'=> $this->nom_tag
         ];
         return $this->crud->insertRecord($this->table, $data);
-        
+    }
     }
 
     // fonction suppression

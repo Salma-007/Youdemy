@@ -131,9 +131,9 @@
                         unset($_SESSION['error_signup']); 
                     }
                     if (isset($_SESSION['message_successs'])) {
-                      echo '<div class="alert alert-danger text-center">' . $_SESSION['message_successs'] . '</div>';
+                      echo '<div class="alert alert-success text-center">' . $_SESSION['message_successs'] . '</div>';
                       unset($_SESSION['message_successs']); 
-                  }
+                    }
                   ?>
                 </form>
               </div>

@@ -88,7 +88,12 @@
           <div class="modal-body">
             <form action="/createCategorie" method="POST">
               <div class="mb-3">
-                <label for="categoryName" class="form-label">Category Name</label>
+              <?php
+                    if (isset($_SESSION['error_categorie'])) {
+                        echo '<div class="alert alert-danger text-center">' . $_SESSION['error_categorie'] . '</div>';
+                        unset($_SESSION['error_categorie']); 
+                    }
+                  ?>
                 <input type="text" class="form-control" id="categoryName" name="categoryName" placeholder="Enter category name" required>
               </div>
               <div class="modal-footer">

@@ -88,7 +88,12 @@
           <div class="modal-body">
             <form action="/createTag" method="POST">
               <div class="mb-3">
-                <label for="tagName" class="form-label">Tag Name</label>
+              <?php
+                    if (isset($_SESSION['error_tag'])) {
+                        echo '<div class="alert alert-danger text-center">' . $_SESSION['error_tag'] . '</div>';
+                        unset($_SESSION['error_tag']); 
+                    }
+                  ?>
                 <input type="text" class="form-control" id="tagName" name="tagName" placeholder="Enter tag name" required>
               </div>
               <div class="modal-footer">

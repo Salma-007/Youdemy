@@ -33,7 +33,7 @@
 <body class="g-sidenav-show  bg-gray-100">
 <?php include('../public/assets/components/sidebar.php'); ?>
 
-  <main class="main-content position-relative max-height-vh-100 h-100 border-radius-lg ">
+  <main class="main-content position-relative h-100 border-radius-lg ">
     <!-- Navbar -->
     <?php include('../public/assets/components/navbar.php'); ?>
     <!-- End Navbar -->
@@ -83,7 +83,6 @@
                   <div class="ms-auto text-end">
                     <a class="btn btn-link text-danger text-gradient px-3 mb-0" href="/deleteTeacher?id=<?= $teacher['id'] ?>"><i class="material-symbols-rounded text-sm me-2">delete</i>Delete</a>
                     <a class="btn btn-link text-danger text-gradient px-3 mb-0" href="/banTeacher?id=<?= $teacher['id'] ?>"><i class="material-symbols-rounded text-sm me-2">delete</i>ban</a>
-                    <a class="btn btn-link text-dark px-3 mb-0" href="javascript:;"><i class="material-symbols-rounded text-sm me-2">edit</i>Edit</a>
                     <a class="btn btn-link text-dark px-3 mb-0" href="/activateTeacher?id=<?= $teacher['id'] ?>"><i class="material-symbols-rounded text-sm me-2">edit</i>Activate</a>
                   </div>
                 </li>

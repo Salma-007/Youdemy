@@ -222,7 +222,7 @@
                 <button class="back-btn" onclick="window.history.back();">Retour</button>
                 <form action="/markCourseAsFinished?id=<?php echo $course['id'];?>" method="POST">
                     <input type="hidden" name="course_id" value="<?php echo $course['id']; ?>" />
-                    <?php if ($_SESSION['user_id'] && $inscrit) { ?>
+                    <?php if ($_SESSION['user_id'] && $inscrit && $course['isFinished'] === 0) { ?>
                         <button type="submit" class="finish-btn">Terminer le cours</button>
                     <?php }  ?>
                 </form>

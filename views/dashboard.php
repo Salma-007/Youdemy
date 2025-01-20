@@ -57,7 +57,6 @@ foreach ($category_stats as $stat) {
         <div class="ms-3">
           <h3 class="mb-0 h4 font-weight-bolder">Dashboard</h3>
           <p class="mb-4">
-            
           </p>
         </div>
         <div class="col-xl-3 col-sm-6 mb-xl-0 mb-4">
