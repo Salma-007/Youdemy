@@ -1,6 +1,5 @@
 <?php
 namespace Classes;
-// require realpath(__DIR__.'/../vendor/autoload.php');
 use Config\Database;
 use Classes\BaseModel;
 use PDO;
@@ -50,12 +49,10 @@ class Categorie{
         return $this->crud->insertRecord($this->table, $data);
     }
     }
-
     // fonction suppression
     public function deleteCategorie(){
         return $this->crud->deleteRecord($this->table, $this->id);
     }
-    
     // fonction update
     public function updateCategorie(){
         $data = [
@@ -63,22 +60,18 @@ class Categorie{
         ];
         return $this->crud->updateRecord($this->table, $data, $this->id);
     }
-
     // recuperation de toutes Categories
     public function getAllCategories(){
         return $this->crud->readRecords($this->table);
     }
-
     //get a record by id
     public function getCategoriebyId(){
         return $this->crud->getRecord($this->table,$this->id);
     }
-
     // count des categories
     public function getCountCategories(){
         return $this->crud->getTableCount($this->table);
     }
-
     // nombre de cour par categorie
     public function getCoursesCountByCategory(){
         $query = "

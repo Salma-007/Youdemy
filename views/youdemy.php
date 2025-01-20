@@ -32,7 +32,7 @@
             <?php echo htmlspecialchars($category['nom_categorie']); ?>
         </button>
     <?php endforeach; ?>
-    <form method="GET" action="/" class="search-form">
+    <form method="GET" action="/youdemy" class="search-form">
         <input type="text" name="search" placeholder="Rechercher par titre..." value="<?php echo isset($_GET['search']) ? htmlspecialchars($_GET['search']) : ''; ?>">
         <button type="submit">Rechercher</button>
     </form>
@@ -104,7 +104,7 @@
             if (searchTerm) {
                 urlParams.set('search', searchTerm);
             }
-            window.location.href = 'youdemy?' + urlParams.toString();
+            window.location.href = '?' + urlParams.toString();
         }
 
     </script>
