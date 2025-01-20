@@ -7,7 +7,6 @@
     <link rel="icon" type="image/png" href="../assets/img/favicon.png">
     <link rel="stylesheet" href="/assets/css/styleyoudemy.css">
     <title>Youdemy </title>
-
 </head>
 <body>
     <nav class="navbar">

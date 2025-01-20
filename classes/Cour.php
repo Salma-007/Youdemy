@@ -149,12 +149,13 @@ class Cour{
     }
     // get courses by categorie
     public function getCoursesByCategory($categoryId, $coursesPerPage, $offset){
-        $query = "SELECT cours.id, titre, picture, status, categories.nom_categorie AS nom_categorie, 
+        $query = "SELECT cours.id, titre, cours.picture, status, categories.nom_categorie AS nom_categorie, users.nom AS enseignant,
                             description, GROUP_CONCAT(tags.nom_tag) AS tags
                     FROM cours
                     LEFT JOIN categories ON cours.id_categorie = categories.id
                     LEFT JOIN cour_tags ON cours.id = cour_tags.id_cour
                     LEFT JOIN tags ON cour_tags.id_tag = tags.id
+                    LEFT JOIN users ON cours.id_enseignant = users.id
                     WHERE categories.id = :categoryId and status = 'accepted'
                     GROUP BY cours.id
                     LIMIT :offset, :limit";  
@@ -336,12 +337,13 @@ class Cour{
     }
     // Recherche de cours par titre
     public function getCoursesBySearch($searchTerm, $coursesPerPage, $offset){
-        $query = "SELECT cours.id, titre, picture, status, categories.nom_categorie AS nom_categorie, 
-                        description, GROUP_CONCAT(tags.nom_tag) AS tags
+        $query = "SELECT cours.id, titre, cours.picture, status, categories.nom_categorie AS nom_categorie, 
+                        description,users.nom AS enseignant, GROUP_CONCAT(tags.nom_tag) AS tags
                 FROM cours
                 LEFT JOIN categories ON cours.id_categorie = categories.id
                 LEFT JOIN cour_tags ON cours.id = cour_tags.id_cour
                 LEFT JOIN tags ON cour_tags.id_tag = tags.id
+                LEFT JOIN users ON cours.id_enseignant = users.id
                 WHERE titre LIKE :searchTerm AND status = 'accepted'
                 GROUP BY cours.id
                 LIMIT :offset, :limit";

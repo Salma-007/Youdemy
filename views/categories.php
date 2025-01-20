@@ -117,7 +117,12 @@
         <form action="/updateCategorie" method="POST">
           <input type="hidden" name="categoryId" id="editCategoryId">
           <div class="mb-3">
-            <label for="categoryName" class="form-label">Category Name</label>
+          <?php
+                    if (isset($_SESSION['error_categorie_update'])) {
+                        echo '<div class="alert alert-danger text-center">' . $_SESSION['error_categorie_update'] . '</div>';
+                        unset($_SESSION['error_categorie_update']); 
+                    }
+                  ?>
             <input type="text" class="form-control" id="editCategoryName" name="categoryName" required>
           </div>
           <div class="modal-footer">

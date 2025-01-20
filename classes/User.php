@@ -3,6 +3,7 @@ namespace Classes;
 
 use Config\Database;
 use Classes\BaseModel;
+use Classes\UserValidator;
 use PDO;
 
 abstract class User{
@@ -117,30 +118,46 @@ abstract class User{
         return $this->crud->updateRecord($this->table, $data, $this->id);
     }
     // sign up
-    public function registerUser(){
+    public function registerUser() {
+        // Validation des donnees d'utilisateur
+        $errors = UserValidator::validateUserData($this->email, $this->password, $this->nom, $this->role);
+        if (!empty($errors)) {
+            $errorMessages = '';
+            foreach ($errors as $field => $message) {
+                $errorMessages .= $message . '<br>';  
+            }
+            $_SESSION['error_signup'] = $errorMessages;
+            header('Location: /signUp');
+            exit();
+        }
+        // Vérify si l'email existe deja
         $query = "SELECT * FROM " . $this->table . " WHERE email = :email";
-        $stmt = $this->connection->prepare($query); 
+        $stmt = $this->connection->prepare($query);
         $stmt->bindParam(':email', $this->email, PDO::PARAM_STR);
         $stmt->execute();
         if ($stmt->rowCount() > 0) {
-            $_SESSION['error_signup'] = "email already exists!";
-            header('Location: /signUp');  
-            exit(); 
-        }
-        else{
-        $data = [
-            'nom' => $this->nom,
-            'email' => $this->email,
-            'password_hash' => password_hash($this->password, PASSWORD_DEFAULT),
-            'role' => $this->role
-        ];
-        return $this->crud->insertRecord($this->table, $data);
-
-        $_SESSION['message_successs'] = "account created successfully!";
-        header('Location: /signUp');  
-        exit(); 
+            $_SESSION['error_signup'] = "Email already exists!";
+            header('Location: /signUp');
+            exit();
+        } else {
+            $data = [
+                'nom' => $this->nom,
+                'email' => $this->email,
+                'password_hash' => password_hash($this->password, PASSWORD_DEFAULT),
+                'role' => $this->role
+            ];
+            if ($this->crud->insertRecord($this->table, $data)) {
+                $_SESSION['message_success'] = "Account created successfully!";
+                header('Location: /signUp');
+                exit();
+            } else {
+                $_SESSION['error_signup'] = "Failed to create account.";
+                header('Location: /signUp');
+                exit();
+            }
         }
     }
+
     // courses per teacher
     public function coursesPerTeacher(){
         $query = "select cours.id, titre, picture, status ,categories.nom_categorie as nom_categorie, description, GROUP_CONCAT(tags.nom_tag) AS tags 

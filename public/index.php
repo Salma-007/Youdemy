@@ -3,7 +3,6 @@
 require __DIR__ . '/../vendor/autoload.php';
 session_start();
 
-
 use Controllers\CategorieController;
 use Controllers\TagController;
 use Controllers\DashboardController;
@@ -225,6 +224,10 @@ if(array_key_exists($url, $route)){
             $controller->CoursesHome();
             break;
     }
+    }else{
+        $controller = new DashboardController();
+        $controller->page_notfound();
+    exit;
 }
 
 ?>

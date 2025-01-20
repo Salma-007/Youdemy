@@ -117,7 +117,12 @@
         <form action="/updateTag" method="POST">
           <input type="hidden" name="tagId" id="editTagId">
           <div class="mb-3">
-            <label for="tagName" class="form-label">Tag Name</label>
+          <?php
+                    if (isset($_SESSION['error_tag_update'])) {
+                        echo '<div class="alert alert-danger text-center">' . $_SESSION['error_tag_update'] . '</div>';
+                        unset($_SESSION['error_tag_update']); 
+                    }
+                  ?>
             <input type="text" class="form-control" id="editTagName" name="tagName" required>
           </div>
           <div class="modal-footer">

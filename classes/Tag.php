@@ -62,10 +62,21 @@ class Tag{
     
     // fonction update
     public function updateTag(){
-        $data = [
-            'nom_tag'=>$this->nom_tag
-        ];
-        return $this->crud->updateRecord($this->table, $data, $this->id);
+        $query = "SELECT * FROM " . $this->table . " WHERE nom_tag = :nom_tag";
+        $stmt = $this->connn->prepare($query); 
+        $stmt->bindParam(':nom_tag', $this->nom_tag, PDO::PARAM_STR);
+        $stmt->execute();
+        if ($stmt->rowCount() > 0) {
+            $_SESSION['error_tag_update'] = "tag already exists!";
+            header('Location: /tags');  
+            exit(); 
+        }
+        else{
+            $data = [
+                'nom_tag'=>$this->nom_tag
+            ];
+            return $this->crud->updateRecord($this->table, $data, $this->id);
+        }
     }
 
     // recuperation de toutes Tags

@@ -102,7 +102,7 @@
             border-radius: 8px;
         }
 
-        .course-document {
+        /* .course-document {
             margin-top: 2rem;
             padding: 1rem;
             border: 1px solid #ddd;
@@ -110,7 +110,36 @@
             box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
             white-space: pre-wrap; /* Gère le texte formaté */
             word-wrap: break-word;
-        }
+        } */
+        /* Conteneur du document */
+.course-document {
+    max-width: 600px;
+    margin: 0 auto;
+}
+
+/* Le carrousel, ou conteneur scrollable */
+.carousel {
+    max-height: 400px;  /* Vous pouvez ajuster cette valeur selon vos besoins */
+    overflow-y: auto;   /* Active le défilement vertical */
+    padding: 20px;
+    background-color: #f9f9f9;
+    border: 1px solid #ddd;
+}
+
+/* Ajout d'un style pour rendre l'expérience plus agréable */
+.carousel::-webkit-scrollbar {
+    width: 8px;
+}
+
+.carousel::-webkit-scrollbar-thumb {
+    background-color: #888;
+    border-radius: 4px;
+}
+
+.carousel::-webkit-scrollbar-thumb:hover {
+    background-color: #555;
+}
+
 
         .finish-btn, .back-btn {
             background-color: #4361ee;
@@ -200,7 +229,9 @@
             <?php if ($course['contenuDocument']) { ?>
                 <div class="course-document">
                     <h3>Document du cours :</h3>
-                    <p><?php echo nl2br(htmlspecialchars($course['contenuDocument'])); ?></p>
+                    <div class="carousel">
+                        <p><?php echo nl2br(htmlspecialchars($course['contenuDocument'])); ?></p>
+                    </div>
                 </div>
             <?php } ?>
 

@@ -99,6 +99,10 @@ class DashboardController{
     public function signInPage(){
         require(__DIR__ . '/../views/sign-in.php');  
     }
+    public function page_notfound()
+    {
+        require(__DIR__ .'/../views/page_notFound.php');
+    }
 }
 
 

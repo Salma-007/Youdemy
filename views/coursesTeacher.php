@@ -170,8 +170,6 @@
                     videoInput.style.display = 'block';
                 }
             });
-
-
         });
     </script>
 </body>
