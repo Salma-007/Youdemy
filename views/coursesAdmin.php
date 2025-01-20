@@ -21,11 +21,10 @@
   <!-- CSS Files -->
   <link id="pagestyle" href="../assets/css/material-dashboard.css?v=3.2.0" rel="stylesheet" />
   <style>
-    /* Custom white background for main content */
     .main-content {
-      background-color: white; /* Set background to white */
-      padding: 20px; /* Adjust padding for better spacing */
-      border-radius: 10px; /* Optional: Add rounded corners */
+      background-color: white; 
+      padding: 20px; 
+      border-radius: 10px; 
     }
   </style>
 </head>
@@ -86,19 +85,18 @@
               </div>
   </div>
   <script>
-
-  const editTagModal = document.getElementById('editTagModal');
-  editTagModal.addEventListener('show.bs.modal', function (event) {
-    const button = event.relatedTarget;
-    const categoryId = button.getAttribute('data-id');
-    const categoryName = button.getAttribute('data-name');
-    
-    const modalCategoryId = editTagModal.querySelector('#editTagId');
-    const modalCategoryName = editTagModal.querySelector('#editTagName');
-    
-    modalCategoryId.value = categoryId;
-    modalCategoryName.value = categoryName;
-  });
+    const editTagModal = document.getElementById('editTagModal');
+    editTagModal.addEventListener('show.bs.modal', function (event) {
+      const button = event.relatedTarget;
+      const categoryId = button.getAttribute('data-id');
+      const categoryName = button.getAttribute('data-name');
+      
+      const modalCategoryId = editTagModal.querySelector('#editTagId');
+      const modalCategoryName = editTagModal.querySelector('#editTagName');
+      
+      modalCategoryId.value = categoryId;
+      modalCategoryName.value = categoryName;
+    });
 </script>
   <!-- Bootstrap JS -->
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"></script>

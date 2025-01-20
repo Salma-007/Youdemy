@@ -57,7 +57,6 @@ class DashboardController{
             $courses = $this->cour->getAllCoursesLimit($this->coursesPerPage, $offset);
             $totalCourses = $this->cour->getCountCoursesAccepted();
         }
-    
         // Calculer le nombre total de pages
         $totalPages = ceil($totalCourses / $this->coursesPerPage);
         require(__DIR__ . '/../views/youdemy.php');

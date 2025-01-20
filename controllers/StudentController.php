@@ -52,7 +52,7 @@ class StudentController{
         }
         $this->student->setPassword($pswd);
         $this->student->registerUser();
-        return header('location: /signIn');
+        return header('location: /signUp');
     }
     // sign in
     public function signInUser(){

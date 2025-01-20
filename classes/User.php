@@ -135,6 +135,10 @@ abstract class User{
             'role' => $this->role
         ];
         return $this->crud->insertRecord($this->table, $data);
+
+        $_SESSION['message_successs'] = "account created successfully!";
+        header('Location: /signUp');  
+        exit(); 
         }
     }
     // courses per teacher

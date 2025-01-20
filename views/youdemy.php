@@ -56,8 +56,7 @@
                             <?php if ($_SESSION['user_id']) { ?>
                               <a href='/enroll?id=<?php echo $course['id'];?>' class="course-price">s'inscrire</a>
                             <?php }  ?>
-                            
-                            <a href='/singleCourse?id=<?php echo $course['id'];?>' class="course-price">voir</a>
+                            <!-- <a href='/singleCourse?id=<?php echo $course['id'];?>' class="course-price">voir</a> -->
                         </div>
 
                     </div>
