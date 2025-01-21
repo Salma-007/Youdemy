@@ -1,6 +1,5 @@
 <?php
 namespace Classes;
-// require realpath(__DIR__.'/../vendor/autoload.php');
 use Config\Database;
 use Classes\BaseModel;
 use PDO;

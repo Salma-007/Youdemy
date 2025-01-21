@@ -320,7 +320,7 @@ foreach ($category_stats as $stat) {
     };
     const doughnut = document.getElementById('myChart');
     new Chart(doughnut, {
-        type: 'doughnut',
+        type: 'pie',
         data: data
     });
     </script>
